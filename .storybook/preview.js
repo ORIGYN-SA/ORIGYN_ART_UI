@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 export const parameters = {
+  layout: 'fullscreen',
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -16,6 +17,8 @@ const theme = {
     BLACK: '#000000',
     WHITE: '#FFFFFF',
     ACCENT_COLOR: '#F5A506',
+    LIGHT_GRAY: '#DFDFDF',
+    LIGHTER_GRAY: '#F5F5F5',
     BG_GRAY: '#E5E5E5'
   },
   typography: {
@@ -23,6 +26,12 @@ const theme = {
   },
   spacing: {
 
+  },
+  media: {
+    sm: '@media (max-width: 600px)',
+    md: '@media (max-width: 960px)',
+    lg: '@media (max-width: 1280px)',
+    xl: '@media (max-width: 1920px)',
   },
   containers: {
     sm: 905,

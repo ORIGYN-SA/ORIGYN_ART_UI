@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import Footer, { FooterProps } from "./Footer";
 
 export default {
-  title: "Components/Interface/Banner",
+  title: "Components/Interface/Footer",
   component: Footer,
 } as Meta;
 

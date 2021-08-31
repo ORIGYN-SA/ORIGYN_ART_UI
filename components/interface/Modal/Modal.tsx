@@ -13,6 +13,9 @@ export type ModalProps = {
 }
 
 const customStyles = {
+  overlay: {
+    overflow: 'auto',
+  },
   content: {
     padding: '0px',
     top: '50%',

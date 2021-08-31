@@ -25,6 +25,11 @@ const StyledFlex = styled.div<ButtonProps>`${({ size, disabled, fullWidth, borde
   background-color: ${ primary ? theme.colors.WHITE : theme.colors.BLACK };
   color: ${ primary ? theme.colors.BLACK : theme.colors.WHITE };
   border: ${bordered ? `2px solid ${primary ? theme.colors.BLACK : theme.colors.WHITE}` : 'none'};
+  
+  &:hover {
+    background-color: ${theme.colors.ACCENT_COLOR};
+    color: ${theme.colors.WHITE};
+  }
 `}`;
 
 export default StyledFlex;

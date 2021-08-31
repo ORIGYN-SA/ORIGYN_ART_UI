@@ -13,7 +13,7 @@ const StyledFlex = styled.div<ContainerProps>`${({size = 'full', relative, paddi
   width: ${size === 'full' ? '100%' : `${theme.containers[size]}px`};
   max-width: 100%;
   box-sizing: border-box;
-  position: ${relative ? 'relative' : 'static'}
+  position: ${relative ? 'relative' : 'static'};
   margin: 0 auto;
 `}`;
 

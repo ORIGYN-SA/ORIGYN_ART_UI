@@ -10,6 +10,7 @@ import Button from "../../components/interface/Button";
 import BalanceCard from "../../components/interface/BalanceCard";
 import Table from "../../components/interface/Table";
 import HR from "../../components/interface/HR";
+import ContactCard from "../../components/interface/ContactCard";
 
 import { TabContentVertical } from "../../components/interface/TabContent";
 import Container from "../../components/layout/Container";
@@ -56,7 +57,9 @@ const Template: Story = (args) => (
           <div>Content 3</div>,
           <div>Content 4</div>,
           <div>Content 5</div>,
-          <div>Content 6</div>,
+          <div>
+            <ContactCard />
+          </div>,
         ]}
       />
     </Container>
