@@ -20,7 +20,7 @@ import ProductCard from "./interface/ProductCard";
 import SearchInput from "./interface/Inputs/SearchInput";
 import Stepper from "./interface/Stepper";
 import TabContent from "./interface/TabContent";
-import TabContentVertical from "./interface/TabContent";
+import TabContentVertical from "./interface/TabContent/TabContentVertical";
 import Table from "./interface/Table";
 import TextInput from "./interface/Inputs/TextInput";
 
