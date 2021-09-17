@@ -11,9 +11,17 @@ export default {
 const Template: Story<MenuLinkProps> = (args) => (
   <div>
     <MenuLink to="link" {...args} />
-    <MenuLink to="link" className="active" {...args} />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = { children: "Link text" };
+
+const ActiveTemplate: Story<MenuLinkProps> = (args) => (
+  <div>
+    <MenuLink to="link" className="active" {...args} />
+  </div>
+);
+
+export const ActiveLink = ActiveTemplate.bind({});
+ActiveLink.args = { children: "Link text" };
