@@ -6,6 +6,8 @@ import Modal from "../../components/interface/Modal";
 import Button from "../../components/interface/Button";
 
 import TextInput from "../../components/interface/Inputs/TextInput";
+import TextArea from "../../components/interface/Inputs/TextArea";
+
 import HR from "../../components/interface/HR";
 import CheckboxInput from "../../components/interface/Inputs/CheckboxInput";
 
@@ -86,6 +88,13 @@ const Template: Story = (args) => {
               />
             </InputWrapper>
           </ResponsiveGrid>
+          <TextArea
+            resize="none"
+            name="message"
+            label="Your Message"
+            placeholder="Type in a message (max. 500 characters)"
+            rows={5}
+          />
           <CheckboxInput
             name="privacyPolicy"
             label={`By sending this form, I agree that my personal data will be \n saved and processed according to data protection regulations and will be used only for commercial and marketing purposes.`}
