@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Flex from "../../layout/Flex";
 
 export type RowType = {
-  [key: string]: string | number;
+  [key: string]: any;
 };
 type CellType = {
   id: string;
@@ -18,6 +19,21 @@ type SortValue = {
   value: string;
   default: boolean;
 };
+
+const ArrowTop = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+`;
+const ArrowBottom = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+`;
 
 const StyledTable = styled.table`
   width: 100%;
@@ -44,6 +60,13 @@ const StyledTd = styled.td`
 const StyledCol = styled.col`
   width: ${(props) => props.width}%;
 `;
+
+const SortedArrows = () => (
+  <Flex gap={2} flexFlow="column">
+    <ArrowTop />
+    <ArrowBottom />
+  </Flex>
+);
 
 const Table = ({ cells, rows, cols = [] }: TableProps) => {
   const [sortValue, setSortValue] = useState<SortValue>({
@@ -95,7 +118,10 @@ const Table = ({ cells, rows, cols = [] }: TableProps) => {
               key={cell.id}
               canSort={cell.canSort}
             >
-              {cell.label}
+              <Flex align="center" gap={5}>
+                {cell.label}
+                {cell.canSort && <SortedArrows />}
+              </Flex>
             </StyledTh>
           ))}
         </tr>
