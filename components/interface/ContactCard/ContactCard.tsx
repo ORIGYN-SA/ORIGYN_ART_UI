@@ -47,10 +47,21 @@ const ContactInfo = styled.p`
   line-height: 24px;
   font-weight: 400;
 `;
-const ContactAddress = styled.p`
+const ContactEmail = styled.a`
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+`;
+const ContactAddress = styled.address`
+  ${({ theme }) => `
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-style: initial;
+  ${theme.media.md}{
+    text-align: center;
+  }
+`}
 `;
 
 const ContactWrapper = styled(Flex)`
@@ -99,15 +110,17 @@ const ContactCard = ({ personalInfo }: ContactCardProps) => {
             <ContactWrapper>
               <AccountName>{name}</AccountName>
               <InfoTitle>{role}</InfoTitle>
-              <ContactInfo>{email}</ContactInfo>
+              <ContactEmail href={`mailto:${email}`}>{email}</ContactEmail>
               <ContactInfo>{phone}</ContactInfo>
             </ContactWrapper>
             <ContactWrapper>
               <InfoTitle>{company}</InfoTitle>
-              <ContactAddress>{address}</ContactAddress>
-              <ContactAddress>{zip}</ContactAddress>
-              <ContactAddress>{country}</ContactAddress>
-              <ContactAddress>{website}</ContactAddress>
+              <ContactAddress>
+                {address} <br />
+                {zip} <br />
+                {country} <br />
+                {website} <br />
+              </ContactAddress>
             </ContactWrapper>
           </Flex>
         </Flex>
