@@ -11,8 +11,8 @@ const StyledFlex = styled.div<ContainerProps>`
   ${({ size = "full", relative, padding, smPadding, theme }) => `
   display: block;
   padding: ${padding ? padding : "0"};
-  width: ${size === "full" ? "100%" : `${theme.containers[size]}px`};
-  max-width: 100%;
+  max-width: ${size === "full" ? "100%" : `${theme.containers[size]}px`};
+  width: 100%;
   box-sizing: border-box;
   position: ${relative ? "relative" : "static"};
   margin: 0 auto;
