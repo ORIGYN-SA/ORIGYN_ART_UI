@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 import Flex from "../../layout/Flex/Flex";
 import HR from "../HR";
@@ -29,15 +29,21 @@ const StyledMenuLink = styled(MenuLink)`
 `;
 
 const StyledBalance = styled.h2`
- word-break: break-all;
- text-align: center;
-`
+  word-break: break-all;
+  text-align: center;
+`;
 
-const BalanceCard = ({ balance, icon, name, actions, bgColor, textColor, padding  }: BalanceCardProps) => {
+const BalanceCard = ({
+  balance,
+  icon,
+  name,
+  actions,
+  bgColor,
+  textColor,
+  padding,
+}: BalanceCardProps) => {
   return (
-    <Card
-      flexFlow="column"
-    >
+    <Card flexFlow="column">
       <StyledBanner
         flexFlow="column"
         justify="center"
@@ -49,21 +55,17 @@ const BalanceCard = ({ balance, icon, name, actions, bgColor, textColor, padding
       >
         <Flex gap={5} align="center">
           {icon}
-          <b style={{fontSize: 13}}>{name}</b>
+          <b style={{ fontSize: 13 }}>{name}</b>
         </Flex>
         <StyledBalance>{numberWithCommas(balance)}</StyledBalance>
       </StyledBanner>
-      {
-        (actions) ? (
-          <StyledBalanceCardContent flexFlow="column" justify="center">
-            <HR accent={false} />
-            <StyledMenuLink to="/deposit">DEPOSIT</StyledMenuLink>
-            <HR accent={false} />
-            <StyledMenuLink to="/withdraw">WITHDRAW</StyledMenuLink>
-            <HR accent={false} />
-          </StyledBalanceCardContent>
-        ) : null
-      }
+      {actions ? (
+        <StyledBalanceCardContent flexFlow="column" justify="center">
+          <HR accent={false} />
+          <StyledMenuLink to="/deposit">TOP UP</StyledMenuLink>
+          <HR accent={false} marginBottom={80} />
+        </StyledBalanceCardContent>
+      ) : null}
     </Card>
   );
 };
