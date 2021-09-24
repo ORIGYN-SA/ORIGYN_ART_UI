@@ -40,6 +40,8 @@ const StyledTable = styled.table`
   color: #000;
   border-spacing: 0;
   white-space: nowrap;
+  border-collapse: separate;
+  border-spacing: 0 9px;
 `;
 const StyledTbody = styled.tbody`
   background-color: #fff;
