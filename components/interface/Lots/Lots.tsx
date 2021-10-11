@@ -21,17 +21,44 @@ interface LotRowProps extends Omit<LotsProps, "lots" | "handleAddLot"> {
   fractionPrice: any;
   lotPrice: any;
 }
-
+const LotsHeaderWrapper = styled(Flex)`
+  ${({ theme }) => `
+    padding: 15px 5px;
+    text-align: center;
+    ${theme.media.sm} {
+      display: none;
+    }
+  `}
+`;
+const SelectWrapper = styled.div`
+  ${({ theme }) => `
+    width: 100%;
+    padding: 0 10px;
+    max-width: 200px;
+    ${theme.media.sm} {
+      display: flex;
+      align-items: center;
+      text-align: end;
+      max-width: 100%;
+      padding: 0;
+    }
+  `}
+`;
 const Col = styled.div`
   width: 100%;
 `;
 const Square = styled(Flex)`
-  min-width: 40px;
-  height: 40px;
-  background-color: #000000;
-  color: white;
-  font-weight: 600;
-  font-size: 15px;
+  ${({ theme }) => `
+    min-width: 40px;
+    height: 40px;
+    background-color: #000000;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    ${theme.media.sm} {
+      position: absolute;
+    }
+  `}
 `;
 const ErrorMessage = styled.p`
   color: #e42932;
@@ -42,10 +69,46 @@ const ErrorMessage = styled.p`
 `;
 
 const StyledLotRow = styled(Flex)`
-  background-color: #f5f5f5;
-  padding: 5px;
-  border: 1px solid #151515;
-  margin: 5px 0;
+  ${({ theme }) => `
+    background-color: #f5f5f5;
+    padding: 5px;
+    border: 1px solid #151515;
+    margin: 5px 0;
+    ${theme.media.sm} {
+      position: relative;
+    }
+  `}
+`;
+const LotsWrapper = styled.div`
+  ${({ theme }) => `
+    display: contents;
+    ${theme.media.sm} {
+      display: block;
+      margin-top: 50px;
+      width: 100%;
+    }
+  `}
+`;
+const MobileLotTitle = styled.span`
+  ${({ theme }) => `
+    display: none;
+    ${theme.media.sm} {
+      display: block;
+      width: 100%;
+      padding-right: 10px;
+    }
+  `}
+`;
+const CloseIconWrapper = styled.div`
+  ${({ theme }) => `
+    padding: 0 10px;
+    max-width: 40px;
+    ${theme.media.sm} {
+      position: absolute;
+      top: 17px;
+      right: 15px;
+    }
+  `}
 `;
 const CloseIcon = styled.div`
   position: relative;
@@ -96,7 +159,7 @@ const Lots = ({
 }: LotsProps) => {
   return (
     <>
-      <Flex fullWidth style={{ padding: "15px 5px", textAlign: "center" }}>
+      <LotsHeaderWrapper fullWidth>
         <Col style={{ padding: 0, maxWidth: 40 }}>
           <span>Lot</span>
         </Col>
@@ -110,7 +173,7 @@ const Lots = ({
           <span>Lot Price</span>
         </Col>
         <Col style={{ padding: "0 10px", maxWidth: 40 }}></Col>
-      </Flex>
+      </LotsHeaderWrapper>
       {lots.map((lot: any, i: number) => (
         <LotRow
           key={i}
@@ -148,12 +211,9 @@ const LotRow = ({
       <Square align="center" justify="center">
         {index + 1}
       </Square>
-      <div
-        style={{
-          display: "contents",
-        }}
-      >
-        <Col style={{ padding: "0 10px", maxWidth: 200 }}>
+      <LotsWrapper>
+        <SelectWrapper>
+          <MobileLotTitle>Quantity</MobileLotTitle>
           <Select
             height="40px"
             options={quantityOptions}
@@ -162,8 +222,9 @@ const LotRow = ({
               handleChangeLotValue(index, event, "quantity")
             }
           />
-        </Col>
-        <Col style={{ padding: "0 10px", maxWidth: 200 }}>
+        </SelectWrapper>
+        <SelectWrapper>
+          <MobileLotTitle>Price per Fraction</MobileLotTitle>
           <Select
             height="40px"
             options={fractionPriceOptions}
@@ -172,8 +233,9 @@ const LotRow = ({
               handleChangeLotValue(index, event, "fractionPrice")
             }
           />
-        </Col>
-        <Col style={{ padding: "0 10px", maxWidth: 200 }}>
+        </SelectWrapper>
+        <SelectWrapper>
+          <MobileLotTitle>Lot Price</MobileLotTitle>
           <Select
             height="40px"
             options={lotPriceOptions}
@@ -182,12 +244,12 @@ const LotRow = ({
               handleChangeLotValue(index, event, "lotPrice")
             }
           />
-        </Col>
-      </div>
+        </SelectWrapper>
+      </LotsWrapper>
 
-      <Col style={{ padding: "0 10px", maxWidth: 40 }}>
+      <CloseIconWrapper>
         <CloseIcon onClick={() => handleDeleteLot(index)} />
-      </Col>
+      </CloseIconWrapper>
     </StyledLotRow>
   );
 };
