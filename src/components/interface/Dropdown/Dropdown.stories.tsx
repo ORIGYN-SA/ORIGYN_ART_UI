@@ -21,5 +21,8 @@ primary.args = {
     { value: "red", label: "Red" },
     { value: "blue", label: "Blue" },
     { value: "pink", label: "Pink" },
+    { value: "red1", label: "Red1" },
+    { value: "blue2", label: "Blue2" },
+    { value: "pink3", label: "Pink3" },
   ],
 };

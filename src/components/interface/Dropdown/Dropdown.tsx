@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { handleInputChange } from "react-select/dist/declarations/src/utils";
-import "./Dropdown.css";
+import "./styles.css";
 
 const Icon = () => {
   return (
@@ -12,6 +11,7 @@ const Icon = () => {
 
 const Dropdown = ({ placeHolder, options }: any) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [selectValue, setSelectValue] = useState(null);
 
   useEffect(() => {
     const handler = () => setShowMenu(false);
@@ -28,7 +28,21 @@ const Dropdown = ({ placeHolder, options }: any) => {
   };
 
   const getDisplay = () => {
+    if (selectValue) {
+      return selectValue.label;
+    }
     return placeHolder;
+  };
+
+  const onItemClick = (option) => {
+    setSelectValue(option);
+  };
+
+  const isSelected = (option) => {
+    if (!selectValue) {
+      return false;
+    }
+    return selectValue.value === option.value;
   };
 
   return (
@@ -44,7 +58,10 @@ const Dropdown = ({ placeHolder, options }: any) => {
       {showMenu && (
         <div className="dropdown-menu">
           {options.map((option) => (
-            <div key={option.value} className="dropdown-item">
+            <div 
+            onClick={() => onItemClick(option)}
+            key={option.value} 
+            className={`dropdown-item ${isSelected(option) && "selected"}`}>
               {option.label}
             </div>
           ))}
