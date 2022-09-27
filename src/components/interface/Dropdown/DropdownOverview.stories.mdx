@@ -9,19 +9,36 @@ import { Meta, Story, Canvas } from "@storybook/addon-docs";
 # Dropdown component
 
 Basic Dropdown component:
+- single selection menu
+- multiple selection menu
+- sorting selection menu
 
 
 ## Properties
 
 ```typescript
 type Dropdown
+     isMultiple
+     {options}
+     placeholder
 }
 ```
 
-## Basic
+## Single-selection
 
 <Canvas>
-    <Story id="components-interface-dropdown-all-stories--primary" />
+    <Story id="components-interface-dropdown-all-stories--single" />
+</Canvas>
+
+
+## Multiple-selection
+<Canvas>
+    <Story id="components-interface-dropdown-all-stories--multiple" />
+</Canvas>
+
+## Sort
+<Canvas>
+    <Story id="components-interface-dropdown-all-stories--sorting" />
 </Canvas>
 
 

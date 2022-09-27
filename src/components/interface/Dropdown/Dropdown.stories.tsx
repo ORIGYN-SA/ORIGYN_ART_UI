@@ -9,13 +9,45 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => (
-  <div style={{ height: "200px" }}>
-    <Dropdown placeHolder="Select..." {...args} />
+  <div style={{ height: "200px", display: "flex",  justifyContent:"center" }}>
+    <Dropdown {...args} isMultiple placeHolder="Sort" />
   </div>
 );
 
-export const primary = Template.bind({});
-primary.args = {
+export const single = Template.bind({});
+single.args = {
+  options: [
+    { value: "green", label: "Green" },
+    { value: "red", label: "Red" },
+    { value: "blue", label: "Blue" },
+    { value: "pink", label: "Pink" },
+    { value: "red1", label: "Red1" },
+    { value: "blue2", label: "Blue2" },
+    { value: "pink3", label: "Pink3" },
+  ],
+};
+
+export const multiple = Template.bind({});
+multiple.args = {
+
+  // add isMultiple arg
+    
+  options: [
+    { value: "green", label: "Green" },
+    { value: "red", label: "Red" },
+    { value: "blue", label: "Blue" },
+    { value: "pink", label: "Pink" },
+    { value: "red1", label: "Red1" },
+    { value: "blue2", label: "Blue2" },
+    { value: "pink3", label: "Pink3" },
+  ],
+};
+
+export const sorting = Template.bind({});
+sorting.args = {
+
+// add checkbox
+
   options: [
     { value: "green", label: "Green" },
     { value: "red", label: "Red" },
