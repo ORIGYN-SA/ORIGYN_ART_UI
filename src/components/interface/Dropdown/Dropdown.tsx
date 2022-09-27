@@ -118,3 +118,16 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
 };
 
 export default Dropdown;
+
+
+// this is for sorting
+
+// <div className="dropdown-box" key={option.value}>
+// <div onClick={() => onItemClick(option)} className={`check-box ${isSelected(option) && "selected"}`}> </div>
+// <div
+  
+//   className={`dropdown-item ${isSelected(option) && "selected"}`}
+// >
+//   {option.label}
+// </div>
+// </div>

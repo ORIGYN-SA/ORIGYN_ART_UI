@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => (
-  <div style={{ height: "200px", display: "flex",  justifyContent:"center" }}>
+  <div style={{ height: "300px", display: "flex",  justifyContent:"center" }}>
     <Dropdown {...args} isMultiple placeHolder="Sort" />
   </div>
 );

@@ -1,11 +1,16 @@
 .dropdown-container {
   text-align: left;
-  background: #FAFAFA;
-  border: 1px solid #E3E3E3;
   position: relative;
-  border-radius: 12px;
   width: 226px;
-  height: 40px;
+  height: 38px;
+  background: #fefefe;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0px 1px 12px rgba(18, 18, 18, 0.04),
+    0px 0px 4px rgba(18, 18, 18, 0.08);
+  border-radius: 12px 12px 0px 0px;
+
+padding: 0px 0px 8px;
+gap: 8px;
 }
 
 .dropdown-input {
@@ -20,19 +25,26 @@
   position: absolute;
   transform: translateY (4px);
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 8px;
   overflow: auto;
   max-height: 150px;
+  background: #fefefe;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0px 1px 12px rgba(18, 18, 18, 0.04),
+    0px 0px 4px rgba(18, 18, 18, 0.08);
+  border-radius: 0px 0px 12px 12px;
 }
 
 .dropdown-item {
-    padding: 5px;
-    cursor: pointer;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
-    background-color: #9fc3f870
+  background-color: #9fc3f870;
 }
 
 .dropdown-item.selected {
@@ -56,3 +68,100 @@
   display: flex;
   align-items: center;
 }
+
+/* This is the CSS for sorting */
+/* 
+.dropdown-container {
+  text-align: left;
+  
+  border: 1px solid #e3e3e3;
+  position: relative;
+  background: #fefefe;
+  box-shadow: 0px 1px 12px rgba(18, 18, 18, 0.04),
+    0px 0px 4px rgba(18, 18, 18, 0.08);
+  border-radius: 12px;
+  width: 208px;
+  height: 30px;
+}
+
+.dropdown-input {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.dropdown-tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  position: absolute;
+  transform: translateY (4px);
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: auto;
+  max-height: 248px;
+}
+
+.dropdown-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  
+}
+
+.dropdown-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 16px;
+  gap: 10px;
+}
+
+.check-box {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  background: #fefefe;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+}
+
+.check-box:hover {
+  background-color: #9fc3f870;
+}
+
+.check-box.selected {
+  background-color:#000000;
+  color: #fff;
+} 
+
+.dropdown-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.dropdown-tag-item {
+  background-color: #ddd;
+  padding: 2px 4px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+.dropdown-tag-close {
+  display: flex;
+  align-items: center;
+}
+*/
