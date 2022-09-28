@@ -92,6 +92,7 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
 
   return (
     <div className="dropdown-container">
+      <div className="dropdown-menu-1">
       <div onClick={handleClick} className="dropdown-input">
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
@@ -100,8 +101,9 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
           </div>
         </div>
       </div>
+      </div>
       {showMenu && (
-        <div className="dropdown-menu">
+        <div className="dropdown-menu-2">
           {options.map((option) => (
             <div
               onClick={() => onItemClick(option)}
