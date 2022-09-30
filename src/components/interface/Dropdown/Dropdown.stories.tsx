@@ -2,6 +2,7 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import Dropdown from "./Dropdown";
+import DropdownSorting from "./Dropdown";
 
 export default {
   title: "Components/Interface/Dropdown/All stories",
@@ -30,7 +31,7 @@ single.args = {
 export const multiple = Template.bind({});
 multiple.args = {
 
-  // add isMultiple arg
+  
     
   options: [
     { value: "green", label: "Green" },

@@ -91,15 +91,14 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
   };
 
   return (
+    <div>
     <div className="dropdown-container">
       <div className="dropdown-menu-1">
       <div onClick={handleClick} className="dropdown-input">
         <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tools">
-          <div className="dropdown-tool">
+        
             <Icon />
-          </div>
-        </div>
+         
       </div>
       </div>
       {showMenu && (
@@ -116,6 +115,7 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
         </div>
       )}
     </div>
+    </div>
   );
 };
 
@@ -124,12 +124,106 @@ export default Dropdown;
 
 // this is for sorting
 
-// <div className="dropdown-box" key={option.value}>
-// <div onClick={() => onItemClick(option)} className={`check-box ${isSelected(option) && "selected"}`}> </div>
-// <div
+export const DropdownSorting = ({ placeHolder, options, isMultiple }: any) => {
+  const [showMenu, setShowMenu] = useState(false);
+  const [selectValue, setSelectValue] = useState(isMultiple ? [] : null);
+
+  useEffect(() => {
+    const handler = () => setShowMenu(false);
+
+    window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
+  });
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setShowMenu(!showMenu);
+  };
+
+  const getDisplay = () => {
+    if (!selectValue || selectValue.length === 0) {
+      return placeHolder;
+    }
+    if (isMultiple) {
+      return (
+        <div className="dropdown-tags">
+          {selectValue.map((option) => (
+            <div key={option.value} className="dropdown-tag-item">
+              {option.label}
+              <span
+                onClick={(e) => onTagRemove(e, option)}
+                className="dropdown-tag-close"
+              >
+                <CloseIcon />
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return selectValue.label;
+  };
+  const removeOption = (option) => {
+    return selectValue.filter((o) => o.value !== option.value);
+  };
+  const onTagRemove = (e, option) => {
+    e.stopPropagation();
+    setSelectValue(removeOption(option));
+  };
+
+  const onItemClick = (option) => {
+    let newValue;
+    if (isMultiple) {
+      if (selectValue.findIndex((o) => o.value === option.value) >= 0) {
+        newValue = removeOption(option);
+      } else {
+        newValue = [...selectValue, option];
+      }
+    } else {
+      newValue = option;
+    }
+    setSelectValue(newValue);
+  };
+
+  const isSelected = (option) => {
+    if (isMultiple) {
+      return selectValue.filter((o) => o.value === option.value).length > 0;
+    }
+    if (!selectValue) {
+      return false;
+    }
+    return selectValue.value === option.value;
+  };
+
+  return (
+    <div>
+    <div className="dropdown-container">
+      <div className="dropdown-menu-1">
+      <div onClick={handleClick} className="dropdown-input">
+        <div className="dropdown-selected-value">{getDisplay()}</div>
+        
+            <Icon />
+         
+      </div>
+      </div>
+      {showMenu && (
+        <div className="dropdown-menu-2">
+          {options.map((option) => (
+<div className="dropdown-box" key={option.value}>
+<div onClick={() => onItemClick(option)} className={`check-box ${isSelected(option) && "selected"}`}> </div>
+<div
   
-//   className={`dropdown-item ${isSelected(option) && "selected"}`}
-// >
-//   {option.label}
-// </div>
-// </div>
+  className={`dropdown-item ${isSelected(option) && "selected"}`}
+>
+  {option.label}
+</div>
+</div>
+          ))}
+        </div>
+      )}
+    </div>
+    </div>
+  );
+};
