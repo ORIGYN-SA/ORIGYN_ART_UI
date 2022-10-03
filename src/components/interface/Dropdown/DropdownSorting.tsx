@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./styles.css";
+import "./styles2.css";
 
 const Icon = () => {
   return (
@@ -17,7 +17,7 @@ const CloseIcon = () => {
   );
 };
 
-const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
+const DropdownSorting = ({ placeHolder, options, isMultiple }: any) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectValue, setSelectValue] = useState(isMultiple ? [] : null);
 
@@ -103,12 +103,20 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
         {showMenu && (
           <div className="dropdown-menu-2">
             {options.map((option) => (
-              <div
-                onClick={() => onItemClick(option)}
-                key={option.value}
-                className={`dropdown-item ${isSelected(option) && "selected"}`}
-              >
-                {option.label}
+              <div className="dropdown-box" key={option.value}>
+                <div
+                  onClick={() => onItemClick(option)}
+                  className={`check-box ${isSelected(option) && "selected"}`}
+                >
+                  {" "}
+                </div>
+                <div
+                  className={`dropdown-item ${
+                    isSelected(option) && "selected"
+                  }`}
+                >
+                  {option.label}
+                </div>
               </div>
             ))}
           </div>
@@ -118,6 +126,4 @@ const Dropdown = ({ placeHolder, options, isMultiple }: any) => {
   );
 };
 
-export default Dropdown;
-
-// this is for sorting
+export default DropdownSorting;

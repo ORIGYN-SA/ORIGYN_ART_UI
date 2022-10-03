@@ -2,7 +2,7 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import Dropdown from "./Dropdown";
-import DropdownSorting from "./Dropdown";
+import DropdownSorting from "./DropdownSorting";
 
 export default {
   title: "Components/Interface/Dropdown/All stories",
@@ -10,8 +10,8 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => (
-  <div style={{ height: "300px", display: "flex",  justifyContent:"center" }}>
-    <Dropdown {...args} isMultiple placeHolder="Sort" />
+  <div style={{ height: "300px", display: "flex", justifyContent: "center" }}>
+    <DropdownSorting {...args} isMultiple placeHolder="Sort" />
   </div>
 );
 
@@ -30,9 +30,6 @@ single.args = {
 
 export const multiple = Template.bind({});
 multiple.args = {
-
-  
-    
   options: [
     { value: "green", label: "Green" },
     { value: "red", label: "Red" },
@@ -46,8 +43,7 @@ multiple.args = {
 
 export const sorting = Template.bind({});
 sorting.args = {
-
-// add checkbox
+  // add checkbox
 
   options: [
     { value: "green", label: "Green" },
