@@ -103,19 +103,21 @@ const DropdownSorting = ({ placeHolder, options, isMultiple }: any) => {
         {showMenu && (
           <div className="dropdown-menu-2">
             {options.map((option) => (
-              <div className="dropdown-box" key={option.value}>
-                <div
-                  onClick={() => onItemClick(option)}
-                  className={`check-box ${isSelected(option) && "selected"}`}
-                >
-                  {" "}
-                </div>
-                <div
-                  className={`dropdown-item ${
-                    isSelected(option) && "selected"
-                  }`}
-                >
-                  {option.label}
+              <div className="dropdown-sorting">
+                <div className="dropdown-box" key={option.value}>
+                  <div
+                    onClick={() => onItemClick(option)}
+                    className={`check-box ${isSelected(option) && "selected"}`}
+                  >
+                    {" "}
+                  </div>
+                  <div
+                    className={`dropdown-item ${
+                      isSelected(option) && "selected"
+                    }`}
+                  >
+                    {option.label}
+                  </div>
                 </div>
               </div>
             ))}
