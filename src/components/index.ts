@@ -36,6 +36,8 @@ import Select from "./interface/Inputs/Select";
 import Toggle from "./interface/Inputs/Toggle";
 import Tooltip from "./interface/Tooltip";
 
+import ProgressBar from "./interface/ProgressBar";
+
 import * as Icons from "./icons";
 
 export {
@@ -76,5 +78,6 @@ export {
   Tooltip,
   Status,
   SStatus,
-  Snackbar
+  Snackbar,
+  ProgressBar,
 };
