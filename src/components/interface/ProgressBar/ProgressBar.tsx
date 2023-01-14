@@ -167,7 +167,9 @@ const ProgressBar = ({ open, title, itemIndex, itemsTotal, successMessage, durat
                             </>
                         ) : (
                             <Flex align="center" justify="center">
-                                Loading...
+                                <StyledProgressMessage>
+                                    Loading data...
+                                </StyledProgressMessage>
                             </Flex>
                         )
                     }
