@@ -18,8 +18,10 @@ const Template: Story<ProgressProps>= (args) =>(
 
 export const normal= Template.bind({});
 normal.args={
-    open: true,
-    closeModal: () => {},
-    itemsNumber: 5,
+    open: false,
+    itemsTotal: 13,
+    itemIndex: 0,
     title: "Progress Bar - Storybook",
+    successMessage: "Success Message - Storybook",
+    durationMsSuccess: 5000,
 }
