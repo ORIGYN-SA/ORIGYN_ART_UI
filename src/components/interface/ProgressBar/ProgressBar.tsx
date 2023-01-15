@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useRef, useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import Flex from "../../layout/Flex";
 import Container from "../../layout/Container";
+import Button from "../../interface/Button"
 import { theme } from "../../../utils"
 import styled from 'styled-components';
 
@@ -11,7 +12,6 @@ export type ProgressProps = {
     itemIndex: number;
     itemsTotal: number;
     successMessage: string;
-    durationMsSuccess: number;
 }
 
 const StyledModal = styled(ReactModal) <{ size: string }>`
@@ -24,7 +24,7 @@ const StyledModal = styled(ReactModal) <{ size: string }>`
     
     position: absolute;
     inset: 50% auto auto 50%;
-
+    width:634px;
     padding: 0;
     top: 50px;
     left: 50%;
@@ -39,7 +39,6 @@ const StyledModal = styled(ReactModal) <{ size: string }>`
     border-radius: 24px;
     background-color: ${({ theme }) => theme.colors.BACKGROUND};
     color: ${({ theme }) => theme.colors.TEXT};
-    width: auto;
     max-height: calc(100% - 100px);
 
     ${({ theme }) => theme?.media?.lg} {
@@ -96,25 +95,40 @@ font-size:14px;
 color:${theme.colors.SECONDARY_TEXT};
 margin-top:16px;
 `
-const ProgressBar = ({ open, title, itemIndex, itemsTotal, successMessage, durationMsSuccess }: PropsWithChildren<ProgressProps>) => {
-    durationMsSuccess = durationMsSuccess || 3000;
-    const [Open, setIsOpen] = useState(open)
+const BtnContainer = styled.div`
+margin-top:32px;
+`
+const ProgressBar = ({ open, title, itemIndex, itemsTotal, successMessage}: PropsWithChildren<ProgressProps>) => {
+
+    const [Open, setIsOpen] = useState(open);
+    const progressLineContainer = useRef<HTMLDivElement>(null);
     const progressLine = useRef<HTMLDivElement>(null);
     const successMsg = useRef<HTMLDivElement>(null);
     const msg = useRef<HTMLDivElement>(null);
+    const btnDone=useRef<HTMLButtonElement>(null);
+
+    const handleClose=() => {
+        setIsOpen(false);
+    }
 
     const setLineProgress = () => {
 
         if (successMsg.current) {
             if (itemIndex == itemsTotal) {
+
                 msg.current.style.display = "none";
+                progressLine.current.style.display = "none";
+                progressLineContainer.current.style.display="none"
+                
                 successMsg.current.style.display = "block";
-                setTimeout(() => {
-                    setIsOpen(false);
-                }, durationMsSuccess);
+                btnDone.current.style.display="block";
             } else {
                 successMsg.current.style.display = "none";
+                btnDone.current.style.display="none";
+                
                 msg.current.style.display = "block";
+                progressLine.current.style.display = "block";
+                progressLineContainer.current.style.display="block"
             }
         }
 
@@ -161,7 +175,14 @@ const ProgressBar = ({ open, title, itemIndex, itemsTotal, successMessage, durat
                                         {itemIndex} of {itemsTotal}
                                     </StyledProgressMessage>
                                 </Flex>
-                                <StyleProgressLineContainer>
+                                <Flex align="flex-end" justify="flex-end">
+                                    <BtnContainer>
+                                    <Button size="large" btnType="filled" onClick={handleClose}  ref={btnDone}>
+                                        Done
+                                    </Button>
+                                    </BtnContainer>
+                                </Flex>
+                                <StyleProgressLineContainer ref={progressLineContainer}>
                                     <StyleProgressLine onClick={setLineProgress} ref={progressLine} />
                                 </StyleProgressLineContainer>
                             </>

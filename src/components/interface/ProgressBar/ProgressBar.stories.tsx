@@ -23,5 +23,4 @@ normal.args={
     itemIndex: 0,
     title: "Progress Bar - Storybook",
     successMessage: "Success Message - Storybook",
-    durationMsSuccess: 5000,
 }
