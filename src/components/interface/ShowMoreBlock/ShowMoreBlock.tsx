@@ -2,15 +2,16 @@ import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
+import './ShowMoreBlock.scss'
 
 const StyledShowMoreBlock = styled("div")``;
 
-const OverflowText = styled("div")<{ showFull?: boolean }>`
-  height: ${({ showFull }) =>
-    showFull ? "auto" : "calc(var(--text-line-height) * 2em)"};
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+// const OverflowText = styled("div")<{ showFull?: boolean }>`
+//   height: ${({ showFull }) =>
+//     showFull ? "auto" : "calc(var(--text-line-height) * 2em)"};
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// `;
 
 const ShowMoreBlock: React.FC<PropsWithChildren<{ btnText?: string }>> = ({
   btnText,
@@ -37,9 +38,13 @@ const ShowMoreBlock: React.FC<PropsWithChildren<{ btnText?: string }>> = ({
 
   return (
     <Flex flexFlow="column" align="flex-start" gap={8}>
-      <OverflowText ref={textBlock} showFull={!showFull}>
+      {showFull ? 
+      (<div className="overflow-text-div" ref={textBlock} style={{height: "auto"}}>
         {children}
-      </OverflowText>
+      </div>) : 
+      (<div className="overflow-text-div" ref={textBlock} style={{height: "calc(var(--text-line-height) * 2em)"}}>
+        {children}
+      </div>)}
       {overflow && (
         <>
           {showFull ? (

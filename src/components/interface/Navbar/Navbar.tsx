@@ -5,71 +5,72 @@ import Flex from "../../layout/Flex";
 import ThemeIcon from "../../icons/Theme";
 import { Link } from "react-router-dom";
 import { HR, Icons } from "../../index";
+import './Navbar.sass'
 
-const StyledNav = styled("div")`
-  ${({ theme }) => `
-  display: block;
-  ${theme.media.md}{
-    display: none;
-  }
-  background-color: ${theme.colors.NAVIGATION_BACKGROUND};
-  color: ${theme.colors.TEXT};
-  padding: 24px;
-  box-sizing: border-box;
-  width: 104px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
+// const StyledNav = styled("div")`
+//   ${({ theme }) => `
+//   display: block;
+//   ${theme.media.md}{
+//     display: none;
+//   }
+//   background-color: ${theme.colors.NAVIGATION_BACKGROUND};
+//   color: ${theme.colors.TEXT};
+//   padding: 24px;
+//   box-sizing: border-box;
+//   width: 104px;
+//   height: 100vh;
+//   position: sticky;
+//   top: 0;
 
-  li {
-    list-style: none;
-  }
+//   li {
+//     list-style: none;
+//   }
 
-  a {
-    color: ${theme.colors.WHITE};
-  }
+//   a {
+//     color: ${theme.colors.WHITE};
+//   }
 
-  svg {
-    fill: currentColor;
-  }
-`}
-`;
+//   svg {
+//     fill: currentColor;
+//   }
+// `}
+// `;
 
-const MobileNav = styled("div")`
-  display: none;
-  z-index: 10000;
-  position: sticky;
-  top: 0;
-  height: auto;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.BACKGROUND};
-  color: ${({ theme }) => theme.colors.TEXT};
-  ${({ theme }) => theme.media.md} {
-    display: block;
-  }
-`;
-const MobileNavHead = styled("div")`
-  top: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  padding: 16px;
-  box-sizing: border-box;
-`;
-const MobileMenu = styled("div")`
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 64px);
-  display: flex;
-  flex-flow: column;
-  box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors.BACKGROUND};
-  color: ${({ theme }) => theme.colors.TEXT};
-`;
+// const MobileNav = styled("div")`
+//   display: none;
+//   z-index: 10000;
+//   position: sticky;
+//   top: 0;
+//   height: auto;
+//   width: 100%;
+//   background-color: ${({ theme }) => theme.colors.BACKGROUND};
+//   color: ${({ theme }) => theme.colors.TEXT};
+//   ${({ theme }) => theme.media.md} {
+//     display: block;
+//   }
+// `;
+// const MobileNavHead = styled("div")`
+//   top: 0;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   height: 64px;
+//   padding: 16px;
+//   box-sizing: border-box;
+// `;
+// const MobileMenu = styled("div")`
+//   position: absolute;
+//   top: 64px;
+//   left: 0;
+//   width: 100%;
+//   height: calc(100vh - 64px);
+//   display: flex;
+//   flex-flow: column;
+//   box-sizing: border-box;
+//   background-color: ${({ theme }) => theme.colors.BACKGROUND};
+//   color: ${({ theme }) => theme.colors.TEXT};
+// `;
 
 const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
   navItems,
@@ -155,8 +156,8 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
           </linearGradient>
         </defs>
       </svg>
-      <MobileNav>
-        <MobileNavHead>
+      <div className="ogy-side-mobile-nav">
+        <div className="ogy-head-mobile-nav">
           <Icons.OrigynIcon />
           <Button
             iconButton
@@ -165,9 +166,9 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
           >
             {mobileMenu ? <Icons.CloseIcon width={24} /> : <Icons.MenuIcon />}
           </Button>
-        </MobileNavHead>
+        </div>
         {mobileMenu && (
-          <MobileMenu>
+          <div className='ogy-menu-mobile-nav'>
             {navItems.map((item) => (
               <a href={item.href}>
                 <Button textButton>
@@ -181,10 +182,10 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
             <Button textButton onClick={onChangeTheme}>
               <ThemeIcon />
             </Button>
-          </MobileMenu>
+          </div>
         )}
-      </MobileNav>
-      <StyledNav>
+      </div>
+      <div className="ogy-side-nav">
         <Flex
           flexFlow="column"
           align="center"
@@ -209,7 +210,7 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
             </Button>
           </Flex>
         </Flex>
-      </StyledNav>
+      </div>
     </>
   );
 };

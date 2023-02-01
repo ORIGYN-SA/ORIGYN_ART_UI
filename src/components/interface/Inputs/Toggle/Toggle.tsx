@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import './Toggle.scss'
 
 export interface ToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -61,14 +62,20 @@ const Slider = styled.span`
 
 const Toggle = ({ checked, handleToggle, disabled, ...args }: ToggleProps) => {
   return (
-    <Switch className="switch">
-      <SwitchInput
+    // didn't implement: <label className="toggle-switch-label "> because Switch has a predefined className='switch
+
+    <Switch className="switch"> 
+      <input
+        className='toggle-switch-input'
         disabled={disabled}
         type="checkbox"
         checked={checked}
         onClick={(event: any) => handleToggle(event.target.checked)}
         {...args}
       />
+
+       {/* didn't implement: <span className="toggle-switch-span "> because Slider has a predefined className='slider round'> */}
+
       <Slider className="slider round"></Slider>
     </Switch>
   );

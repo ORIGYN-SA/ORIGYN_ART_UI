@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
 import Container from "../../layout/Container";
+import './Pagination.scss'
 
 const flexContainer: any = {
   display: "flex",
@@ -17,40 +18,40 @@ const flexContainer: any = {
   top: "20px",
 };
 
-const PaginationContainer = styled("div")`
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  gap: 4px;
-  padding: 0px;
-  justify-content: center;
-  width: 260px;
-  height: 40px;
-  .pageCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    padding: 11px;
-    gap: 10px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
-    background: transparent;
-    border: 1px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    margin: 0 6px;
-    cursor: pointer;
-    &:not([disabled]):hover {
-      border: 1px;
-    }
-  }
-`;
+// const PaginationContainer = styled("div")`
+//   display: flex;
+//   align-items: flex-start;
+//   flex-direction: row;
+//   gap: 4px;
+//   padding: 0px;
+//   justify-content: center;
+//   width: 260px;
+//   height: 40px;
+//   .pageCard {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     height: 40px;
+//     width: 40px;
+//     padding: 11px;
+//     gap: 10px;
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 20px;
+//     text-align: center;
+//     background: transparent;
+//     border: 1px;
+//     box-sizing: border-box;
+//     border-radius: 4px;
+//     margin: 0 6px;
+//     cursor: pointer;
+//     &:not([disabled]):hover {
+//       border: 1px;
+//     }
+//   }
+// `;
 
 const textStyle: any = {
   fontFamily: "Montserrat",
@@ -86,11 +87,11 @@ const MoreIconText: any = {
   textAlign: "center",
 };
 
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
-  padding: 0 0.5rem;
-`;
+// const Icon = styled.img`
+//   width: 20px;
+//   height: 20px;
+//   padding: 0 0.5rem;
+// `;
 
 interface PaginationProps {
   currentPage: number;
@@ -149,7 +150,7 @@ const Pagination = ({ pageCount, onPageChange }: any) => {
         <p style={textStyle}>
           Page {currentPage} of {pageCount}
         </p>
-        <PaginationContainer>
+        <div className="pagination-container">
           {currentPage !== 1 && (
             <Button
               size="small"
@@ -213,7 +214,7 @@ const Pagination = ({ pageCount, onPageChange }: any) => {
             }}
             disabled={currentPage === pageCount}
           >{`>`}</Button>
-        </PaginationContainer>
+        </div>
       </Flex>
     </Container>
   );

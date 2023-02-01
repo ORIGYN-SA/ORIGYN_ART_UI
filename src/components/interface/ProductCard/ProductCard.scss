@@ -1,0 +1,27 @@
+
+.product-card-content {
+   // ${() => `
+        padding: 16px;
+        
+        .p {
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 20px;
+          
+          letter-spacing: -0.1px;
+          color: #5F5F5F;
+        }
+        
+        .h4 {
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 22px;
+          
+          letter-spacing: -0.15px;
+          color: #0B140C;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+     // `}
+}

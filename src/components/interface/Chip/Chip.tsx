@@ -1,6 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import styles from "styled-components";
 import {theme} from "../../../utils";
+import './Chip.scss'
 
 export interface ChipProps {
   size?: "small" | "medium";
@@ -74,9 +75,9 @@ export const SChip = styles.b<ChipProps>`
 const Chip: React.FC<PropsWithChildren<ChipProps>> = (props) => {
   const {children} = props;
   return (
-    <SChip {...props}>
+    <b className="chip-b" {...props}>
       {children}
-    </SChip>
+    </b>
   );
 };
 

@@ -5,41 +5,42 @@ import HR from "../HR";
 import Flex from "../../layout/Flex";
 import Button from "../Button";
 import ArrowRight from "../../icons/ArrowRight";
+import './ProductCard.scss'
 
 export type ProductCardProps = {};
 
-const StyledProductCardContent = styled("div")`
-  ${() => `
-  padding: 16px;
+// const StyledProductCardContent = styled("div")`
+//   ${() => `
+//   padding: 16px;
   
-  p {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 20px;
+//   p {
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 20px;
     
-    letter-spacing: -0.1px;
-    color: #5F5F5F;
-  }
+//     letter-spacing: -0.1px;
+//     color: #5F5F5F;
+//   }
   
-  h4 {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 22px;
+//   h4 {
+//     font-weight: 600;
+//     font-size: 14px;
+//     line-height: 22px;
     
-    letter-spacing: -0.15px;
-    color: #0B140C;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`}
-`;
+//     letter-spacing: -0.15px;
+//     color: #0B140C;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//   }
+// `}
+// `;
 
 const ProductCard = () => {
   return (
     <Card flexFlow="column">
       <img src="http://placehold.jp/240x290.png" alt="123" />
-      <StyledProductCardContent>
+      <div className='product-card-content'>
         <p>Creator/Account</p>
         <h4>Lorem ipsum dolor sit amet, consectetur adipiscing</h4>
         <br />
@@ -82,7 +83,7 @@ const ProductCard = () => {
           </h4>
           <ArrowRight />
         </Flex>
-      </StyledProductCardContent>
+      </div>
     </Card>
   );
 };

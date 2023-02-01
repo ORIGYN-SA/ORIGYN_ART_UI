@@ -1,0 +1,26 @@
+.bread-crumbs-div {
+//
+    display: flex;
+    gap: 15px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    margin: 12px 0;
+    color: 'placeholder';  //${theme.colors.TEXT};
+    
+    .svg {
+      fill: 'placeholder';  //${theme.colors.TEXT};
+    }
+    
+    .a {
+      text-decoration: underline;
+      font-weight: 600;
+      color: 'placeholder';  //${theme.colors.TEXT};
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+ // `}
+}
