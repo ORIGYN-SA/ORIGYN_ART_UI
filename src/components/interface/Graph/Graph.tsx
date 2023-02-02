@@ -144,6 +144,7 @@ export const Graph = ({
 
     const slicedKeys = dataKeys.slice(-days);
     const newFilteredData = {};
+
     slicedKeys.forEach((key) => {
       const date = new Date(parseInt(key) * 1000);
       const keyAsDate = `${date.toLocaleString("default", {
