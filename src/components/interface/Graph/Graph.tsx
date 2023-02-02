@@ -80,6 +80,9 @@ const frames = [
   { label: "ALL", days: 900 },
 ];
 
+const findFrameByDays = (days: number) =>
+  frames.findIndex((frame) => frame.days >= days);
+
 export const GraphHeader = ({
   onFrameChange,
   priceChange,
@@ -117,13 +120,16 @@ export const Graph = ({
   data,
   token,
   width,
-  frame = 0,
+  frame,
   overline,
   hidePriceChange,
   tooltipLabel,
   onFrameChange,
+  frameAsDays,
 }: GraphProps) => {
-  const [selectedFrame, setSelectedFrame] = useState(frame);
+  const [selectedFrame, setSelectedFrame] = useState(
+    frame ?? findFrameByDays(frameAsDays) ?? 0
+  );
   const [filteredData, setFilteredData] = useState({});
   const [priceChange, setPriceChange] = useState(0);
 
@@ -149,7 +155,7 @@ export const Graph = ({
   }, [selectedFrame]);
 
   const _onFrameChange = (frame: number) => {
-    onFrameChange && onFrameChange(frames[frame].days);
+    onFrameChange && onFrameChange(frames[frame].days, frame);
     setSelectedFrame(frame);
   };
 
@@ -171,11 +177,12 @@ export const Graph = ({
 export default Graph;
 
 type GraphProps = {
-  onFrameChange: (i: number) => void;
+  onFrameChange: (days: number, frameIndex?: number) => void;
   data: Record<string | number, number>;
   token: string;
   width: string;
   frame?: number;
+  frameAsDays?: number;
   hidePriceChange?: boolean;
   overline?: string;
   tooltipLabel?: {
@@ -184,7 +191,7 @@ type GraphProps = {
   };
 };
 type GraphHeaderProps = {
-  onFrameChange: (i: number) => void;
+  onFrameChange: (days: number, frameIndex?: number) => void;
   priceChange: number;
   selectedFrame: number;
   token: string;
