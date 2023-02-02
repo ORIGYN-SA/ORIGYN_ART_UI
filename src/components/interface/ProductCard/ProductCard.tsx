@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Card from "../Card";
 
 const StyledProductCardContent = styled("div")`
-  ${() => `
+  ${({ theme }) => `
+  
   padding: 16px;
   
   p {
@@ -33,7 +34,9 @@ const StyledCardImage = styled("img")`
   ${() => `width: 307px; height: 307px`}
 `;
 const StyledCard = styled(Card)`
-  ${() => `width: 307px;`}
+  ${({ theme }) => `
+  background-color: ${theme.colors.NAVIGATION_BACKGROUND};
+  width: 307px;`}
 `;
 
 const ProductCard = ({ title, info, image, status }: ProductCardProps) => {

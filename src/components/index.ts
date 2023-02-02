@@ -6,6 +6,7 @@ import Banner from "./interface/Banner";
 import BreadCrumbs from "./interface/BreadCrumbs";
 import Button from "./interface/Button";
 import Card from "./interface/Card";
+import Graph from "./interface/Graph/Graph";
 import CheckboxInput from "./interface/Inputs/CheckboxInput";
 import DatePicker from "./interface/Inputs/DatePicker";
 import HR from "./interface/HR";
@@ -43,6 +44,7 @@ import * as Icons from "./icons";
 
 export {
   Grid,
+  Graph,
   Flex,
   Container,
   // BalanceCard,
@@ -80,5 +82,5 @@ export {
   Tooltip,
   Status,
   SStatus,
-  Snackbar
+  Snackbar,
 };

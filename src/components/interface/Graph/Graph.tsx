@@ -3,8 +3,6 @@ import styled, { useTheme } from "styled-components";
 import { LineChart } from "./LineChart";
 
 const SGraph = styled.div<{ width: string }>`
-  border: 1px solid #e3e3e3;
-  border-radius: 12px;
   ${({ width }) => `
     width: ${width};
   `}
@@ -87,15 +85,19 @@ export const GraphHeader = ({
   priceChange,
   selectedFrame,
   token,
+  overline,
+  hidePriceChange,
 }: GraphHeaderProps) => {
   return (
     <SGraphHeader>
       <div>
-        <SOverline>Overline</SOverline>
+        {overline && <SOverline>{overline}</SOverline>}
         <SToken>{token}</SToken>
-        <SPriceChange trend={priceChange > 0 ? "up" : "down"}>
-          {parseFloat(priceChange.toString()).toFixed(3)}%
-        </SPriceChange>
+        {!hidePriceChange && (
+          <SPriceChange trend={priceChange > 0 ? "up" : "down"}>
+            {parseFloat(priceChange.toString()).toFixed(3)}%
+          </SPriceChange>
+        )}
       </div>
       <SFrames>
         {frames.map((frame, index) => (
@@ -111,7 +113,16 @@ export const GraphHeader = ({
     </SGraphHeader>
   );
 };
-export const Graph = ({ data, token, width, frame = 0 }: GraphProps) => {
+export const Graph = ({
+  data,
+  token,
+  width,
+  frame = 0,
+  overline,
+  hidePriceChange,
+  tooltipLabel,
+  onFrameChange,
+}: GraphProps) => {
   const [selectedFrame, setSelectedFrame] = useState(frame);
   const [filteredData, setFilteredData] = useState({});
   const [priceChange, setPriceChange] = useState(0);
@@ -137,28 +148,46 @@ export const Graph = ({ data, token, width, frame = 0 }: GraphProps) => {
     setFilteredData({ ...newFilteredData });
   }, [selectedFrame]);
 
+  const _onFrameChange = (frame: number) => {
+    onFrameChange && onFrameChange(frames[frame].days);
+    setSelectedFrame(frame);
+  };
+
   return (
     <SGraph width={width}>
       <GraphHeader
         token={token}
         priceChange={priceChange}
         selectedFrame={selectedFrame}
-        onFrameChange={setSelectedFrame}
+        onFrameChange={_onFrameChange}
+        overline={overline}
+        hidePriceChange={hidePriceChange}
       />
-      <LineChart data={filteredData} />
+      <LineChart data={filteredData} tooltipLabel={tooltipLabel} />
     </SGraph>
   );
 };
 
+export default Graph;
+
 type GraphProps = {
+  onFrameChange: (i: number) => void;
   data: Record<string | number, number>;
   token: string;
   width: string;
   frame?: number;
+  hidePriceChange?: boolean;
+  overline?: string;
+  tooltipLabel?: {
+    text?: string;
+    unit?: string;
+  };
 };
 type GraphHeaderProps = {
   onFrameChange: (i: number) => void;
   priceChange: number;
   selectedFrame: number;
   token: string;
+  hidePriceChange?: boolean;
+  overline?: string;
 };

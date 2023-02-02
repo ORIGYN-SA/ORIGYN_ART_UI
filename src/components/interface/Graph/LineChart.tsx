@@ -25,7 +25,7 @@ const STooltip = styled.div<TooltipProps>`
   ${({ left, top, display }) => `
     display: ${display};
     left: ${left + 35}px;
-    top: ${top + 60}px;
+    top: ${top + 30}px;
   `}
 `;
 type Point = {
@@ -43,7 +43,12 @@ type Data = {
   value: number;
 };
 
-export const LineChart = ({ data: propsData, height = 350, width = 700 }) => {
+export const LineChart = ({
+  data: propsData,
+  height = 350,
+  width = 700,
+  tooltipLabel,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [tooltip, setTooltip] = useState<TooltipProps>({
     content: "",
@@ -365,7 +370,10 @@ export const LineChart = ({ data: propsData, height = 350, width = 700 }) => {
   return (
     <div
       onMouseMove={(e) => onChartMouseMove(e)}
-      style={{ cursor: tooltip.display === "block" ? "pointer" : "auto" }}
+      style={{
+        position: "relative",
+        cursor: tooltip.display === "block" ? "pointer" : "auto",
+      }}
     >
       <canvas ref={canvasRef} height={height} width={width} />
       {tooltip.content && (
@@ -376,7 +384,8 @@ export const LineChart = ({ data: propsData, height = 350, width = 700 }) => {
         >
           <span>{data[tooltip.selectedIndex]?.label}</span>
           <div style={{ color: "white" }}>
-            Avg. Price: {data[tooltip.selectedIndex]?.value} OGY
+            {tooltipLabel.text ?? "Avg.Price"}:{" "}
+            {data[tooltip.selectedIndex]?.value} {tooltipLabel.unit ?? "$"}
           </div>
         </STooltip>
       )}
