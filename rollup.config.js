@@ -9,7 +9,7 @@ export default {
   output: [
     {
       file: "build/index.js",
-      format: "cjs",
+      format: "cjs",  //CommonJS
       sourcemap: true
     },
     {
@@ -22,7 +22,26 @@ export default {
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ useTsconfigDeclarationDir: true }),
-    postcss()
+    typescript({ 
+      useTsconfigDeclarationDir: true,
+      tsconfig: './tsconfig.json',
+      sourceMap: true,
+      inlineSources: true,
+      exclude: [
+        '**/__tests__',
+        '**/tests',
+        '**/__mocks__',
+        '**/mocks',
+        '**/jest-setup.*',
+        '**/setupTests.*',
+        '**/*.test.*',
+        '**/*.stories.*',
+        '**/story.*'
+      ] 
+    }),
+    postcss({
+      plugins: [],
+      minimize: true
+    })
   ]
 };

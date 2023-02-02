@@ -1,11 +1,13 @@
+import rollupConfig from '../rollup.config'; 
+
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = {
-  "stories": [
+  stories: [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)",
   ],
-  "addons": [
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     {
@@ -15,4 +17,21 @@ module.exports = {
       }
     }
   ],
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-webpack5'
+  },
+  webpackFinal: async () => {
+    rollupConfig.module.rules.push({
+      test: /\.(c?js)$/,
+      type: 'javascript/auto',
+      resolve: { fullySpecified: false }
+    })
+    rollupConfig.module.rules.push({
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+      include: path.resolve(__dirname, '../')
+    })
+    return config
+  }
 }
