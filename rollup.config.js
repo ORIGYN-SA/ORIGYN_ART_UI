@@ -3,6 +3,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
+import scss from 'rollup-plugin-scss'
+import sass from 'rollup-plugin-sass'
 
 export default {
   input: "src/index.ts",
@@ -20,6 +22,8 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
+    scss(),
+    sass(),
     resolve(),
     commonjs(),
     typescript({ 
