@@ -134,7 +134,18 @@ export const Graph = ({
   const [priceChange, setPriceChange] = useState(0);
 
   useEffect(() => {
+    // Here we are adding dummy data, we can have only
+    // 2 data points passed as prop
+    const dummyData = {};
+    const firstKey =
+      parseInt(Object.keys(data)?.[0]) ?? new Date().getTime() / 1000;
+    for (let i = 0; i <= 300; i++) {
+      const key = firstKey - i * 86400;
+      dummyData[key] = 0;
+    }
+    data = { ...dummyData, ...data };
     let dataKeys = Object.keys(data);
+
     const { days } = frames[selectedFrame];
     const ratio =
       data[dataKeys[dataKeys.length - days]] /
