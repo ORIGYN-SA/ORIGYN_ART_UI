@@ -15,12 +15,8 @@
     "build-storybook": "build-storybook",
     "prity": "npx prettier --write src/components"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/origyn-sa/origyn_art_ui"
-  },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/origyn-sa"
+    "@origyn-sa:registry": "https://gitlab.origyn.ch/api/v4/projects/10659/packages/npm/"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

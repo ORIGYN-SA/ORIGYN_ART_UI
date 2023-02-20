@@ -1,0 +1,152 @@
+image: alpine
+
+variables:
+  APP_NAME: tf-art-ui
+
+stages:
+  - build
+  - update
+  - publish
+
+.configure_aws:
+  before_script:
+    - apk add --no-cache jq python3 py3-pip && pip install awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+
+.build_push: &build_push
+  - /kaniko/executor
+    --context $CI_PROJECT_DIR
+    --dockerfile Dockerfile
+    --destination $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$APP_NAME-$CI_COMMIT_BRANCH:$CI_COMMIT_SHA
+
+.update_script: &update_script
+  - aws ecs describe-task-definition --task-definition $APP_NAME-task-$CI_COMMIT_BRANCH --query taskDefinition > task-definition.json
+  - echo $(jq --arg image "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$APP_NAME-$CI_COMMIT_BRANCH:$CI_COMMIT_SHA" '.containerDefinitions[0].image = $image | del(.taskDefinitionArn) | del(.revision) | del(.status) | del(.requiresAttributes) | del(.compatibilities) | del(.registeredAt) | del(.registeredBy)' task-definition.json) > task-definition.json
+  - aws ecs register-task-definition --cli-input-json file://$PWD/task-definition.json
+  - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster $APP_NAME-cluster-$CI_COMMIT_BRANCH --service $APP_NAME-ecs-service-$CI_COMMIT_BRANCH-$AWS_DEFAULT_REGION --task-definition $APP_NAME-task-$CI_COMMIT_BRANCH
+
+.start_openvpn: &start_openvpn
+  - export TZ=Etc/UTC && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  - apt-get update && apt-get install -y openvpn iputils-ping awscli curl
+  - cat <<< $CLIENT_OVPN > /etc/openvpn/client.ovpn
+  - openvpn --config /etc/openvpn/client.ovpn --daemon
+  - sleep 30s
+  - ping -c 1 10.0.1.238
+
+.configure_kubectl: &configure_kubectl
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.15/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - mv ./kubectl /usr/local/bin/kubectl
+  - echo $KUBE_CONFIG_DATA | base64 --decode >> ${HOME}/.kube/config
+
+.configure_git: &configure_git
+  - apt-get update && apt-get install git -y
+  - git config user.name runner
+  - git config user.email runner@gitlab.com
+  - git config github.token $CI_JOB_TOKEN
+
+build-push-dev:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+    - *build_push
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push"
+  tags:
+    - docker
+
+update-ecs-dev:
+  stage: update
+  extends: .configure_aws
+  needs:
+    - job: build-push-dev
+  when: on_success
+  script:
+    - *update_script
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push"
+  tags:
+    - docker
+
+build-push:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context $CI_PROJECT_DIR
+      --dockerfile Dockerfile
+      --destination $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/art-ui:$CI_COMMIT_BRANCH-$CI_COMMIT_SHA
+      --destination $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/art-ui:latest
+  rules:
+    - if: ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "stage") && $CI_PIPELINE_SOURCE == "push"
+  tags:
+    - docker
+
+update-kube:
+  stage: update
+  image:
+    name: ubuntu
+  needs:
+    - job: build-push
+  when: on_success
+  script:
+    - *start_openvpn
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+    - *configure_kubectl
+    - kubectl set image deployment/art-ui art-ui=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/art-ui:$CI_COMMIT_BRANCH-$CI_COMMIT_SHA -n $NAMESPACE --record
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"
+      variables:
+        NAMESPACE: "production"
+    - if: $CI_COMMIT_BRANCH == "stage" && $CI_PIPELINE_SOURCE == "push"
+      variables:
+        NAMESPACE: "staging"
+  tags:
+    - docker
+
+publish:
+  stage: publish
+  image:
+    name: node:latest
+  when: on_success
+  script:
+    - *configure_git
+    - npm ci && npm run build
+    - git add . && git commit -m "prepare package lock files" || true
+    - npm version $VERSION
+    - export MESSAGE=$(git log -1 --pretty=%B)
+    - git commit --amend -m "[ci skip] $MESSAGE" --no-verify
+    - git push https://${GIT_SYNC_USER}:${GITLAB_TOKEN}@${CI_SERVER_HOST}/$CI_PROJECT_PATH.git HEAD:$CI_COMMIT_BRANCH
+    - npm publish
+    - >
+      if [ $VERSION == "minor" ]; then 
+        export TARGET_BRANCH=main && ./autoMergeRequest.sh
+      fi
+    - >
+      if [ $VERSION == "major" ]; then 
+        export TARGET_BRANCH=stage && ./autoMergeRequest.sh && export TARGET_BRANCH=main && ./autoMergeRequest.sh
+      fi
+  tags:
+    - docker
+  rules:
+    - if: ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "stage" || $CI_COMMIT_BRANCH == "develop") && $CI_COMMIT_MESSAGE =~ /#patch/ && $CI_PIPELINE_SOURCE == "push"
+      variables:
+        VERSION: "patch"
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_MESSAGE =~ /#minor/ && $CI_PIPELINE_SOURCE == "push"
+      variables:
+        VERSION: "minor"
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_MESSAGE =~ /#major/ && $CI_PIPELINE_SOURCE == "push"
+      variables:
+        VERSION: "major"
