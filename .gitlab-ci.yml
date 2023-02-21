@@ -45,7 +45,6 @@ stages:
   - apt-get update && apt-get install git -y
   - git config user.name runner
   - git config user.email runner@gitlab.com
-  - git config github.token $CI_JOB_TOKEN
 
 build-push-dev:
   stage: build
@@ -129,6 +128,8 @@ publish:
     - export MESSAGE=$(git log -1 --pretty=%B)
     - git commit --amend -m "[ci skip] $MESSAGE" --no-verify
     - git push https://${GIT_SYNC_USER}:${GITLAB_TOKEN}@${CI_SERVER_HOST}/$CI_PROJECT_PATH.git HEAD:$CI_COMMIT_BRANCH
+    - npm config set -- //${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${GITLAB_TOKEN}
+    - npm config set @${CI_PROJECT_ROOT_NAMESPACE}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
     - npm publish
     - >
       if [ $VERSION == "minor" ]; then 
