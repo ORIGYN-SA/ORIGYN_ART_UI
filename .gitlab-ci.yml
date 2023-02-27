@@ -27,18 +27,22 @@ stages:
   - aws ecs register-task-definition --cli-input-json file://$PWD/task-definition.json
   - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster $APP_NAME-cluster-$CI_COMMIT_BRANCH --service $APP_NAME-ecs-service-$CI_COMMIT_BRANCH-$AWS_DEFAULT_REGION --task-definition $APP_NAME-task-$CI_COMMIT_BRANCH
 
-.start_openvpn: &start_openvpn
+.create_ssh: &create_ssh
   - export TZ=Etc/UTC && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-  - apt-get update && apt-get install -y openvpn iputils-ping awscli curl
-  - cat <<< $CLIENT_OVPN > /etc/openvpn/client.ovpn
-  - openvpn --config /etc/openvpn/client.ovpn --daemon
-  - sleep 30s
-  - ping -c 1 10.0.1.238
+  - apt-get update -y && apt-get install openssh-client awscli -y
+  - echo "127.0.0.1 $K8S_HOST" | tee -a /etc/hosts
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $BASTION_HOST >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
 
 .configure_kubectl: &configure_kubectl
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.15/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - mv ./kubectl /usr/local/bin/kubectl
+  - mkdir ${HOME}/.kube
   - echo $KUBE_CONFIG_DATA | base64 --decode >> ${HOME}/.kube/config
 
 .configure_git: &configure_git
@@ -99,11 +103,12 @@ update-kube:
     - job: build-push
   when: on_success
   script:
-    - *start_openvpn
+    - *create_ssh
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set region $AWS_DEFAULT_REGION
     - *configure_kubectl
+    - ssh -4 -fNT -L 6443:$K8S_HOST:443 ubuntu@$BASTION_HOST
     - kubectl set image deployment/art-ui art-ui=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/art-ui:$CI_COMMIT_BRANCH-$CI_COMMIT_SHA -n $NAMESPACE --record
   rules:
     - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"
