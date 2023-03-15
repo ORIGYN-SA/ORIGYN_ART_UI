@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
 import ThemeIcon from "../../icons/Theme";
 import { Link } from "react-router-dom";
-import {HR, Icons} from "../../index";
+import { HR, Icons } from "../../index";
 
-const StyledNav = styled.div`
-${({ theme}) => `
+const StyledNav = styled("div")`
+  ${({ theme }) => `
   display: block;
   ${theme.media.md}{
     display: none;
@@ -32,22 +32,23 @@ ${({ theme}) => `
   svg {
     fill: currentColor;
   }
-`}`;
+`}
+`;
 
-const MobileNav = styled.div`
+const MobileNav = styled("div")`
   display: none;
   z-index: 10000;
   position: sticky;
   top: 0;
   height: auto;
   width: 100%;
-  background-color: ${({ theme}) => theme.colors.BACKGROUND};
-  color: ${({ theme}) => theme.colors.TEXT};
-  ${({ theme}) => theme.media.md}{
+  background-color: ${({ theme }) => theme.colors.BACKGROUND};
+  color: ${({ theme }) => theme.colors.TEXT};
+  ${({ theme }) => theme.media.md} {
     display: block;
   }
-`
-const MobileNavHead = styled.div`
+`;
+const MobileNavHead = styled("div")`
   top: 0;
   width: 100%;
   display: flex;
@@ -56,8 +57,8 @@ const MobileNavHead = styled.div`
   height: 64px;
   padding: 16px;
   box-sizing: border-box;
-`
-const MobileMenu = styled.div`
+`;
+const MobileMenu = styled("div")`
   position: absolute;
   top: 64px;
   left: 0;
@@ -66,16 +67,19 @@ const MobileMenu = styled.div`
   display: flex;
   flex-flow: column;
   box-sizing: border-box;
-  background-color: ${({ theme}) => theme.colors.BACKGROUND};
-  color: ${({ theme}) => theme.colors.TEXT};
-`
+  background-color: ${({ theme }) => theme.colors.BACKGROUND};
+  color: ${({ theme }) => theme.colors.TEXT};
+`;
 
-const Navbar: React.FC<{navItems: any, onChangeTheme?: any}> = ({ navItems, onChangeTheme = () => {} }) => {
+const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
+  navItems,
+  onChangeTheme = () => {},
+}) => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
     <>
-      <svg style={{position: "absolute", width: 0, height: 0}}>
+      <svg style={{ position: "absolute", width: 0, height: 0 }}>
         <defs>
           <linearGradient
             id="paint0_linear_1649_2905"
@@ -153,46 +157,55 @@ const Navbar: React.FC<{navItems: any, onChangeTheme?: any}> = ({ navItems, onCh
       </svg>
       <MobileNav>
         <MobileNavHead>
-          <Icons.OrigynIcon/>
-          <Button iconButton size="medium" onClick={() => setMobileMenu(!mobileMenu)}>
-            {
-              mobileMenu ? (
-                <Icons.CloseIcon width={24} />
-              ) : (
-                <Icons.MenuIcon />
-              )
-            }
+          <Icons.OrigynIcon />
+          <Button
+            iconButton
+            size="medium"
+            onClick={() => setMobileMenu(!mobileMenu)}
+          >
+            {mobileMenu ? <Icons.CloseIcon width={24} /> : <Icons.MenuIcon />}
           </Button>
         </MobileNavHead>
-        {
-          mobileMenu && (
-            <MobileMenu>
-              {
-                navItems.map((item) => <a href={item.href}><Button textButton>{item.icon()} {item.title}</Button></a>)
-              }
-              <br/>
-              <HR />
-              <br/>
-              <Button textButton onClick={onChangeTheme}>
-                <ThemeIcon/>
-              </Button>
-            </MobileMenu>
-          )
-        }
+        {mobileMenu && (
+          <MobileMenu>
+            {navItems.map((item) => (
+              <a href={item.href}>
+                <Button textButton>
+                  {item.icon()} {item.title}
+                </Button>
+              </a>
+            ))}
+            <br />
+            <HR />
+            <br />
+            <Button textButton onClick={onChangeTheme}>
+              <ThemeIcon />
+            </Button>
+          </MobileMenu>
+        )}
       </MobileNav>
       <StyledNav>
-        <Flex flexFlow="column" align="center" justify="space-between" fullHeight>
+        <Flex
+          flexFlow="column"
+          align="center"
+          justify="space-between"
+          fullHeight
+        >
           <Flex flexFlow="column" align="center" gap={8}>
-            <div style={{marginBottom: '24px'}} >
-              <Icons.OrigynIcon/>
+            <div style={{ marginBottom: "24px" }}>
+              <Icons.OrigynIcon />
             </div>
-            {
-              navItems.map((item) => <a key={`navItem-${item.href}`} href={item.href}><Button textButton iconButton size="large">{item.icon()}</Button></a>)
-            }
+            {navItems.map((item) => (
+              <a key={`navItem-${item.href}`} href={item.href}>
+                <Button textButton iconButton size="large">
+                  {item.icon()}
+                </Button>
+              </a>
+            ))}
           </Flex>
           <Flex flexFlow="column" align="center">
             <Button textButton iconButton onClick={onChangeTheme}>
-              <ThemeIcon/>
+              <ThemeIcon />
             </Button>
           </Flex>
         </Flex>

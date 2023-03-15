@@ -1,107 +1,98 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 export const theme = {
   colors: {
-    BACKGROUND: '#151515',
-    //BACKGROUND: '#FEFEFE', LIGHT
-    BORDER: '#242424',
+    BACKGROUND: "#151515",
+    //BACKGROUND: '#f3f3f3', LIGHT
+    BORDER: "#242424",
     //BORDER: '#E3E3E3', LIGHT
-    TEXT: '#FEFEFE',
+    TEXT: "#FEFEFE",
     // TEXT: '#151515', LIGHT
-    SECONDARY_TEXT: '#5F5F5F',
-    INACTIVE: '#9A9A9A',
+    SECONDARY_TEXT: "#5F5F5F",
+    INACTIVE: "#9A9A9A",
 
-    NAVIGATION_BACKGROUND: '#000000',
-    // NAVIGATION_BACKGROUND: '#FEFEFE', LIGHT
-    NAVIGATION_BACKGROUND_LIGHT: '#121212',
+    NAVIGATION_BACKGROUND: "#000000",
+    // NAVIGATION_BACKGROUND: '#fafafa', LIGHT
+    NAVIGATION_BACKGROUND_LIGHT: "#121212",
     // NAVIGATION_BACKGROUND_LIGHT: '#FCFCFC', LIGHT
 
-    ERROR: '#B5010A',
-    PROGRESS: '#F2BD00',
-    SUCCESS: '#50AA3E',
+    ERROR: "#B5010A",
+    PROGRESS: "#F2BD00",
+    SUCCESS: "#50AA3E",
 
-    ACCENT_COLOR: '#70237D',
-    ACCENT_COLOR_2: '#FFE7BD',
+    ACCENT_COLOR: "#70237D",
+    ACCENT_COLOR_2: "#FFE7BD",
 
-    PRIMARY_1000: '#0f0f0f',
-    PRIMARY_900: '#151515',
-    PRIMARY_800: '#242424',
-    PRIMARY_700: '#3A3A3A',
-    PRIMARY_600: '#5F5F5F',
-    PRIMARY_500: '#9A9A9A',
-    PRIMARY_400: '#E3E3E3',
-    PRIMARY_300: '#F2F2F2',
-    PRIMARY_200: '#FAFAFA',
-    PRIMARY_100: '#FEFEFE',
-
+    PRIMARY_1000: "#0f0f0f",
+    PRIMARY_900: "#151515",
+    PRIMARY_800: "#242424",
+    PRIMARY_700: "#3A3A3A",
+    PRIMARY_600: "#5F5F5F",
+    PRIMARY_500: "#9A9A9A",
+    PRIMARY_400: "#E3E3E3",
+    PRIMARY_300: "#F2F2F2",
+    PRIMARY_200: "#FAFAFA",
+    PRIMARY_100: "#FEFEFE",
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",
     md: "0px 5px 10px -5px rgba(26, 32, 44, 0.1)",
     lg: "0px 10px 15px -3px rgba(26, 32, 44, 0.1), 0px 4px 6px -2px rgba(26, 32, 44, 0.05)",
   },
-  typography: {
-
-  },
-  spacing: {
-
-  },
+  typography: {},
+  spacing: {},
   media: {
-    sm: '@media (max-width: 600px)',
-    md: '@media (max-width: 960px)',
-    lg: '@media (max-width: 1280px)',
-    xl: '@media (max-width: 1920px)',
+    sm: "@media (max-width: 600px)",
+    md: "@media (max-width: 960px)",
+    lg: "@media (max-width: 1280px)",
+    xl: "@media (max-width: 1920px)",
   },
   containers: {
     sm: 905,
     md: 1150,
     lg: 1440,
-  }
+  },
 };
 
 export const themeLight = {
   colors: {
-    BACKGROUND: '#FEFEFE',
-    BORDER: '#E3E3E3',
-    TEXT: '#151515',
-    SECONDARY_TEXT: '#5F5F5F',
-    INACTIVE: '#9A9A9A',
+    BACKGROUND: "#f3f3f3",
+    BORDER: "#E3E3E3",
+    TEXT: "#151515",
+    SECONDARY_TEXT: "#5F5F5F",
+    INACTIVE: "#9A9A9A",
 
-    NAVIGATION_BACKGROUND: '#FEFEFE',
-    NAVIGATION_BACKGROUND_LIGHT: '#FCFCFC',
+    NAVIGATION_BACKGROUND: "#fafafa",
+    NAVIGATION_BACKGROUND_LIGHT: "#FCFCFC",
 
-    ERROR: '#B5010A',
-    PROGRESS: '#F2BD00',
-    SUCCESS: '#50AA3E',
+    ERROR: "#B5010A",
+    PROGRESS: "#F2BD00",
+    SUCCESS: "#50AA3E",
 
-    ACCENT_COLOR: '#70237D',
-    ACCENT_COLOR_2: '#FFE7BD',
+    ACCENT_COLOR: "#70237D",
+    ACCENT_COLOR_2: "#FFE7BD",
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",
     md: "0px 5px 10px -5px rgba(26, 32, 44, 0.1)",
     lg: "0px 10px 15px -3px rgba(26, 32, 44, 0.1), 0px 4px 6px -2px rgba(26, 32, 44, 0.05)",
   },
-  typography: {
-
-  },
-  spacing: {
-
-  },
+  typography: {},
+  spacing: {},
   media: {
-    sm: '@media (max-width: 600px)',
-    md: '@media (max-width: 960px)',
-    lg: '@media (max-width: 1280px)',
-    xl: '@media (max-width: 1920px)',
+    sm: "@media (max-width: 600px)",
+    md: "@media (max-width: 960px)",
+    lg: "@media (max-width: 1280px)",
+    xl: "@media (max-width: 1920px)",
   },
   containers: {
     sm: 905,
     md: 1150,
     lg: 1440,
-  }
+  },
 };
 
-export const GlobalStyle = createGlobalStyle<{theme: typeof theme}>`
+export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
   :root {
     --text-line-height: 1.57;
   }

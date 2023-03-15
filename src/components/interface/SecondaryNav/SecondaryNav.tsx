@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Flex from "../../layout/Flex";
 import MenuLink from "../MenuLink";
@@ -7,17 +7,16 @@ import Button from "../Button/Button";
 import Card from "../Card";
 
 export type SecondaryNavProps = {
-  tabs: Array<{ title: string, id: string }>;
+  tabs: Array<{ title: string; id: string }>;
   content: Array<any>;
   title?: string;
   onConnect?: () => void;
-  onLogOut?:  () => void;
+  onLogOut?: () => void;
   principal?: string;
-
 };
 
 const StyledSecondaryNav = styled(Flex)`
-  ${({theme}) => `
+  ${({ theme }) => `
   background: linear-gradient(90deg, ${theme.colors.NAVIGATION_BACKGROUND_LIGHT} 0%, ${theme.colors.NAVIGATION_BACKGROUND} 100%);
   color: ${theme.colors.WHITE};
   font-weight: 600;
@@ -39,7 +38,7 @@ const StyledSecondaryNav = styled(Flex)`
 `;
 
 const StyledTab = styled(MenuLink)`
-  ${({theme}) => `
+  ${({ theme }) => `
     color: ${theme.colors.TEXT};
     display: flex;
     height: 100%;
@@ -63,23 +62,23 @@ const NavTitle = styled(Flex)`
   font-size: 14px;
   line-height: 22px;
   letter-spacing: -0.15px;
-  color: ${({theme}) => theme.colors.TEXT};;
+  color: ${({ theme }) => theme.colors.TEXT};
 
   margin-right: 32px;
-`
-const StyledWalletMenu = styled.div`
+`;
+const StyledWalletMenu = styled("div")`
   position: relative;
-`
+`;
 const StyledLogOut = styled(Card)`
   position: absolute;
   top: 100%;
   right: 0;
-`
+`;
 const StyledWallet = styled(Button)`
   position: relative;
-  background: ${({theme}) => theme.colors.BACKGROUND};;
-  border: 1px solid ${({theme}) => theme.colors.BORDER};;
-  color: ${({theme}) => theme.colors.TEXT};
+  background: ${({ theme }) => theme.colors.BACKGROUND};
+  border: 1px solid ${({ theme }) => theme.colors.BORDER};
+  color: ${({ theme }) => theme.colors.TEXT};
   opacity: 1;
 
   &:after {
@@ -92,33 +91,37 @@ const StyledWallet = styled(Button)`
     top: 0;
     right: 0;
 
-    background: ${({theme}) => theme.colors.SUCCESS};
+    background: ${({ theme }) => theme.colors.SUCCESS};
 
     border: 1px solid #000000;
   }
 `;
 
-const StyledContent = styled.div`
-  background: ${({theme}) => theme.colors.BACKGROUND};;
-  /* Primary/800: border (dark) */
-
-  border-top: 1px solid ${({theme}) => theme.colors.BORDER};;
+const StyledContent = styled("div")`
+  background: ${({ theme }) => theme.colors.BACKGROUND};
+  box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 4%);
   border-radius: 16px 0px 0px 0px;
   width: 100%;
   height: 100%;
-`
+`;
 
 const StyledTitle = styled.p`
-  ${({ theme}) => theme.media.sm}{
+  ${({ theme }) => theme.media.sm} {
     display: none;
   }
-`
+`;
 
-const SecondaryNav = ({tabs, content, title, onConnect, principal, onLogOut}: SecondaryNavProps) => {
+const SecondaryNav = ({
+  tabs,
+  content,
+  title,
+  onConnect,
+  principal,
+  onLogOut,
+}: SecondaryNavProps) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const ref = useRef(null);
-
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -133,12 +136,25 @@ const SecondaryNav = ({tabs, content, title, onConnect, principal, onLogOut}: Se
   }, [ref]);
 
   return (
-    <Banner bgColor="transparent" flexFlow="column" align="flex-start" padding="0">
-      <Banner bgColor="transparent" fullWidth justify="space-between" align="center" padding="0 24px">
+    <Banner
+      bgColor="transparent"
+      flexFlow="column"
+      align="flex-start"
+      padding="0"
+    >
+      <Banner
+        bgColor="transparent"
+        fullWidth
+        justify="space-between"
+        align="center"
+        padding="0 24px"
+      >
         <Flex align="center" gap={32}>
-          <StyledTitle><b>{title}</b></StyledTitle>
+          <StyledTitle>
+            <b>{title}</b>
+          </StyledTitle>
           <StyledSecondaryNav>
-            {tabs.map(({id, title}, index) => (
+            {tabs.map(({ id, title }, index) => (
               <StyledTab
                 as="div"
                 key={id}
@@ -150,31 +166,34 @@ const SecondaryNav = ({tabs, content, title, onConnect, principal, onLogOut}: Se
             ))}
           </StyledSecondaryNav>
         </Flex>
-        {
-          onConnect && !principal && (
-            <div><Button size="small" onClick={onConnect}>Connect</Button></div>
-          )
-        }
-        {
-          principal && <StyledWalletMenu>
-            <StyledWallet size="small" onClick={() => setIsMenuOpened(!isMenuOpened)}>
+        {onConnect && !principal && (
+          <div>
+            <Button size="small" onClick={onConnect}>
+              Connect
+            </Button>
+          </div>
+        )}
+        {principal && (
+          <StyledWalletMenu>
+            <StyledWallet
+              size="small"
+              onClick={() => setIsMenuOpened(!isMenuOpened)}
+            >
               {principal.slice(0, 2)}...{principal.slice(-4)}
             </StyledWallet>
-            {
-              onLogOut && isMenuOpened && (
-                <StyledLogOut ref={ref} type="filled" padding="16px">
-                  <Flex>
-                    <Button textButton size="small" onClick={onLogOut}>Log out</Button>
-                  </Flex>
-                </StyledLogOut>
-              )
-            }
+            {onLogOut && isMenuOpened && (
+              <StyledLogOut ref={ref} type="filled" padding="16px">
+                <Flex>
+                  <Button textButton size="small" onClick={onLogOut}>
+                    Log out
+                  </Button>
+                </Flex>
+              </StyledLogOut>
+            )}
           </StyledWalletMenu>
-        }
+        )}
       </Banner>
-      <StyledContent>
-        {content[currentTab]}
-      </StyledContent>
+      <StyledContent>{content[currentTab]}</StyledContent>
     </Banner>
   );
 };

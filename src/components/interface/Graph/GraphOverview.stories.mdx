@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="Components/Interface/Graph/Overview" />
+
+<style>{`
+
+`}</style>
+
+# Line Graph Component
+
+The Graph component will render a canvas within the page, drawing lines based on `data` object.
+
+You can look at visual appearance of the Graph in
+[storybook style guides](https://www.figma.com/file/OScGNN4AirANA6u70ZxzMV/Design-System?node-id=73%3A4620)
+
+## Properties
+
+```typescript
+type GraphProps = {
+  data: Record<string | number, number>;
+  token: string;
+  width: string;
+  frame?: number;
+};
+```
+
+## OGY Chart
+
+<Canvas>
+  <Story id="components-interface-graph-all-stories--ogy-graph" />
+</Canvas>
+
+## ICP Chart
+
+<Canvas>
+  <Story id="components-interface-graph-all-stories--icp-graph" />
+</Canvas>
+
+## Some token
+
+<Canvas>
+  <Story id="components-interface-graph-all-stories--default" />
+</Canvas>

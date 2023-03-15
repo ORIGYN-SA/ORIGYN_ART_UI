@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "../Card";
-import HR from "../HR";
-import Flex from "../../layout/Flex";
-import Button from "../Button";
-import ArrowRight from "../../icons/ArrowRight";
 
-export type ProductCardProps = {};
-
-const StyledProductCardContent = styled.div`
-  ${() => `
+const StyledProductCardContent = styled("div")`
+  ${({ theme }) => `
+  
   padding: 16px;
   
   p {
@@ -35,29 +30,35 @@ const StyledProductCardContent = styled.div`
 `}
 `;
 
-const ProductCard = () => {
+const StyledCardImage = styled("img")`
+  ${() => `width: 307px; height: 307px`}
+`;
+const StyledCard = styled(Card)`
+  ${({ theme }) => `
+  background-color: ${theme.colors.NAVIGATION_BACKGROUND};
+  width: 307px;`}
+`;
+
+const ProductCard = ({ title, info, image, status }: ProductCardProps) => {
   return (
-    <Card flexFlow="column">
-      <img src="http://placehold.jp/240x290.png" alt="123" />
+    <StyledCard flexFlow="column">
+      <StyledCardImage src={image} alt={`image-${title}`} />
       <StyledProductCardContent>
-        <p>Creator/Account</p>
-        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing</h4>
-        <br/>
+        <p>{info}</p>
+        <h4>{title}</h4>
+        <br />
         <p>Status</p>
-        <Flex align="center" justify="space-between">
-          <h4><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M5.99678 1L5.92969 1.22788V7.83991L5.99678 7.90684L9.06594 6.09263L5.99678 1Z" fill="#343434"/>
-            <path d="M6.00089 1L2.93164 6.09263L6.00089 7.90684V4.69755V1Z" fill="#8C8C8C"/>
-            <path d="M5.9968 8.48824L5.95898 8.53435V10.8897L5.9968 11L9.06784 6.67497L5.9968 8.48824Z" fill="#3C3C3B"/>
-            <path d="M6.00089 11V8.48824L2.93164 6.67497L6.00089 11Z" fill="#8C8C8C"/>
-            <path d="M5.99805 7.90673L9.06721 6.09252L5.99805 4.69743V7.90673Z" fill="#141414"/>
-            <path d="M2.93164 6.09252L6.00089 7.90673V4.69743L2.93164 6.09252Z" fill="#393939"/>
-          </svg>0.075</h4>
-          <ArrowRight />
-        </Flex>
+        {status}
       </StyledProductCardContent>
-    </Card>
+    </StyledCard>
   );
 };
 
 export default ProductCard;
+
+type ProductCardProps = {
+  title: string;
+  info?: string;
+  image: string;
+  status: JSX.Element;
+};

@@ -35,7 +35,7 @@ const StyledLabel = styled.label`
   line-height: 24px;
 `;
 
-const ErrorMessage = styled.div`
+const ErrorMessage = styled("div")`
   ${({ theme }) => `
   font-weight: 400;
   font-size: 11px;

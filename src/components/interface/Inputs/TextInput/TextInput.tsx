@@ -1,15 +1,14 @@
 import React from "react";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import Flex from "../../../layout/Flex";
 import ErrorIcon from "../../../icons/Error";
 
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-  inputSize?: 'small' | 'medium' | 'large';
-};
-
-
+  inputSize?: "small" | "medium" | "large";
+}
 
 const largeSize = css`
   padding: 0 16px;
@@ -45,12 +44,12 @@ export const inputSizes = {
   large: largeSize,
   medium: mediumSize,
   small: smallSize,
-}
+};
 
-const StyledTextInput = styled.input<{error: boolean, inputSize?: string}>`
-  ${({inputSize = "large"}) => inputSizes[inputSize]};
-  
-  ${({theme, error}) => `
+const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
+  ${({ inputSize = "large" }) => inputSizes[inputSize]};
+
+  ${({ theme, error }) => `
     padding: 0 16px;
     gap: 10px;
     background: ${theme.colors.BACKGROUND};
@@ -66,10 +65,11 @@ const StyledTextInput = styled.input<{error: boolean, inputSize?: string}>`
       outline: none;
       background-color: ${theme.colors.TEXT}06;
     }
-`}`;
+`}
+`;
 
-const ErrorMessage = styled.div`
-  ${({theme}) => `
+const ErrorMessage = styled("div")`
+  ${({ theme }) => `
   font-weight: 400;
   font-size: 11px;
   line-height: 16px;
@@ -86,17 +86,13 @@ const Label = styled.label`
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 8px;
-`
+`;
 
 const TextInput = ({ label, error, inputSize, ...props }: TextInputProps) => {
   return (
     <Flex flexFlow="column" fullWidth>
-      {label ? <Label htmlFor={props.id}>{label}</Label> : null }
-      <StyledTextInput
-        error={!!error}
-        inputSize={inputSize}
-        {...props}
-      />
+      {label ? <Label htmlFor={props.id}>{label}</Label> : null}
+      <StyledTextInput error={!!error} inputSize={inputSize} {...props} />
       <ErrorMessage>
         {error && (
           <>

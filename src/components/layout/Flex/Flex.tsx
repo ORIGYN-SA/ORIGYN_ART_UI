@@ -11,6 +11,7 @@ export type FlexProps = {
     | "space-around";
   align?: "flex-start" | "flex-end" | "center";
   flexFlow?: TFlexFlow;
+  flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
   smFlexFlow?: TFlexFlow;
   mdFlexFlow?: TFlexFlow;
   lgFlexFlow?: TFlexFlow;
@@ -25,13 +26,14 @@ export type FlexProps = {
   relative?: boolean;
 };
 
-const StyledFlex = styled.div<FlexProps>`
+const StyledFlex = styled("div")<FlexProps>`
   ${({
     justify,
     align,
     fullWidth,
     fullHeight,
     flexFlow,
+    flexWrap,
     smFlexFlow,
     mdFlexFlow,
     lgFlexFlow,
@@ -48,6 +50,7 @@ const StyledFlex = styled.div<FlexProps>`
   align-items: ${align};
   justify-content: ${justify};
   flex-flow: ${flexFlow ? flexFlow : "row"};
+  flex-wrap: ${flexWrap ? flexWrap : "nowrap"};
   width: ${fullWidth ? "100%" : "auto"};
   height: ${fullHeight ? "100%" : "auto"};
   gap: ${gap}px;

@@ -8,8 +8,8 @@ export type BreadCrumbsProps = {
   data: Array<{ title: string; link: string }>;
 };
 
-const SBreadCrumbs = styled.div`
-  ${({theme}) => `
+const SBreadCrumbs = styled("div")`
+  ${({ theme }) => `
   display: flex;
   gap: 15px;
   font-weight: 400;
@@ -38,12 +38,11 @@ const SBreadCrumbs = styled.div`
 const BreadCrumbs = ({ data }: BreadCrumbsProps) => {
   return (
     <SBreadCrumbs>
-      {data.map(({link, title}, index) => (
+      {data.map(({ link, title }, index) => (
         <Flex gap={15} smFlexFlow="row" align="center" key={title}>
-          {index > 0 && <span className="material-symbols-rounded">
-              chevron_right
-            </span>
-          }
+          {index > 0 && (
+            <span className="material-symbols-rounded">chevron_right</span>
+          )}
           {index + 1 === data.length ? (
             <span>{title}</span>
           ) : (

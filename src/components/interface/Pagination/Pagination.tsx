@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
 import Container from "../../layout/Container";
@@ -17,7 +17,7 @@ const flexContainer: any = {
   top: "20px",
 };
 
-const PaginationContainer = styled.div`
+const PaginationContainer = styled("div")`
   display: flex;
   align-items: flex-start;
   flex-direction: row;
@@ -36,18 +36,18 @@ const PaginationContainer = styled.div`
     padding: 11px;
     gap: 10px;
     font-style: normal;
-    font-weight: 500; 
+    font-weight: 500;
     font-size: 12px;
     line-height: 20px;
     text-align: center;
     background: transparent;
-    border: 1px ;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 4px;
     margin: 0 6px;
     cursor: pointer;
     &:not([disabled]):hover {
-      border: 1px ;
+      border: 1px;
     }
   }
 `;
@@ -64,27 +64,27 @@ const textStyle: any = {
 };
 
 const MoreIconDiv: any = {
-  display: 'flex',
-flexDirection: 'column',
-justifyContent: 'center',
-alignItems: 'center',
-padding: '0px',
-gap: '10px',
-width: '40px',
-height: '40px',
-borderRadius: '999px'
-}
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "0px",
+  gap: "10px",
+  width: "40px",
+  height: "40px",
+  borderRadius: "999px",
+};
 
 const MoreIconText: any = {
-width: '9px',
-height: '20px',
-fontFamily: 'Montserrat',
-fontStyle: 'normal',
-fontWeight: '500',
-fontSize: '12px',
-lineHeight: '20px',
-textAlign: 'center',
-}
+  width: "9px",
+  height: "20px",
+  fontFamily: "Montserrat",
+  fontStyle: "normal",
+  fontWeight: "500",
+  fontSize: "12px",
+  lineHeight: "20px",
+  textAlign: "center",
+};
 
 const Icon = styled.img`
   width: 20px;
@@ -141,7 +141,7 @@ const Pagination = ({ pageCount, onPageChange }: any) => {
 
   useEffect(() => {
     onPageChange(currentPage);
-  }, [currentPage])
+  }, [currentPage]);
 
   return (
     <Container padding="8px">
@@ -159,7 +159,8 @@ const Pagination = ({ pageCount, onPageChange }: any) => {
                 if (currentPage > 1) setCurrentPage(currentPage - 1);
               }}
               disabled={currentPage <= 1}
-            >{`<`}</Button>)}
+            >{`<`}</Button>
+          )}
           {pageCount < 4 && renderPageButtons()}
           {currentPage >= pageCount - 2 && pageCount > 3 && (
             <>

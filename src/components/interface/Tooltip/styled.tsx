@@ -1,12 +1,15 @@
 import styled, { css, keyframes } from "styled-components";
-import {theme} from "../../../utils"
+import { theme } from "../../../utils";
 
-export const TooltipWrapper = styled.div`
+export const TooltipWrapper = styled("div")`
   position: relative;
   display: inline-flex;
 `;
 
-export const TooltipTarget = styled.button<{styleMe?: any, showOnFocus?: any}>`
+export const TooltipTarget = styled.button<{
+  styleMe?: any;
+  showOnFocus?: any;
+}>`
   border: none;
   background: inherit;
   padding: 5px;
@@ -33,7 +36,7 @@ export const TooltipTarget = styled.button<{styleMe?: any, showOnFocus?: any}>`
     `};
 `;
 
-export const CenterContainer = styled.div<{position?: any}>`
+export const CenterContainer = styled("div")<{ position?: any }>`
   position: absolute;
   width: 200px;
   margin-left: -100px;
@@ -72,10 +75,10 @@ export const CenterContainer = styled.div<{position?: any}>`
         return css`
           bottom: calc(100% + 5px);
         `;
-      default :
+      default:
         return css`
-        bottom: calc(100% + 5px);
-        `
+          bottom: calc(100% + 5px);
+        `;
     }
   }}
 `;
@@ -90,16 +93,15 @@ const fadeIn = keyframes`
   }
 `;
 
-export const TooltipBox = styled.span<{textColor?: any, position?: any }>`
+export const TooltipBox = styled.span<{ textColor?: any; position?: any }>`
   position: relative;
-  background-color: ${theme.colors.TEXT}; 
+  background-color: ${theme.colors.TEXT};
   color: ${theme.colors.BACKGROUND};
   text-align: center;
   border-radius: 5px;
   padding: 10px 8px;
   font-size: 1.25rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
-
 
   /* animation: ${fadeIn} 1s linear; */
   &:after {
@@ -114,12 +116,13 @@ export const TooltipBox = styled.span<{textColor?: any, position?: any }>`
     top: 100%;
   }
 
-  ${({ position, }) => {
+  ${({ position }) => {
     switch (position) {
       case "bottom":
         return css`
           &:after {
-            border-color: transparent transparent ${theme.colors.TEXT} transparent;
+            border-color: transparent transparent ${theme.colors.TEXT}
+              transparent;
             top: unset;
             width: 1px;
             bottom: 100%;
@@ -129,7 +132,8 @@ export const TooltipBox = styled.span<{textColor?: any, position?: any }>`
       case "left":
         return css`
           &:after {
-            border-color: transparent transparent transparent ${theme.colors.TEXT};
+            border-color: transparent transparent transparent
+              ${theme.colors.TEXT};
             left: 100%;
             top: calc(50% - 5px);
           }

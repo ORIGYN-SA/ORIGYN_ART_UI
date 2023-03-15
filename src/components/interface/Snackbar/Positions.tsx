@@ -28,12 +28,12 @@ export const Positions = {
     bottom: "24px",
     left: "24px",
     align: "-webkit-left",
-  }
+  },
 };
 
 export type positionType = keyof typeof Positions;
 
-export const SnackContainerTopLeft = styled.div`
+export const SnackContainerTopLeft = styled("div")`
   position: fixed;
   top: ${Positions["top-left"].top};
   bottom: ${Positions["top-left"].bottom};
@@ -42,7 +42,7 @@ export const SnackContainerTopLeft = styled.div`
   z-index: 1000;
   text-align: ${Positions["top-left"].align};
 `;
-export const SnackContainerTopRight = styled.div`
+export const SnackContainerTopRight = styled("div")`
   position: fixed;
   top: ${Positions["top-right"].top};
   bottom: ${Positions["top-right"].bottom};
@@ -51,7 +51,7 @@ export const SnackContainerTopRight = styled.div`
   z-index: 1000;
   text-align: ${Positions["top-right"].align};
 `;
-export const SnackContainerBottomLeft = styled.div`
+export const SnackContainerBottomLeft = styled("div")`
   position: fixed;
   top: ${Positions["bottom-left"].top};
   bottom: ${Positions["bottom-left"].bottom};
@@ -60,7 +60,7 @@ export const SnackContainerBottomLeft = styled.div`
   z-index: 1000;
   text-align: ${Positions["bottom-left"].align};
 `;
-export const SnackContainerBottomRight = styled.div`
+export const SnackContainerBottomRight = styled("div")`
   position: fixed;
   top: ${Positions["bottom-right"].top};
   bottom: ${Positions["bottom-right"].bottom};

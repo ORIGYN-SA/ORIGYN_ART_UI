@@ -14,8 +14,21 @@ export interface GridProps {
   rows?: number;
 }
 
-const StyledGrid = styled.div<GridProps>`
-  ${({ columns, theme, gap, rows, smColumns, mdColumns, lgColumns, xlColumns, smGap, mdGap, lgGap, xlGap }) => `
+const StyledGrid = styled("div")<GridProps>`
+  ${({
+    columns,
+    theme,
+    gap,
+    rows,
+    smColumns,
+    mdColumns,
+    lgColumns,
+    xlColumns,
+    smGap,
+    mdGap,
+    lgGap,
+    xlGap,
+  }) => `
   display: grid;
   grid-template-columns: repeat(${columns}, minmax(0, 1fr));
   grid-template-rows: ${rows};
@@ -32,12 +45,16 @@ const StyledGrid = styled.div<GridProps>`
   }
   
   ${theme?.media?.md} {
-    grid-template-columns: repeat(${mdColumns ? mdColumns : 1}, minmax(0, 1fr))!important;
+    grid-template-columns: repeat(${
+      mdColumns ? mdColumns : 1
+    }, minmax(0, 1fr))!important;
     gap: ${mdGap}px;
   }
   
   ${theme?.media?.sm} {
-    grid-template-columns: repeat(${smColumns ? smColumns : 1}, minmax(0, 1fr))!important;
+    grid-template-columns: repeat(${
+      smColumns ? smColumns : 1
+    }, minmax(0, 1fr))!important;
     gap: ${smGap}px;
   }
 `}

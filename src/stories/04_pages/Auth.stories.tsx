@@ -52,7 +52,7 @@ const StyledFBButton = styled(StyledCustomButton)`
 `}
 `;
 
-const StyledCustomText = styled.div`
+const StyledCustomText = styled("div")`
   ${({ theme }) => `
   width: 468px;
   max-width: 100%;

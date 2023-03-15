@@ -20,14 +20,14 @@ type SortValue = {
   default: boolean;
 };
 
-const ArrowTop = styled.div`
+const ArrowTop = styled("div")`
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid black;
 `;
-const ArrowBottom = styled.div`
+const ArrowBottom = styled("div")`
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -114,12 +114,12 @@ const HistoryTable = ({ cells, rows, cols = [] }: TableProps) => {
   );
 };
 
-const TableWrapper = styled.div`
+const TableWrapper = styled("div")`
   width: 100%;
   color: #000;
   white-space: nowrap;
 `;
-const TableHead = styled.div`
+const TableHead = styled("div")`
   ${({ theme }) => `
     display: flex;
     padding: 10px;
@@ -130,7 +130,7 @@ const TableHead = styled.div`
     }
   `}
 `;
-const HeadColumn = styled.div<{ canSort: boolean | undefined }>`
+const HeadColumn = styled("div")<{ canSort: boolean | undefined }>`
   ${({ theme, canSort }) => `
     display: flex;
     flex-grow: 1;
@@ -154,7 +154,7 @@ const HeadColumn = styled.div<{ canSort: boolean | undefined }>`
     }
   `}
 `;
-const BodyWrapper = styled.div`
+const BodyWrapper = styled("div")`
   ${({ theme }) => `
     display: flex;
     background-color: white;
@@ -170,7 +170,7 @@ const BodyWrapper = styled.div`
     }
   `}
 `;
-const BodyColumn = styled.div`
+const BodyColumn = styled("div")`
   ${({ theme }) => `
     display: flex;
     flex-grow: 1;

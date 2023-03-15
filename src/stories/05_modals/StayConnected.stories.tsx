@@ -32,7 +32,7 @@ const PrivacyPolicy = styled.p`
   margin-top: 15px;
 `;
 
-const ResponsiveGrid = styled.div`
+const ResponsiveGrid = styled("div")`
   ${({ theme }) => `
   display: grid;
   grid-template-columns: repeat(2, 1fr);
