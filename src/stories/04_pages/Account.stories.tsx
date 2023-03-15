@@ -39,7 +39,7 @@ const InputWrapper = styled(Flex)`
   width: 100%;
 `;
 
-const ResponsiveGrid = styled.div`
+const ResponsiveGrid = styled("div")`
   ${({ theme }) => `
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -78,8 +78,7 @@ const Template: Story = (args) => (
           <div>Content 3</div>,
           <div>Content 4</div>,
           <div>Content 5</div>,
-          <div>
-          </div>,
+          <div></div>,
         ]}
       />
     </Container>

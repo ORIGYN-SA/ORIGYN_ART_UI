@@ -2,13 +2,10 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import Navbar from "./Navbar";
-import Home from "./MockSlides/Home";
-import Governance from "./MockSlides/Governance";
-import Wallet from "./MockSlides/Wallet";
-import HomeIcon from "../../../components/icons/home";
-import GovernanceIcon from "../../../components/icons/governance";
-import ThemeIcon from "../../../components/icons/theme";
-import WalletIcon from "../../../components/icons/wallet";
+import HomeIcon from "../../../components/icons/Home";
+import GovernanceIcon from "../../../components/icons/Governance";
+import WalletIcon from "../../../components/icons/Wallet";
+import {SafeIcon, TransactionIcon} from "../../icons";
 
 export default {
   title: "Components/Interface/Navbar/All stories",
@@ -20,9 +17,6 @@ const Template: Story = (args: any) => {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         height: "1050px",
         backgroundColor: "#d3d3d3",
       }}
@@ -30,15 +24,28 @@ const Template: Story = (args: any) => {
       <Navbar navItems={[
         {
           href: 'url',
+          title: 'Home',
           icon: HomeIcon
         },
         {
           href: 'url',
+          title: 'Governance',
           icon: GovernanceIcon
         },
         {
           href: 'url',
+          title: 'Wallet',
           icon: WalletIcon
+        },
+        {
+          href: 'url',
+          title: 'Wallet',
+          icon: SafeIcon
+        },
+        {
+          href: 'url',
+          title: 'Wallet',
+          icon: TransactionIcon
         },
       ]} />
     </div>

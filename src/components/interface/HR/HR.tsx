@@ -10,9 +10,9 @@ export type HRProps = {
 };
 
 const HR = styled.hr<HRProps>`
-  ${({ color="BLACK", marginTop = 0, marginBottom = 0, theme }) => `
+  ${({ color, marginTop = 0, marginBottom = 0, theme }) => `
   border: none;
-  border-bottom: 1px solid ${theme.colors[color]};
+  border-bottom: 1px solid ${color ? theme.colors[color] : theme.colors.BORDER };
   margin: ${marginTop}px 0 ${marginBottom}px 0;
 `}
 `;

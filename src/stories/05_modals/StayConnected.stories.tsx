@@ -32,7 +32,7 @@ const PrivacyPolicy = styled.p`
   margin-top: 15px;
 `;
 
-const ResponsiveGrid = styled.div`
+const ResponsiveGrid = styled("div")`
   ${({ theme }) => `
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -46,7 +46,6 @@ const ResponsiveGrid = styled.div`
 
 //TODO
 //Need to rework Checkbox component UI, add props for label and checkbox position
-//Need to change styles for MoreLink Component
 
 const Template: Story = (args) => {
   const [isOpened, setIsOpened] = useState(false);

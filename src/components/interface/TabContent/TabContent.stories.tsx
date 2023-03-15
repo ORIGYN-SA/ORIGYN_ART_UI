@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import TabContent, { TabContentProps } from "./TabContent";
 import TabContentVertical, {
   TabContentVerticalProps,
-  useTabContentVertical
+  useTabContentVertical,
 } from "./TabContentVertical";
 import styled from "styled-components";
 
@@ -30,10 +30,11 @@ Default.args = {
     <div>Content 4</div>,
   ],
   fullWidth: true,
-  justify: 'flex-start'
+  borderBottom: true,
+  justify: "flex-start",
 };
 
-const LeftTopMargin = styled.div`
+const LeftTopMargin = styled("div")`
   margin: 20px 50px 0 50px;
 `;
 
@@ -60,11 +61,13 @@ VerticalTabs.args = {
     <div>Content 4</div>,
     <div>Content 5</div>,
     <div>Content 6</div>,
-  ]
+  ],
 };
 
-const UseVerticalTemplate: Story<{steps: Array<{ title: string; content: any }>}> = ({steps}) => {
-  const [nav, content, step, setStep] = useTabContentVertical(steps)
+const UseVerticalTemplate: Story<{
+  steps: Array<{ title: string; content: any }>;
+}> = ({ steps }) => {
+  const [nav, content, step, setStep] = useTabContentVertical(steps);
 
   return (
     <LeftTopMargin>
@@ -72,7 +75,7 @@ const UseVerticalTemplate: Story<{steps: Array<{ title: string; content: any }>}
       {content}
     </LeftTopMargin>
   );
-}
+};
 
 export const UseVerticalTabs = UseVerticalTemplate.bind({});
 UseVerticalTabs.args = {

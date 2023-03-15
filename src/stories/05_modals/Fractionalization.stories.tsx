@@ -384,7 +384,7 @@ const ScheduleSale = () => {
   );
 };
 
-const Col = styled.div`
+const Col = styled("div")`
   width: 100%;
 `;
 const SellInfo = () => {

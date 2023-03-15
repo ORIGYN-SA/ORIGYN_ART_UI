@@ -3,6 +3,7 @@ import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import Grid from "../../../layout/Grid";
 import TextInput, { TextInputProps } from "./TextInput";
+import Banner from "../../Banner";
 
 export default {
   title: "Components/Interface/Inputs/TextInput/All stories",
@@ -10,13 +11,21 @@ export default {
 } as Meta;
 
 const Template: Story<TextInputProps> = (args) => (
-  <Grid gap={20} columns={5}>
-    <TextInput {...args} />
-  </Grid>
+  <Banner>
+    <Grid gap={20} columns={5}>
+      <TextInput {...args} />
+    </Grid>
+  </Banner>
 );
 
 export const Default = Template.bind({});
 Default.args = { name: "input", label: "Label text", placeholder: "Placeholder text", disabled: true };
+
+export const medium = Template.bind({});
+medium.args = { name: "input", inputSize: "medium", label: "Label text", placeholder: "Placeholder text" };
+
+export const small = Template.bind({});
+small.args = { name: "input", inputSize: "small", label: "Label text", placeholder: "Placeholder text" };
 
 export const filled = Template.bind({});
 filled.args = { name: "input", label: "Label text", value: "Filled", placeholder: "Placeholder text" };

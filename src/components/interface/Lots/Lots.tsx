@@ -22,7 +22,7 @@ interface LotRowProps extends Omit<LotsProps, "lots" | "handleAddLot"> {
   lotPrice: any;
 }
 
-const Col = styled.div`
+const Col = styled("div")`
   width: 100%;
 `;
 const Square = styled(Flex)`
@@ -47,7 +47,7 @@ const StyledLotRow = styled(Flex)`
   border: 1px solid #151515;
   margin: 5px 0;
 `;
-const CloseIcon = styled.div`
+const CloseIcon = styled("div")`
   position: relative;
   width: 100%;
   height: 100%;

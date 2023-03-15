@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Button from "../Button";
+import Flex from "../../layout/Flex";
+import Container from "../../layout/Container";
 
 const flexContainer: any = {
   display: "flex",
@@ -14,7 +17,7 @@ const flexContainer: any = {
   top: "20px",
 };
 
-const PaginationContainer = styled.div`
+const PaginationContainer = styled("div")`
   display: flex;
   align-items: flex-start;
   flex-direction: row;
@@ -32,28 +35,20 @@ const PaginationContainer = styled.div`
     width: 40px;
     padding: 11px;
     gap: 10px;
-    font-family: 'Montserrat';
     font-style: normal;
-    font-weight: 500; 
+    font-weight: 500;
     font-size: 12px;
     line-height: 20px;
     text-align: center;
     background: transparent;
-    border: 1px ;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 4px;
     margin: 0 6px;
-    color: #151515;
     cursor: pointer;
     &:not([disabled]):hover {
-      border: 1px ;
-      color: #151515;
+      border: 1px;
     }
-  }
-  .pageCard.active {
-    background: #f2f2f2;
-    border-radius: 999px;
-    color: #151515;
   }
 `;
 
@@ -63,40 +58,33 @@ const textStyle: any = {
   fontWeight: "600",
   fontSize: "10px",
   lineHeight: "16px",
-  color: "#5F5F5F",
   letterSpacing: "-0,1px",
   width: "64px",
   height: "16px",
 };
 
 const MoreIconDiv: any = {
-  display: 'flex',
-flexDirection: 'column',
-justifyContent: 'center',
-alignItems: 'center',
-padding: '0px',
-gap: '10px',
-width: '40px',
-height: '40px',
-borderRadius: '999px'
-}
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "0px",
+  gap: "10px",
+  width: "40px",
+  height: "40px",
+  borderRadius: "999px",
+};
 
 const MoreIconText: any = {
-width: '9px',
-height: '20px',
-fontFamily: 'Montserrat',
-fontStyle: 'normal',
-fontWeight: '500',
-fontSize: '12px',
-lineHeight: '20px',
-textAlign: 'center',
-color: '#151515',
-}
-
-const chevronStyle = {
-  // width: "18px",
-  // height: "18px"
-}
+  width: "9px",
+  height: "20px",
+  fontFamily: "Montserrat",
+  fontStyle: "normal",
+  fontWeight: "500",
+  fontSize: "12px",
+  lineHeight: "20px",
+  textAlign: "center",
+};
 
 const Icon = styled.img`
   width: 20px;
@@ -110,7 +98,7 @@ interface PaginationProps {
   setCurrentPage: (prevPage: number) => void;
 }
 
-const Pagination = ({ pageCount }: any) => {
+const Pagination = ({ pageCount, onPageChange }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const getPageRange = (currentPage: number, pageCount: number) => {
@@ -136,82 +124,98 @@ const Pagination = ({ pageCount }: any) => {
     let result = [];
     for (let i = 1; i < pageCount + 1; i++) {
       result.push(
-        <button
+        <Button
+          size="small"
+          textButton
+          iconButton
           key={i}
           className={currentPage === i ? `pageCard active` : `pageCard`}
           onClick={() => setCurrentPage(i)}
         >
           {i}
-        </button>
+        </Button>
       );
     }
     return result;
   };
 
+  useEffect(() => {
+    onPageChange(currentPage);
+  }, [currentPage]);
+
   return (
-    <div style={flexContainer}>
-      <p style={textStyle}>
-        Page {currentPage} of {pageCount}
-      </p>
-      <PaginationContainer>
-        {currentPage !== 1 && (
-        <button
-          className="pageCard"
-          onClick={() => {
-            if (currentPage > 1) setCurrentPage(currentPage - 1);
-          }}
-          disabled={currentPage <= 1}
-          style={chevronStyle}
-        >{`<`}</button>)}
-        {pageCount < 4 && renderPageButtons()}
-        {currentPage >= pageCount - 2 && pageCount > 3 && (
-          <>
-            <button
-              className={currentPage === 1 ? `pageCard active` : `pageCard`}
-              onClick={() => setCurrentPage(1)}
+    <Container padding="8px">
+      <Flex align="center" gap={16}>
+        <p style={textStyle}>
+          Page {currentPage} of {pageCount}
+        </p>
+        <PaginationContainer>
+          {currentPage !== 1 && (
+            <Button
+              size="small"
+              textButton
+              iconButton
+              onClick={() => {
+                if (currentPage > 1) setCurrentPage(currentPage - 1);
+              }}
+              disabled={currentPage <= 1}
+            >{`<`}</Button>
+          )}
+          {pageCount < 4 && renderPageButtons()}
+          {currentPage >= pageCount - 2 && pageCount > 3 && (
+            <>
+              <Button
+                size="small"
+                textButton
+                iconButton
+                onClick={() => setCurrentPage(1)}
+              >
+                1
+              </Button>
+              <div>
+                <p>...</p>
+              </div>
+            </>
+          )}
+          {getPageRange(currentPage, pageCount).map((page: number) => (
+            <Button
+              size="small"
+              textButton
+              iconButton
+              key={page}
+              onClick={() => setCurrentPage(page)}
             >
-              1
-            </button>
-            <div style={MoreIconDiv}>
-              <p style={MoreIconText}>...</p>
-            </div>
-          </>
-        )}
-        {getPageRange(currentPage, pageCount).map((page: number) => (
-          <button
-            key={page}
-            className={page === currentPage ? `pageCard active` : `pageCard`}
-            onClick={() => setCurrentPage(page)}
-          >
-            {page}
-          </button>
-        ))}
-        {currentPage < pageCount - 2 && pageCount > 3 && (
-          <>
-            <div style={MoreIconDiv}>
-              <p style={MoreIconText}>...</p>
-            </div>
-            <button
-              className={
-                pageCount === currentPage ? `pageCard active` : `pageCard`
-              }
-              onClick={() => setCurrentPage(pageCount)}
-            >
-              {pageCount}
-            </button>
-          </>
-        )}
-        
-        <button
-          className="pageCard"
-          onClick={() => {
-            if (currentPage < pageCount) setCurrentPage(currentPage + 1);
-          }}
-          style={chevronStyle}
-          disabled={currentPage === pageCount}
-        >{`>`}</button> 
-      </PaginationContainer>
-    </div>
+              {page}
+            </Button>
+          ))}
+          {currentPage < pageCount - 2 && pageCount > 3 && (
+            <>
+              <div style={MoreIconDiv}>
+                <p style={MoreIconText}>...</p>
+              </div>
+              <Button
+                size="small"
+                textButton
+                iconButton
+                onClick={() => setCurrentPage(pageCount)}
+              >
+                {pageCount}
+              </Button>
+            </>
+          )}
+
+          <Button
+            size="small"
+            textButton
+            iconButton
+            onClick={() => {
+              if (currentPage < pageCount) setCurrentPage(currentPage + 1);
+            }}
+            disabled={currentPage === pageCount}
+          >{`>`}</Button>
+        </PaginationContainer>
+      </Flex>
+    </Container>
   );
 };
 

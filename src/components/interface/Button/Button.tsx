@@ -1,8 +1,8 @@
 import styled, {css} from "styled-components";
 
 export type ButtonProps = {
-  size?: string;
-  btnType?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large";
+  btnType?: "outlined" | "secondary" | "filled";
   iconButton?: boolean;
   textButton?: boolean;
   disabled?: boolean;
@@ -36,13 +36,54 @@ const smallSize = css`${({theme}) => `
   gap: 10px;
 `}`;
 
-const buttonType = {
+const buttonSize = {
   small: smallSize,
   large: largeSize,
   medium: mediumSize,
 }
 
-const StyledFlex = styled.button<ButtonProps>
+const outlined = css`
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid #E3E3E3;
+  
+  svg {
+    fill: currentColor;
+  }
+`;
+
+const secondary = css`
+  background-color: ${({theme}) => theme.colors.BACKGROUND};
+  color: ${({theme}) => theme.colors.TEXT};
+  svg {
+    fill: currentColor;
+  }
+`;
+
+const filled = css`
+  background-color: ${({theme}) => theme.colors.TEXT};
+  color: ${({theme}) => theme.colors.BACKGROUND};
+  svg {
+    fill: currentColor;
+  }
+`;
+
+const accent = css`
+  background-color: ${({theme}) => theme.colors.ACCENT_COLOR };
+  color: ${({theme}) => theme.colors.TEXT};
+  svg {
+    fill: currentColor;
+  }
+`;
+
+const buttonTypes = {
+  outlined: outlined,
+  secondary: secondary,
+  filled: filled,
+  accent: accent,
+}
+
+const StyledButton = styled.button<ButtonProps>
 `
   display: flex;
   flex-direction: row;
@@ -51,34 +92,38 @@ const StyledFlex = styled.button<ButtonProps>
   gap: 15px;
   align-items: center;
   box-sizing: border-box;
-  background: #151515;
-  color: #FEFEFE;
+  background: ${({theme}) => theme.colors.BACKGROUND};
+  color: ${({theme}) => theme.colors.TEXT};
+  white-space: nowrap;
   border: none;
   
   svg {
-    fill: #FEFEFE;
+    fill: currentColor;
   }
   
-  ${({btnType = "small"}) => buttonType[btnType]}
+  ${({size = "large"}) => buttonSize[size]};
+  ${({btnType }) => buttonTypes[btnType]};
   
-  ${({ theme, btnType, disabled, size = "auto", iconButton, textButton }) => `
+  ${({ theme, size = "large", disabled, iconButton, textButton }) => `
   :hover, &.hover {
-    background-color: #5F5F5F;
+    background-color: ${theme.colors.BORDER};
+    color: ${theme.colors.TEXT};
   }
   :active, &.active {
-    background-color: #3A3A3A;
+    background-color: ${theme.colors.BORDER};
+    color: ${theme.colors.TEXT};
   }
   cursor: pointer;
   
   ${disabled ? `
-    background-color: ${theme.colors.MID_GREY};
-    border-color: ${theme.colors.MID_GREY};
-    color: ${theme.colors.WHITE};
+    background: ${theme.colors.INACTIVE};
+    border-color: ${theme.colors.BORDER};
+    color: ${theme.colors.SECONDARY_TEXT};
     cursor: not-allowed;
     :hover {
-      background-color: ${theme.colors.MID_GREY};
-      border-color: ${theme.colors.MID_GREY};
-      color: ${theme.colors.WHITE};
+      background-color: ${theme.colors.INACTIVE};
+      border-color: ${theme.colors.BORDER};
+      color: ${theme.colors.SECONDARY_TEXT};
     }
   ` : ""}
   ${iconButton ? `
@@ -87,29 +132,28 @@ const StyledFlex = styled.button<ButtonProps>
     height: 56px;
     border-radius: 50%;
     padding: 0;
-    ${btnType === "medium" ? `
+    ${size === "medium" ? `
       width: 40px;
       height: 40px;
     ` : ""}
-    ${btnType === "small" ? `
+    ${size === "small" ? `
       width: 32px;
       height: 32px;
     ` : ""}
   ` : ""}
-  
   ${textButton ? `
     background: transparent;
-    color: #151515;
+    color: ${theme.colors.TEXT};
     
     > svg {
-      fill: #151515;
+      fill: currentColor;
     }
     
     :hover, &.hover {
-      background: #FAFAFA;
+      background: ${theme.colors.BORDER};
     }
     :active, &.active {
-      background: #F2F2F2;
+      background: ${theme.colors.BORDER};
     }
   ${disabled ? `
     background: transparent;
@@ -119,10 +163,7 @@ const StyledFlex = styled.button<ButtonProps>
     }
   ` : ""}
   ` : ""}
-  ${theme.media.sm} {
-  
-  }
 `}
 `;
 
-export default StyledFlex;
+export default StyledButton;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const OrigynIcon = () => {
+const OrigynIcon = (props) => {
   return (
     <svg
       width="32"
@@ -8,6 +8,7 @@ const OrigynIcon = () => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M3.10867 7.10721C2.65601 7.10721 2.28735 7.47586 2.28735 7.92852V17.8403C2.28735 20.4629 4.4013 22.5908 7.0239 22.6188H8.17654C7.55589 22.5908 7.0659 22.0822 7.0659 21.4615V7.92385C7.0659 7.4712 6.69724 7.10254 6.24459 7.10254L3.10867 7.10721Z"
@@ -34,16 +35,16 @@ const OrigynIcon = () => {
           y2="22.6188"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.03" stop-color="#05612D" />
-          <stop offset="0.3" stop-color="#017E36" />
-          <stop offset="0.33" stop-color="#138838" />
-          <stop offset="0.4" stop-color="#2E963C" />
-          <stop offset="0.48" stop-color="#41A13F" />
-          <stop offset="0.55" stop-color="#4CA740" />
-          <stop offset="0.63" stop-color="#50A941" />
-          <stop offset="0.73" stop-color="#57AB3C" />
-          <stop offset="0.88" stop-color="#6CAF30" />
-          <stop offset="0.91" stop-color="#70B02D" />
+          <stop offset="0.03" stopColor="#05612D" />
+          <stop offset="0.3" stopColor="#017E36" />
+          <stop offset="0.33" stopColor="#138838" />
+          <stop offset="0.4" stopColor="#2E963C" />
+          <stop offset="0.48" stopColor="#41A13F" />
+          <stop offset="0.55" stopColor="#4CA740" />
+          <stop offset="0.63" stopColor="#50A941" />
+          <stop offset="0.73" stopColor="#57AB3C" />
+          <stop offset="0.88" stopColor="#6CAF30" />
+          <stop offset="0.91" stopColor="#70B02D" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1649_2905"
@@ -53,16 +54,16 @@ const OrigynIcon = () => {
           y2="22.6182"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.03" stop-color="#1F9CD4" />
-          <stop offset="0.3" stop-color="#1470B1" />
-          <stop offset="0.36" stop-color="#1A5EA2" />
-          <stop offset="0.44" stop-color="#214B92" />
-          <stop offset="0.53" stop-color="#254088" />
-          <stop offset="0.63" stop-color="#263C85" />
-          <stop offset="0.69" stop-color="#25397E" />
-          <stop offset="0.79" stop-color="#223169" />
-          <stop offset="0.9" stop-color="#1E2448" />
-          <stop offset="0.91" stop-color="#1E2345" />
+          <stop offset="0.03" stopColor="#1F9CD4" />
+          <stop offset="0.3" stopColor="#1470B1" />
+          <stop offset="0.36" stopColor="#1A5EA2" />
+          <stop offset="0.44" stopColor="#214B92" />
+          <stop offset="0.53" stopColor="#254088" />
+          <stop offset="0.63" stopColor="#263C85" />
+          <stop offset="0.69" stopColor="#25397E" />
+          <stop offset="0.79" stopColor="#223169" />
+          <stop offset="0.9" stopColor="#1E2448" />
+          <stop offset="0.91" stopColor="#1E2345" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_1649_2905"
@@ -72,13 +73,13 @@ const OrigynIcon = () => {
           y2="11.9064"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EDE229" />
-          <stop offset="0.44" stop-color="#F3A30F" />
-          <stop offset="0.57" stop-color="#E96316" />
-          <stop offset="0.68" stop-color="#E1321B" />
-          <stop offset="0.73" stop-color="#DE1F1D" />
-          <stop offset="0.84" stop-color="#DC1820" />
-          <stop offset="1" stop-color="#DB1222" />
+          <stop stopColor="#EDE229" />
+          <stop offset="0.44" stopColor="#F3A30F" />
+          <stop offset="0.57" stopColor="#E96316" />
+          <stop offset="0.68" stopColor="#E1321B" />
+          <stop offset="0.73" stopColor="#DE1F1D" />
+          <stop offset="0.84" stopColor="#DC1820" />
+          <stop offset="1" stopColor="#DB1222" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_1649_2905"
@@ -88,15 +89,15 @@ const OrigynIcon = () => {
           y2="5.39851"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#293170" />
-          <stop offset="0.06" stop-color="#313272" />
-          <stop offset="0.14" stop-color="#473577" />
-          <stop offset="0.25" stop-color="#6A3A7F" />
-          <stop offset="0.29" stop-color="#793C82" />
-          <stop offset="0.44" stop-color="#803483" />
-          <stop offset="0.66" stop-color="#852E83" />
-          <stop offset="0.97" stop-color="#59132A" />
-          <stop offset="1" stop-color="#551022" />
+          <stop stopColor="#293170" />
+          <stop offset="0.06" stopColor="#313272" />
+          <stop offset="0.14" stopColor="#473577" />
+          <stop offset="0.25" stopColor="#6A3A7F" />
+          <stop offset="0.29" stopColor="#793C82" />
+          <stop offset="0.44" stopColor="#803483" />
+          <stop offset="0.66" stopColor="#852E83" />
+          <stop offset="0.97" stopColor="#59132A" />
+          <stop offset="1" stopColor="#551022" />
         </linearGradient>
       </defs>
     </svg>

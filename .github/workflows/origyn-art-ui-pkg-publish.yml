@@ -46,7 +46,7 @@ jobs:
       - name: Dev publish patch
         if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'patch')
         run: |
-          git add . && git commit -m "prepare package lock files"
+          git add . && git commit -m "prepare package lock files" || true
           npm version patch
           npm publish
         env:
@@ -64,7 +64,7 @@ jobs:
       - name: Stage publish patch
         if: github.ref == 'refs/heads/stage' && contains(github.event.head_commit.message, 'patch')
         run: |
-          git add . && git commit -m "prepare package lock files"
+          git add . && git commit -m "prepare package lock files" || true
           npm version patch
           npm publish
         env:
@@ -99,7 +99,7 @@ jobs:
       - name: Dev publishing minor
         if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'minor')
         run: |
-          git add . && git commit -m "prepare package lock files"
+          git add . && git commit -m "prepare package lock files" || true
           npm version minor
           npm publish
           echo "TAG_NAME=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
@@ -127,7 +127,7 @@ jobs:
       - name: DEV publishing major
         if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'major')
         run: |
-          git add . && git commit -m "prepare package lock files"
+          git add . && git commit -m "prepare package lock files" || true
           npm version major
           npm publish
           echo "TAG_NAME=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV

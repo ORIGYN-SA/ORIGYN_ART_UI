@@ -4,8 +4,8 @@ const TransactionIcon = (props: any) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="120"
-      height="110"
+      width="24"
+      height="24"
       viewBox="0 0 120 110"
       fill="black"
       stroke="white"

@@ -15,8 +15,20 @@ export interface ContainerProps {
   relative?: boolean;
 }
 
-const StyledFlex = styled.div<ContainerProps>`
-  ${({ size = "full", smSize, mdSize, lgSize, xlSize, relative, padding = 0, smPadding, mdPadding, lgPadding, theme }) => `
+const StyledFlex = styled("div")<ContainerProps>`
+  ${({
+    size = "full",
+    smSize,
+    mdSize,
+    lgSize,
+    xlSize,
+    relative,
+    padding = 0,
+    smPadding,
+    mdPadding,
+    lgPadding,
+    theme,
+  }) => `
   display: block;
   padding: ${padding};
   max-width: ${size === "full" ? "100%" : `${theme.containers[size]}px`};
@@ -26,21 +38,29 @@ const StyledFlex = styled.div<ContainerProps>`
   margin: 0 auto;
   
   ${theme.media.xl} {
-    max-width: ${xlSize === "full" ? "100%" : `${theme.containers[xlSize || size]}px`};
+    max-width: ${
+      xlSize === "full" ? "100%" : `${theme.containers[xlSize || size]}px`
+    };
   }
   
   ${theme.media.lg} {
-    max-width: ${lgSize === "full" ? "100%" : `${theme.containers[lgSize || size]}px`};
+    max-width: ${
+      lgSize === "full" ? "100%" : `${theme.containers[lgSize || size]}px`
+    };
     padding: ${lgPadding};
   }
   
   ${theme.media.md} {
-    max-width: ${mdSize === "full" ? "100%" : `${theme.containers[mdSize || size]}px`};
+    max-width: ${
+      mdSize === "full" ? "100%" : `${theme.containers[mdSize || size]}px`
+    };
     padding: ${mdPadding};
   }
   
   ${theme.media.sm} {
-    max-width: ${smSize === "full" ? "100%" : `${theme.containers[smSize || size]}px`};
+    max-width: ${
+      smSize === "full" ? "100%" : `${theme.containers[smSize || size]}px`
+    };
     padding: ${smPadding};
   }
 `}

@@ -11,8 +11,6 @@ const Tooltip = ({
   position,
   text,
   children,
-  background,
-  textColor,
   styleMe = true,
 }: any) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -44,8 +42,6 @@ const Tooltip = ({
       {showTooltip && (
         <CenterContainer position={position}>
           <TooltipBox
-            background={background}
-            textColor={textColor}
             position={position}
           >
             {text}

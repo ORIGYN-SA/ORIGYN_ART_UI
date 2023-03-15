@@ -4,6 +4,7 @@ import CheckIcon from "./Check";
 import CheckboxCheckedIcon from "./CheckboxChecked";
 import CheckboxUncheckedIcon from "./CheckboxUnchecked";
 import CloseIcon from "./Close";
+import CopyIcon from "./Copy";
 import DifinityLogoIcon from "./DifinityLogo";
 import FBIcon from "./FB";
 import FilterIcon from "./Filter";
@@ -16,6 +17,15 @@ import TransactionIcon from "./Transaction";
 import TwitterIcon from "./Twitter";
 import LogoMainIcon from "./LogoMain"
 import LogoMainHorizontal from "./LogoMainHorizontal"
+import MenuIcon from "./Menu"
+import Governance from "./Governance"
+import Home from "./Home"
+import OrigynIcon from "./Origyn"
+import ThemeIcon from "./Theme"
+import Wallet from "./Wallet"
+import Libraries from "./Libraries"
+import Marketplace from "./Marketplace"
+import DataBrowse from "./DataBrowse"
 
 export {
   ArrowDownIcon,
@@ -24,16 +34,26 @@ export {
   CheckboxCheckedIcon,
   CheckboxUncheckedIcon,
   CloseIcon,
+  CopyIcon,
+  DataBrowse,
   DifinityLogoIcon,
   FBIcon,
   FilterIcon,
+  Governance,
+  Home,
   InstagramIcon,
   PDFIcon,
   ProfileIcon,
   SafeIcon,
   SearchIcon,
   TransactionIcon,
+  ThemeIcon,
   TwitterIcon,
+  Libraries,
   LogoMainIcon,
-  LogoMainHorizontal
+  LogoMainHorizontal,
+  MenuIcon,
+  Marketplace,
+  OrigynIcon,
+  Wallet,
 };
