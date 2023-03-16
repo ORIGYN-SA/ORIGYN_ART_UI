@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import HomeIcon from "../../../components/icons/Home";
 import GovernanceIcon from "../../../components/icons/Governance";
 import WalletIcon from "../../../components/icons/Wallet";
-import {SafeIcon, TransactionIcon} from "../../icons";
+import { SafeIcon, TransactionIcon } from "../../icons";
 
 export default {
   title: "Components/Interface/Navbar/All stories",
@@ -13,7 +13,6 @@ export default {
 } as Meta;
 
 const Template: Story = (args: any) => {
-
   return (
     <div
       style={{
@@ -21,33 +20,36 @@ const Template: Story = (args: any) => {
         backgroundColor: "#d3d3d3",
       }}
     >
-      <Navbar navItems={[
-        {
-          href: 'url',
-          title: 'Home',
-          icon: HomeIcon
-        },
-        {
-          href: 'url',
-          title: 'Governance',
-          icon: GovernanceIcon
-        },
-        {
-          href: 'url',
-          title: 'Wallet',
-          icon: WalletIcon
-        },
-        {
-          href: 'url',
-          title: 'Wallet',
-          icon: SafeIcon
-        },
-        {
-          href: 'url',
-          title: 'Wallet',
-          icon: TransactionIcon
-        },
-      ]} />
+      <Navbar
+        navItems={[
+          {
+            href: "url",
+            title: "Home",
+            icon: HomeIcon,
+          },
+          {
+            href: "url",
+            title: "Governance",
+            icon: GovernanceIcon,
+          },
+          {
+            href: "url",
+            title: "Wallet",
+            icon: WalletIcon,
+          },
+          {
+            href: "url",
+            title: "Wallet",
+            icon: SafeIcon,
+          },
+          {
+            href: "url",
+            title: "Wallet",
+            icon: TransactionIcon,
+          },
+        ]}
+        dAppsVersion="1.0.0"
+      />
     </div>
   );
 };

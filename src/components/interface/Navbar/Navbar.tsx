@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
 import ThemeIcon from "../../icons/Theme";
-import { Link } from "react-router-dom";
 import { HR, Icons } from "../../index";
+import { theme } from "../../../utils";
 
 const StyledNav = styled("div")`
   ${({ theme }) => `
@@ -71,10 +71,11 @@ const MobileMenu = styled("div")`
   color: ${({ theme }) => theme.colors.TEXT};
 `;
 
-const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
-  navItems,
-  onChangeTheme = () => {},
-}) => {
+const Navbar: React.FC<{
+  navItems: any;
+  onChangeTheme?: any;
+  dAppsVersion: string;
+}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
@@ -178,9 +179,20 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
             <br />
             <HR />
             <br />
-            <Button textButton onClick={onChangeTheme}>
-              <ThemeIcon />
-            </Button>
+            <Flex flexFlow="column" gap={8} align="flex-start">
+              <p
+                style={{
+                  color: theme.colors.INACTIVE,
+                  fontSize: "14px",
+                  marginLeft: "24px",
+                }}
+              >
+                v{dAppsVersion}
+              </p>
+              <Button textButton onClick={onChangeTheme}>
+                <ThemeIcon />
+              </Button>
+            </Flex>
           </MobileMenu>
         )}
       </MobileNav>
@@ -203,7 +215,13 @@ const Navbar: React.FC<{ navItems: any; onChangeTheme?: any }> = ({
               </a>
             ))}
           </Flex>
-          <Flex flexFlow="column" align="center">
+
+          <Flex flexFlow="column" align="center" gap={16}>
+            <Flex>
+              <p style={{ color: theme.colors.INACTIVE, fontSize: "14px" }}>
+                v{dAppsVersion}
+              </p>
+            </Flex>
             <Button textButton iconButton onClick={onChangeTheme}>
               <ThemeIcon />
             </Button>
