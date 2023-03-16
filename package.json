@@ -1,5 +1,5 @@
 {
-  "name": "@origyn-sa/origyn-art-ui",
+  "name": "@origyn/origyn-art-ui",
   "version": "1.2.21",
   "main": "build/index.js",
   "module": "build/index.esm.js",
@@ -17,10 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/origyn-sa/origyn_art_ui"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/origyn-sa"
+    "url": "https://github.com/origyn/origyn_art_ui"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
