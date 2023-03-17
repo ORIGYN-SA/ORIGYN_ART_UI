@@ -17,7 +17,7 @@ const rows = [
     status: "2 hrs 23sec",
   },
   {
-    date: "11 Dec, 2020",
+    date: <div>test 11 Dec, 2020</div>,
     activity: "ICP Deposit",
     details: "xxxxxxx",
     amount: 200,

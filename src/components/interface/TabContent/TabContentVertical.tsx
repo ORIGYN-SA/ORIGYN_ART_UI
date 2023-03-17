@@ -58,8 +58,8 @@ const customReactSelectStyles: StylesConfig<Option | unknown, false> = {
   }),
 };
 
-const StyledTabContent = styled(Flex)<{maxWidth?: string}>`
-  ${({ theme, maxWidth="none" }) => `
+const StyledTabContent = styled(Flex)<{ maxWidth?: string }>`
+  ${({ theme, maxWidth = "none" }) => `
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -88,7 +88,7 @@ const StyledTab = styled(MenuLink)`
   line-height: 1;
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled("div")`
   ${({ theme }) => `
   flex-grow: 1;
   padding-left: 35px;
@@ -141,8 +141,9 @@ const TabContentVertical = ({ tabs, content }: TabContentVerticalProps) => {
   );
 };
 
-
-export const useTabContentVertical = (steps: Array<{ title: string; content: any }>) => {
+export const useTabContentVertical = (
+  steps: Array<{ title: string; content: any }>
+) => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return [
@@ -151,23 +152,23 @@ export const useTabContentVertical = (steps: Array<{ title: string; content: any
         onChange={(option: any) => setCurrentTab(option?.value)}
         styles={customReactSelectStyles}
         components={{
-          DropdownIndicator: ({isFocused}) => (
+          DropdownIndicator: ({ isFocused }) => (
             <StyledArrowDownIcon className={isFocused ? "up" : ""} />
-          )
+          ),
         }}
-        options={steps.map((s, i) => ({value: i, label: s.title}))}
-        defaultValue={{label: steps[0].title, value: 0}}
+        options={steps.map((s, i) => ({ value: i, label: s.title }))}
+        defaultValue={{ label: steps[0].title, value: 0 }}
       />
       <StyledTabContent gap={0}>
-        {steps.map(({title}, index) => (
-            <StyledTab
-              as="b"
-              key={"contentTab-" + title}
-              className={index === currentTab ? "active" : ""}
-              onClick={() => setCurrentTab(index)}
-            >
-              {title}
-            </StyledTab>
+        {steps.map(({ title }, index) => (
+          <StyledTab
+            as="b"
+            key={"contentTab-" + title}
+            className={index === currentTab ? "active" : ""}
+            onClick={() => setCurrentTab(index)}
+          >
+            {title}
+          </StyledTab>
         ))}
       </StyledTabContent>
     </>,

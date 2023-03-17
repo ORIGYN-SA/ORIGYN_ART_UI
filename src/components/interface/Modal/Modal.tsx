@@ -4,26 +4,34 @@ import ReactModal from "react-modal";
 import Container from "../../layout/Container";
 
 import CloseIcon from "../../icons/Close";
+import {Icons} from "../../index";
 
 export type ModalProps = {
   isOpened: boolean;
   closeModal: () => void;
   title?: string | React.ReactNode;
+  size?: 'lg' | 'md' | 'sm' | 'full';
   mode?: string;
-  paddingTop?: string;
-  paddingRight?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
 };
 
-const StyledModal = styled(ReactModal)`
+const modalSizes = {
+  lg: '860px',
+  md: '640px',
+  sm: '420px',
+  full: '100%',
+}
+
+const StyledModal = styled(ReactModal)<{ size: string }>`
   &.ReactModalPortal {
-   
   }
   &.ReactModal__Content {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
     position: absolute;
     inset: 50% auto auto 50%;
-  
+
     padding: 0;
     top: 50px;
     left: 50%;
@@ -36,17 +44,16 @@ const StyledModal = styled(ReactModal)`
       0px 4px 6px -2px rgba(26, 32, 44, 0.05);
     overflow-y: auto;
     border-radius: 24px;
-    background-color: #151515;
-    color: #FEFEFE;
-    width: 100%;
-    height: 100%;
-    
-    
-    ${({theme}) => theme?.media?.lg} {
+    background-color: ${({ theme }) => theme.colors.BACKGROUND};
+    color: ${({ theme }) => theme.colors.TEXT};
+    width: ${({ size }) => modalSizes[size]};
+    max-height: calc(100% - 100px);
+
+    ${({ theme }) => theme?.media?.lg} {
       max-width: calc(100% - 48px);
     }
   }
-  ${({theme}) => theme?.media?.sm} {
+  ${({ theme }) => theme?.media?.sm} {
     &.ReactModal__Content {
       inset: auto;
       left: 0;
@@ -57,30 +64,10 @@ const StyledModal = styled(ReactModal)`
       height: 100%;
       max-width: 100%;
       max-height: 100vh;
+      border-radius: 0;
     }
   }
 `;
-
-const customStyles = {
-  overlay: {
-    overflow: "auto",
-    background: "white",
-  },
-  content: {
-    background: "white",
-    padding: "0px",
-    top: "50px",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%,0)",
-    border: "none",
-    boxShadow:
-      "0px 10px 15px -3px rgba(26, 32, 44, 0.1), 0px 4px 6px -2px rgba(26, 32, 44, 0.05)",
-    "@media (max-width: 600)": {},
-  },
-};
 
 const StyledCloseBtn = styled(CloseIcon)`
   position: absolute;
@@ -102,11 +89,7 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   title,
   children,
   closeModal,
-  mode,
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft
+  size,
 }) => {
   
   return (
@@ -116,11 +99,12 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
       style={{
         overlay: {
           zIndex: 10000,
-          background: mode == 'light'?'#9A9A9A':'#3A3A3A',
         }
       }}
+      size={size}
     >
-      <Container relative size="md" padding={`${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`}>
+      <Container relative size="md">
+        <StyledCloseBtn onClick={closeModal}>{Icons.CloseIcon}</StyledCloseBtn>
         {title && <h2>{title}</h2>}
         {children}
       </Container>

@@ -1,49 +1,82 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Flex from "../../../layout/Flex";
 import ErrorIcon from "../../../icons/Error";
 
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  inputSize?: "small" | "medium" | "large";
+}
+
+const largeSize = css`
+  padding: 0 16px;
+  height: 56px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.15px;
+  border-radius: 12px;
+`;
+
+const mediumSize = css`
+  padding: 0 16px;
+  height: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.15px;
+  border-radius: 12px;
+`;
+
+const smallSize = css`
+  padding: 0 12px;
+  height: 32px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.1px;
+  border-radius: 10px;
+`;
+
+export const inputSizes = {
+  large: largeSize,
+  medium: mediumSize,
+  small: smallSize,
 };
 
-const StyledTextInput = styled.input<{error: boolean}>`
-  ${({theme, value, error}) => `
+const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
+  ${({ inputSize = "large" }) => inputSizes[inputSize]};
+
+  ${({ theme, error }) => `
     padding: 0 16px;
     gap: 10px;
-    min-width: 315px;
-    height: 56px;
-    background: #FEFEFE;
+    background: ${theme.colors.BACKGROUND};
     
-    border: 1px solid ${error ? theme.colors.ERROR : "#E3E3E3"};
-    border-radius: 12px;
-    
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
-    color: ${error ? theme.colors.ERROR : "#5F5F5F"};
+    border: 1px solid ${error ? theme.colors.ERROR : theme.colors.BORDER};
+    color: ${error ? theme.colors.ERROR : theme.colors.TEXT}};
   
-  ::placeholder {
-    color: #5F5F5F;
-  }
+    ::placeholder {
+      color: ${theme.colors.SECONDARY_TEXT};
+    }
+  
+    &:focus{
+      outline: none;
+      background-color: ${theme.colors.TEXT}06;
+    }
+`}
+`;
 
-  &:focus{
-    outline: none;
-    border-color: ${theme.colors.BLACK};
-  }
-`}`;
-
-const ErrorMessage = styled.div`
-  ${({theme}) => `
+const ErrorMessage = styled("div")`
+  ${({ theme }) => `
   font-weight: 400;
   font-size: 11px;
   line-height: 16px;
   margin-top: 6px;
   color: ${theme.colors.ERROR};
   display: flex;
-  align-tems: center;
+  align-items: center;
   gap: 6px;
 `}
 `;
@@ -53,16 +86,13 @@ const Label = styled.label`
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 8px;
-`
+`;
 
-const TextInput = ({ label, error, ...props }: TextInputProps) => {
+const TextInput = ({ label, error, inputSize, ...props }: TextInputProps) => {
   return (
     <Flex flexFlow="column" fullWidth>
-      {label ? <Label htmlFor={props.id}>{label}</Label> : null }
-      <StyledTextInput
-        error={!!error}
-        {...props}
-      />
+      {label ? <Label htmlFor={props.id}>{label}</Label> : null}
+      <StyledTextInput error={!!error} inputSize={inputSize} {...props} />
       <ErrorMessage>
         {error && (
           <>

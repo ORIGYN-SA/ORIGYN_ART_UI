@@ -14,7 +14,6 @@ import ArrowRightIcon from "../../components/icons/ArrowRight";
 import StyledBanner from "../../components/interface/Banner";
 import ProductCard from "../../components/interface/ProductCard";
 import HR from "../../components/interface/HR";
-import MoreLink from "../../components/interface/MoreLink/MoreLink";
 
 export default {
   title: "Pages/Landing Page",
@@ -124,9 +123,6 @@ const Template: Story = (args) => (
     <Container size="lg">
       <Flex align="center" justify="space-between">
         <h2>Latest Artworks for Sale</h2>
-        <MoreLink href="#">
-          See all Artworks for sale <ArrowRightIcon fill="#EE9907" />
-        </MoreLink>
       </Flex>
       <br />
       <Grid columns={3} gap={33}>
@@ -162,7 +158,6 @@ const Template: Story = (args) => (
       <br />
       <br />
     </Container>
-    <Footer />
   </div>
 );
 

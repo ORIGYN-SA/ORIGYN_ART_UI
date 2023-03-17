@@ -25,3 +25,15 @@ export const Default = Template.bind({});
 Default.args = {
   options: options,
 };
+
+export const medium = Template.bind({});
+medium.args = {
+  options: options,
+  inputSize: 'medium',
+};
+
+export const small = Template.bind({});
+small.args = {
+  options: options,
+  inputSize: 'small',
+};

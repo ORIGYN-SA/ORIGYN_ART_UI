@@ -15,11 +15,11 @@ const StyledMenuLink = styled(NavLink)<MenuLinkProps>`
   border-bottom: 3px solid transparent;
   
   &:hover {
-    border-color: ${theme.colors.BLACK};
+    border-color: ${theme.colors.BACKGROUND};
   }
   &.active {
-    color: ${theme.colors.BLACK};
-    border-color: ${theme.colors.ACCENT_COLOR};
+    color: ${theme.colors.TEXT};
+    border-color: ${theme.colors.BORDER};
   }
 `}
 `;

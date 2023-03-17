@@ -1,30 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import Flex from "../../../layout/Flex";
+import {inputSizes} from "../TextInput/TextInput";
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
   label?: string;
   name: string;
   resize?: boolean;
+  inputSize?: 'small' | 'medium' | 'large';
 }
 
-const StyledTextArea = styled.textarea<{ resize?: boolean }>`
-  ${({ theme, value, resize }) => `
-  padding: 13px 13px 13px 20px;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid ${value ? theme.colors.BLACK : theme.colors.LIGHT_GREY};
+const StyledTextArea = styled.textarea<{ resize?: boolean, inputSize?:string }>`
+  ${({inputSize = "large"}) => inputSizes[inputSize]};
+  height: auto;
+  
+  ${({ theme, resize }) => `
+  padding: 16px;
+  border: 1px solid ${theme.colors.DARK_GREY};
   box-sizing: border-box;
-  border-radius: 2px;
   resize: ${resize && 'none'};
+  background: ${theme.colors.BACKGROUND};
+  color: ${theme.colors.TEXT};
+  
   ::placeholder {
-    color: ${theme.colors.LIGHT_GREY};
+    color: ${theme.colors.SECONDARY_TEXT};
   }
 
   &:focus{
     outline: none;
-    border-color: ${theme.colors.BLACK};
   }
 `}
 `;
@@ -34,15 +37,6 @@ const StyledLabel = styled.label`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-`}
-`;
-
-const ErrorMessage = styled.div`
-  ${({ theme }) => `
-  font-size: 14px;
-  line-height: 22px;
-  margin-top: 6px;
-  color: ${theme.colors.ERROR};
 `}
 `;
 

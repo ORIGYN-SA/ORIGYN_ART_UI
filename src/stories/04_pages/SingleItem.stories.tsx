@@ -18,8 +18,6 @@ import SafeIcon from "../../components/icons/Safe";
 import ArrowRightIcon from "../../components/icons/ArrowRight";
 import BreadCrumbs from "../../components/interface/BreadCrumbs/BreadCrumbs";
 import TabContent from "../../components/interface/TabContent/TabContent";
-import MoreLink from "../../components/interface/MoreLink/MoreLink";
-
 export default {
   title: "Pages/Single item",
 } as Meta;
@@ -34,7 +32,7 @@ const StyledCustomCard = styled(Card)`
 `}
 `;
 
-const StyledCustomText = styled.div`
+const StyledCustomText = styled("div")`
   ${({ theme }) => `
   width: 468px;
   max-width: 100%;
@@ -123,9 +121,6 @@ const Template: Story = (args) => (
               Blockchain.
             </p>
           </Flex>
-          <MoreLink href="#">
-            Read more <ArrowRightIcon fill="#EE9907" />
-          </MoreLink>
         </Flex>
         <StyledCustomCard>
           <img src="http://placehold.jp/526x325.png" alt="" />

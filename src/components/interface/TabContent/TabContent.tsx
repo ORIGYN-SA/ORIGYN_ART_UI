@@ -9,24 +9,25 @@ export type TabContentProps = {
   fullWidth?: boolean;
   justify?: "center" | "flex-start" | "flex-end";
   borderBottom?: boolean;
+  bgColor?: string;
 };
 
-const StyledTabContent = styled(Flex)<{borderBottom: boolean}>`
-  ${({theme, borderBottom}) => `
-  background-color: ${theme.colors.BLACK};
-  color: ${theme.colors.WHITE};
+const StyledTabContent = styled(Flex)<{borderBottom: boolean, bgColor}>`
+  ${({theme, borderBottom, bgColor}) => `
+  background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.BACKGROUND};
+  color: ${theme.colors.TEXT};
+  box-sizing: border-box;
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: -0.15px;
   height: 50px;
   gap: 32px;
-  ${theme.colors.WHITE}
+  
   ${borderBottom ? "border-bottom: 1px solid #E3E3E3;" : "" }
   
   ${theme.media.sm} {
     padding: 0 5px;
-    overflow: auto;
     width: 100%;
     gap: 10px;
     justify-content: space-evenly;
@@ -34,55 +35,38 @@ const StyledTabContent = styled(Flex)<{borderBottom: boolean}>`
 `}
 `;
 
-const StyledTabs = styled(Flex)`
-${({ theme}) => `
-  background-color: ${theme.colors.BLACK};
-  color: ${theme.colors.WHITE};
-
-  li {
-    list-style: none;
-  }
-
-  a {
-    color: ${theme.colors.WHITE};
-
-  }
-
-  svg {
-    fill: ${theme.colors.WHITE}
-  }
-`}`
-
 const StyledTab = styled(MenuLink)`
-  ${({theme}) => `
-    color: ${theme.colors.WHITE};
+  ${({ theme }) => `
+    color: ${theme.colors.TEXT};
+    font-weight: 600;
     display: flex;
-    height: 100%;
+    height: 50px;
     align-items: center;
     padding: 0;
-    border-bottom: 2px solid ${theme.colors.WHITE};
+    border-bottom: 1px solid #E3E3E3;
     opacity: 0.5;
   
   &:hover {
     opacity: 1;
+    border-bottom: 1px solid ${theme.colors.TEXT};
   }
   &.active {
     opacity: 1;
-    color: ${theme.colors.WHITE};
-    border-bottom: 2px solid ${theme.colors.WHITE};
+    color: ${theme.colors.TEXT};
+    border-bottom: 2px solid ${theme.colors.ACCENT_COLOR};
   }
 `}
 `;
 
-const TabContent = ({tabs, content, fullWidth=false, justify="center", borderBottom}: TabContentProps) => {
+const TabContent = ({tabs, content, fullWidth=false, justify="center", borderBottom, bgColor}: TabContentProps) => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <Flex flexFlow="column" align="flex-start">
-      <StyledTabContent fullWidth={fullWidth} justify={justify} borderBottom={borderBottom}>
+      <StyledTabContent fullWidth={fullWidth} justify={justify} borderBottom={borderBottom} bgColor={bgColor}>
         {tabs.map(({id, title}, index) => (
           <StyledTab
-            as="h4"
+            as="p"
             key={id}
             className={index === currentTab ? "active" : ""}
             onClick={() => setCurrentTab(index)}

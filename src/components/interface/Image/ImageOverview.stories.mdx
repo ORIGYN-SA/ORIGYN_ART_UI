@@ -1,0 +1,25 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="Components/Interface/HR/Overview" />
+
+<style>{`
+
+`}</style>
+
+# HR component
+
+HR is used as a horizontal separator.
+
+You can customize top and bottom margins and make it use accent color using its props:
+
+```typescript
+type HRProps = {
+  marginTop?: number;
+  marginBottom?: number;
+  accent?: boolean;
+};
+```
+
+Example: ```<HR/>```
+
+<Story id="components-interface-hr-all-stories--default" />

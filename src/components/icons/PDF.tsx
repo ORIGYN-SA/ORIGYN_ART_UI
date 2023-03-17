@@ -4,8 +4,8 @@ const PDFIcon = (props: any) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="30"
+      width="24"
+      height="24"
       viewBox="0 0 28 30"
       fill="black"
       {...props}

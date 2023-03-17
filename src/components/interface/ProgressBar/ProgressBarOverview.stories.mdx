@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="Components/Interface/ProgressBar/Overview" />
+
+<style>{`
+
+`}</style>
+
+# Progress bar 
+
+Basic progress bar component that listen to the itemIndex change.
+When the itemIndex == itemsTotal the success message and the 'done button' are displayed.
+
+Try it in All-stories / normal / canvas to understand how it works. Set Open = true there and start to play with itemIndex ! 
+
+## Properties
+
+```typescript
+ type ProgressProps = {
+    open: boolean;
+    title: string;
+    itemIndex: number;
+    itemsTotal: number;
+    successMessage: string;
+    durationMsSuccess: number; - if not specified is 3000ms
+}
+```
+
+
+<Canvas>
+    <Story id="components-interface-progressbar-all-stories--normal" />
+</Canvas>

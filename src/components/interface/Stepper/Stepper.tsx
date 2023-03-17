@@ -19,24 +19,24 @@ const StyledTabContent = styled(Flex)`
   background: ${theme.colors.WHITE};
   height: 50px;
   padding: 0;
-  color: #ffffff;
+  color: ${theme.colors.TEXT};
 `}
 `;
 
 const StyledTab = styled(MenuLink)`
   ${({ theme, width }) => `
-  color: ${theme.colors.MID_GREY};
-  background: #ffffff;
+  color: ${theme.colors.TEXT};
+  background: ${theme.colors.BACKGROUND};
   flex-grow: ${width ? 'auto' : 1};
   width: ${width ? width : 'width'};
-  border-bottom: 3px solid ${theme.colors.MID_GREY};
+  border-bottom: 3px solid ${theme.colors.BORDER};
   padding: 17px 0;
   text-align: center;
   
     
   &.active {
-    color: ${theme.colors.BLACK};
-    border-bottom: 3px solid ${theme.colors.BLACK};
+    color: ${theme.colors.TEXT};
+    border-bottom: 3px solid ${theme.colors.BORDER};
   }
 `}
 `;

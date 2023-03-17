@@ -37,27 +37,19 @@ const Template: Story = (args: any) => (
 export const left = Template.bind({});
 left.args = {
   position: "left",
-  background: "000000",
-  textColor: "ffffff",
 };
 
 export const right = Template.bind({});
 right.args = {
   position: "right",
-  background: "000000",
-  textColor: "ffffff",
 };
 
 export const top = Template.bind({});
 top.args = {
   position: "top",
-  background: "000000",
-  textColor: "ffffff",
 };
 
 export const bottom = Template.bind({});
 bottom.args = {
   position: "bottom",
-  background: "000000",
-  textColor: "ffffff",
 };

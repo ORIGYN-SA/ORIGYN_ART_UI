@@ -4,20 +4,28 @@ import CheckboxUncheckedIcon from "../../../icons/CheckboxUnchecked";
 import CheckboxCheckedIcon from "../../../icons/CheckboxChecked";
 import CheckboxUncheckedDisabledIcon from "../../../icons/CheckboxUncheckedDisabled";
 import CheckboxCheckedDisabledIcon from "../../../icons/CheckboxCheckedDisabled";
-import {disabled} from "./CheckboxInput.stories";
 
-export interface CheckboxInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
   radio?: boolean;
 }
 
 const StyledCheckboxInput = styled.input`
-  ${() => `
   display: none;
-  
+  & + svg {
+    display: none;
+  }
+
+  &:disabled + div {
+    background-color: ${({ theme }) => theme.colors.DARK_GREY};
+    &:after {
+      opacity: 0.5;
+    }
+  }
   &:checked + div {
-    background-color: #151515;
+    background-color: ${({ theme }) => theme.colors.WHITE};
     opacity: 1;
     &:after {
       opacity: 1;
@@ -26,22 +34,21 @@ const StyledCheckboxInput = styled.input`
   & + svg {
     display: none;
   }
-  
+
   &:checked + svg {
     display: block;
   }
   &:checked + svg + svg {
     display: none;
   }
-`}
 `;
 
-const StyledCheckboxIcon = styled.div`
-  ${({ theme }) => `
+const StyledCheckboxIcon = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #E3E3E3;
+  background-color: ${({ theme }) => theme.colors.BACKGROUND};
+  border: 1px solid ${({ theme }) => theme.colors.BORDER};
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -52,53 +59,37 @@ const StyledCheckboxIcon = styled.div`
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: #fefefe;
     opacity: 0;
-  }
-`}
+    background-color: ${({ theme }) => theme.colors.BACKGROUND}
 `;
 
 const StyledLabel = styled.label`
-  ${() => `
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 14px;
   line-height: 24px;
   cursor: pointer;
-`}
 `;
 
-const CheckboxInput = ({
-  label,
-  radio,
-  id,
-  ...props
-}: CheckboxInputProps) => {
-
+const CheckboxInput = ({ label, radio, id, ...props }: CheckboxInputProps) => {
   return (
     <>
       <StyledLabel htmlFor={id}>
-        <StyledCheckboxInput
-          type="checkbox"
-          id={id}
-          {...props}
-        />
+        <StyledCheckboxInput type="checkbox" id={id} {...props} />
         {!radio ? (
           <>
-            {
-              props.disabled ? (
-                <>
-                  <CheckboxCheckedDisabledIcon />
-                  <CheckboxUncheckedDisabledIcon />
-                </>
-              ) : (
-                <>
-                  <CheckboxCheckedIcon />
-                  <CheckboxUncheckedIcon />
-                </>
-              )
-            }
+            {props.disabled ? (
+              <>
+                <CheckboxCheckedDisabledIcon />
+                <CheckboxUncheckedDisabledIcon />
+              </>
+            ) : (
+              <>
+                <CheckboxCheckedIcon />
+                <CheckboxUncheckedIcon />
+              </>
+            )}
           </>
         ) : (
           <StyledCheckboxIcon />
