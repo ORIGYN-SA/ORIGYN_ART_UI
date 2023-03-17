@@ -1,16 +1,22 @@
-Release v1.2.12
-#TS Storybook setup
-This is default setup for TypeScript component base with Storybook setup.
+# ORIGYN ART UI
 
-##Getting started
-To start the storybook project just run:
+React UI library created for and used by [Origyn Decentralized Applications](https://github.com/ORIGYN-SA/DApps).
+
+## 🏁 Quickstart
+
+All components in this library can be rendered in Storybook.
+
 ```sh
+npm ci
 npm run storybook
 ```
-The app will be started on  ```http://localhost:6006/```
 
-##File structure
-All components are based in a components folder.
+Browse to `http://localhost:6006/`.
+
+## File Structure
+
+All components are located in the components folder.
+
 ```sh
 -.storybook/
 |-main.js
@@ -20,13 +26,15 @@ All components are based in a components folder.
 |-brandIdentity
 |-interface
 ```
-```brandIdentity``` - contains information about default setup of the components (corporate color palette, used Icons, Typography etc.)
 
-Inside ```layout``` folder basic display components stored (Grid, Flex etc.);
+`brandIdentity` - information about the default setup for components (corporate color palette, used icons, typography etc.)
 
-```Interface``` contains UI components (Buttons, Dropdowns etc.)
+`layout` - layout components (Grid, Flex, etc.)
 
-##Links to fonts
+`interface` - UI components (Buttons, Dropdowns etc.)
+
+## Links to fonts
+
 ```sh
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
