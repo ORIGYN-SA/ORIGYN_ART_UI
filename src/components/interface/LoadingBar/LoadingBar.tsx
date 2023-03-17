@@ -8,33 +8,20 @@ const Styles = styled.div`
     border-radius: 12px;
   }
   .gradient-background {
-    background: linear-gradient(
-      360deg,
-      #ede229,
-      #f3a30f,
-      #e1321b,
-      #db1222,
-      #05612d,
-      #017e36,
-      #138838,
-      #2e963c,
-      #41a13f,
-      #50a941,
-      #70b02d,
-      #1f9cd4,
-      #1a5ea2,
-      #214b92,
-      #263c85,
-      #25397e,
-      #1e2345,
-      #293170,
-      #473577,
-      #793c82,
-      #852e83,
-      #551022
+    background-image: linear-gradient(
+      130deg,
+      #eed926 0%,
+      #ef8712 13.54%,
+      #dd1c1f 24.48%,
+      #833183 38.54%,
+      #363373 51.04%,
+      #1a87c4 60.42%,
+      #1e2345 75%,
+      #65ae35 83.33%,
+      #046d31 100%
     );
-    background-size: 700% 700%;
-    animation: myAnimation 4s linear infinite;
+    background-size: 500% 500%;
+    animation: myAnimation 2s linear infinite;
   }
 
   @keyframes myAnimation {
@@ -44,7 +31,6 @@ const Styles = styled.div`
     to {
       background-position: 100% 100%;
     }
-  }
   }
 `;
 
