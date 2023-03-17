@@ -33,6 +33,7 @@ import Snackbar from "./interface/Snackbar";
 import RangeSlider from "./interface/RangeSlider";
 
 import Lots from "./interface/Lots";
+import LoadingBar from "./interface/LoadingBar";
 
 import TextInput from "./interface/Inputs/TextInput";
 import TextArea from "./interface/Inputs/TextArea";
@@ -79,6 +80,7 @@ export {
   RangeSlider,
   Select,
   Lots,
+  LoadingBar,
   TextArea,
   Toggle,
   Tooltip,
