@@ -7,12 +7,7 @@ import {
   TooltipBox,
 } from "./styled";
 
-const Tooltip = ({
-  position,
-  text,
-  children,
-  styleMe = true,
-}: any) => {
+const Tooltip = ({ position, text, children, styleMe = true }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const targetRef = useRef(null);
@@ -41,11 +36,7 @@ const Tooltip = ({
       </TooltipTarget>
       {showTooltip && (
         <CenterContainer position={position}>
-          <TooltipBox
-            position={position}
-          >
-            {text}
-          </TooltipBox>
+          <TooltipBox position={position}>{text}</TooltipBox>
         </CenterContainer>
       )}
     </TooltipWrapper>

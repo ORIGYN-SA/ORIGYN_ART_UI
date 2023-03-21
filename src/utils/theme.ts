@@ -22,6 +22,15 @@ export const theme = {
 
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
+    ACCENT_PURPLE_800: "#331038",
+    // ACCENT_PURPLE_800:""#EDC7F2"", LIGHT
+    ACCENT_PURPLE_900: " #250A2B",
+    // ACCENT_PURPLE_900:" #f4e5f1", LIGHT
+    ACCENT_PURPLE_200: "#EDC7F2",
+    // ACCENT_PURPLE_200 : "#70237D", LIGHT
+    NAVIGATIONBAR_ICON_TEXT: "#edc7f2",
+    // NAVIGATION_ICON_TEXT: "#70237D", LIGHT
+
 
     PRIMARY_1000: "#0f0f0f",
     PRIMARY_900: "#151515",
@@ -71,6 +80,10 @@ export const themeLight = {
 
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
+    ACCENT_PURPLE_800: "#EDC7F2",
+    ACCENT_PURPLE_900: " #F4E5F1",
+    ACCENT_PURPLE_200: "#70237D",
+    NAVIGATIONBAR_ICON_TEXT: "#5f5f5f",
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",
