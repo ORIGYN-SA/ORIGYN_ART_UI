@@ -116,21 +116,29 @@ const MobileMenu = styled("div")`
   color: ${({ theme }) => theme.colors.TEXT};
 `;
 
+const NavButton = styled(Button)`
+  ${({ theme }) => `
+  &.nav-button {
+    color: ${theme.colors.SECONDARY_TEXT};
+  }
+
+  &.nav-button:hover {
+    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    color: ${theme.colors.ACCENT_PURPLE_200};
+  }
+  &.nav-button.active {
+    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    color: ${theme.colors.ACCENT_PURPLE_200};
+  }`}
+`;
+
 const Navbar: React.FC<{
   navItems: any;
   onChangeTheme?: any;
   dAppsVersion: string;
 }> = ({ navItems, onChangeTheme = () => {}, dAppsVersion }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [hoverStates, setHoverStates] = useState({});
-
-  const handleMouseEnter = (id) => {
-    setHoverStates((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const handleMouseLeave = (id) => {
-    setHoverStates((prev) => ({ ...prev, [id]: false }));
-  };
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <>
@@ -225,21 +233,14 @@ const Navbar: React.FC<{
           <MobileMenu>
             {navItems.map((item, index) => (
               <a href={item.href}>
-                <Button
+                <NavButton
                   textButton
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                  style={{
-                    backgroundColor: hoverStates[index]
-                      ? theme.colors.ACCENT_PURPLE_900
-                      : theme.colors.ACCENT_PURPLE_800,
-                    color: hoverStates[index]
-                      ? theme.colors.SECONDARY_TEXT
-                      : theme.colors.ACCENT_PURPLE_200,
-                  }}
+                  className={`nav-button${
+                    index === currentTab ? " active" : ""
+                  }`}
                 >
                   {item.icon()} {item.title}
-                </Button>
+                </NavButton>
               </a>
             ))}
             <br />
@@ -255,22 +256,13 @@ const Navbar: React.FC<{
               >
                 v{dAppsVersion}
               </p>
-              <Button
+              <NavButton
                 textButton
                 onClick={onChangeTheme}
-                onMouseEnter={() => handleMouseEnter("themeButton")}
-                onMouseLeave={() => handleMouseLeave("themeButton")}
-                style={{
-                  backgroundColor: hoverStates["themeButton"]
-                    ? theme.colors.ACCENT_PURPLE_900
-                    : theme.colors.ACCENT_PURPLE_800,
-                  color: hoverStates["themeButton"]
-                    ? theme.colors.SECONDARY_TEXT
-                    : theme.colors.ACCENT_PURPLE_200,
-                }}
+                className="nav-button"
               >
                 <ThemeIcon />
-              </Button>
+              </NavButton>
             </Flex>
           </MobileMenu>
         )}
@@ -291,24 +283,18 @@ const Navbar: React.FC<{
                 key={`navItem-${index}`}
                 content={item.title.toUpperCase()}
               >
-                <a key={`navItem-${index}`} href={index}>
-                  <Button
+                <a key={`navItem-${index}`} href={item.href}>
+                  <NavButton
                     textButton
                     iconButton
                     size="large"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                    style={{
-                      backgroundColor: hoverStates[index]
-                        ? theme.colors.ACCENT_PURPLE_900
-                        : theme.colors.ACCENT_PURPLE_800,
-                      color: hoverStates[index]
-                        ? theme.colors.SECONDARY_TEXT
-                        : theme.colors.ACCENT_PURPLE_200,
-                    }}
+                    className={`nav-button${
+                      index === currentTab ? " active" : ""
+                    }`}
+                    onClick={() => setCurrentTab(index)}
                   >
                     {item.icon()}
-                  </Button>
+                  </NavButton>
                 </a>
               </NavigationBarTooltip>
             ))}
@@ -320,23 +306,14 @@ const Navbar: React.FC<{
                 v{dAppsVersion}
               </p>
             </Flex>
-            <Button
+            <NavButton
               textButton
               iconButton
               onClick={onChangeTheme}
-              onMouseEnter={() => handleMouseEnter("themeButton")}
-              onMouseLeave={() => handleMouseLeave("themeButton")}
-              style={{
-                backgroundColor: hoverStates["themeButton"]
-                  ? theme.colors.ACCENT_PURPLE_900
-                  : theme.colors.ACCENT_PURPLE_800,
-                color: hoverStates["themeButton"]
-                  ? theme.colors.SECONDARY_TEXT
-                  : theme.colors.ACCENT_PURPLE_200,
-              }}
+              className="nav-button"
             >
               <ThemeIcon />
-            </Button>
+            </NavButton>
           </Flex>
         </Flex>
       </StyledNav>
