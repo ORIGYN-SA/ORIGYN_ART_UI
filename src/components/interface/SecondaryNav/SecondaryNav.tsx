@@ -59,15 +59,6 @@ const StyledTab = styled(MenuLink)`
 `}
 `;
 
-const NavTitle = styled(Flex)`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: -0.15px;
-  color: ${({ theme }) => theme.colors.TEXT};
-
-  margin-right: 32px;
-`;
 const StyledWalletMenu = styled("div")`
   position: relative;
 `;
