@@ -11,6 +11,8 @@ export const theme = {
     SECONDARY_TEXT: "#9A9A9A",
     INACTIVE: "#9A9A9A",
 
+    MODAL_BACKGROUND: 'rgba(58, 58, 58, 0.9)',
+
     NAVIGATION_BACKGROUND: "#000000",
     // NAVIGATION_BACKGROUND: '#fafafa', LIGHT
     NAVIGATION_BACKGROUND_LIGHT: "#121212",
@@ -74,6 +76,9 @@ export const themeLight = {
 
     NAVIGATION_BACKGROUND: "#fafafa",
     NAVIGATION_BACKGROUND_LIGHT: "#FCFCFC",
+
+    // background 3A3A3A with opacity 90%
+    MODAL_BACKGROUND: 'rgba(227, 227, 227, 0.85)',
 
     ERROR: "#B5010A",
     PROGRESS: "#F2BD00",
