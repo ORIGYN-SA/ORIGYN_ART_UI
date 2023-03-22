@@ -24,6 +24,9 @@ const modalSizes = {
 const StyledModal = styled(ReactModal)<{ size: string }>`
   &.ReactModalPortal {
   }
+  .ReactModal__Overlay {
+    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND}
+  }
   &.ReactModal__Content {
     ::-webkit-scrollbar {
       display: none;
@@ -44,7 +47,7 @@ const StyledModal = styled(ReactModal)<{ size: string }>`
       0px 4px 6px -2px rgba(26, 32, 44, 0.05);
     overflow-y: auto;
     border-radius: 24px;
-    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND};
+    background-color: ${({ theme }) => theme.colors.BACKGROUND};
     color: ${({ theme }) => theme.colors.TEXT};
     width: ${({ size }) => modalSizes[size]};
     max-height: calc(100% - 100px);
