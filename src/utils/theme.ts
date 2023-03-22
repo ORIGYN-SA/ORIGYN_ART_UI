@@ -8,7 +8,7 @@ export const theme = {
     //BORDER: '#E3E3E3', LIGHT
     TEXT: "#FEFEFE",
     // TEXT: '#151515', LIGHT
-    SECONDARY_TEXT: "#5F5F5F",
+    SECONDARY_TEXT: "#9A9A9A",
     INACTIVE: "#9A9A9A",
 
     NAVIGATION_BACKGROUND: "#000000",
@@ -30,6 +30,7 @@ export const theme = {
     // ACCENT_PURPLE_200 : "#70237D", LIGHT
     NAVIGATIONBAR_ICON_TEXT: "#edc7f2",
     // NAVIGATION_ICON_TEXT: "#70237D", LIGHT
+    ACC_BUTTON_TEXT: "#FEFEFE",
 
 
     PRIMARY_1000: "#0f0f0f",
@@ -65,7 +66,7 @@ export const theme = {
 
 export const themeLight = {
   colors: {
-    BACKGROUND: "#f3f3f3",
+    BACKGROUND: "#FAFAFA",
     BORDER: "#E3E3E3",
     TEXT: "#151515",
     SECONDARY_TEXT: "#5F5F5F",
@@ -84,6 +85,7 @@ export const themeLight = {
     ACCENT_PURPLE_900: " #F4E5F1",
     ACCENT_PURPLE_200: "#70237D",
     NAVIGATIONBAR_ICON_TEXT: "#5f5f5f",
+    ACC_BUTTON_TEXT: "#FEFEFE",
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",
