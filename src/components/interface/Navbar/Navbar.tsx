@@ -22,34 +22,32 @@ const NavigationBarTooltip = ({ children, content }) => {
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {children}
       </div>
-      {isVisible && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "100%",
-            transform: "translateY(-50%) translateX(8px)",
-            backgroundColor: theme.colors.ACCENT_PURPLE_800,
-            color: theme.colors.NAVIGATIONBAR_ICON_TEXT,
-            fontSize: "10px",
-            fontWeight: "normal",
-            whiteSpace: "nowrap",
-            height: "24px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: "4px",
-            padding: "4px",
-            borderRadius: "8px",
-          }}
-        >
-          {content}
-        </div>
-      )}
+      {isVisible && <StyledTooltip>{content}</StyledTooltip>}
     </div>
   );
 };
+
+const StyledTooltip = styled("div")`
+  ${({ theme }) => `
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform:translateY(-50%) translateX(8px);
+    background-color: ${theme.colors.ACCENT_PURPLE_800};
+    color: ${theme.colors.NAVIGATIONBAR_ICON_TEXT};
+    font-size: 10px;
+    font-weight: normal;
+    white-space: nowrap;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 8px;
+`}
+`;
 
 const StyledNav = styled("div")`
   ${({ theme }) => `
