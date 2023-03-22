@@ -70,7 +70,7 @@ const filled = css`
 
 const accent = css`
   background-color: ${({theme}) => theme.colors.ACCENT_COLOR };
-  color: ${({theme}) => theme.colors.TEXT};
+  color: ${({theme}) => theme.colors.ACC_BUTTON_TEXT};
   svg {
     fill: currentColor;
   }
