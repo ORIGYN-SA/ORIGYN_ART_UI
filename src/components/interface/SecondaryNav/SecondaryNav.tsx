@@ -117,6 +117,7 @@ const StyledTitle = styled(MenuLink)`
     padding: 0;
     opacity: 1;
     color: ${theme.colors.TEXT};
+    margin-right: 32px;
   
 `}
 `;
