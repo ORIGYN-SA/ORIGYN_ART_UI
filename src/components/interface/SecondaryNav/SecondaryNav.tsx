@@ -10,6 +10,7 @@ export type SecondaryNavProps = {
   tabs: Array<{ title: string; id: string }>;
   content: Array<any>;
   title?: string;
+  titleLink?: string;
   onConnect?: () => void;
   onLogOut?: () => void;
   principal?: string;
@@ -39,6 +40,7 @@ const StyledSecondaryNav = styled(Flex)`
 
 const StyledTab = styled(MenuLink)`
   ${({ theme }) => `
+    background: ${theme.colors.NAVIGATION_BACKGROUND};
     color: ${theme.colors.TEXT};
     display: flex;
     height: 100%;
@@ -57,15 +59,6 @@ const StyledTab = styled(MenuLink)`
 `}
 `;
 
-const NavTitle = styled(Flex)`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: -0.15px;
-  color: ${({ theme }) => theme.colors.TEXT};
-
-  margin-right: 32px;
-`;
 const StyledWalletMenu = styled("div")`
   position: relative;
 `;
@@ -105,16 +98,35 @@ const StyledContent = styled("div")`
   height: 100%;
 `;
 
-const StyledTitle = styled.p`
-  ${({ theme }) => theme.media.sm} {
-    display: none;
-  }
+const StyledTitle = styled(MenuLink)`
+  ${({ theme }) => `
+    background: ${theme.colors.NAVIGATION_BACKGROUND};
+    color: ${theme.colors.TEXT};
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0;
+    opacity: 1;
+    color: ${theme.colors.TEXT};
+    margin-right: 32px;
+  
+`}
+`;
+const StyledContainer = styled("div")`
+  ${({ theme }) => `
+  width: 100%;
+  height: auto;
+  background: ${theme.colors.NAVIGATION_BACKGROUND};
+  position: sticky;
+  top: 0;
+  `}
 `;
 
 const SecondaryNav = ({
   tabs,
   content,
   title,
+  titleLink,
   onConnect,
   principal,
   onLogOut,
@@ -142,57 +154,61 @@ const SecondaryNav = ({
       align="flex-start"
       padding="0"
     >
-      <Banner
-        bgColor="transparent"
-        fullWidth
-        justify="space-between"
-        align="center"
-        padding="0 24px"
-      >
-        <Flex align="center" gap={32}>
-          <StyledTitle>
-            <b>{title}</b>
-          </StyledTitle>
-          <StyledSecondaryNav>
-            {tabs.map(({ id, title }, index) => (
-              <StyledTab
-                as="div"
-                key={id}
-                className={index === currentTab ? "active" : ""}
-                onClick={() => setCurrentTab(index)}
+      <StyledContainer>
+        <Banner
+          bgColor="transparent"
+          fullWidth
+          justify="space-between"
+          align="center"
+          padding="0 24px"
+        >
+          <Flex align="center" gap={32}>
+            <StyledSecondaryNav>
+              <StyledTitle as="div" className={""}>
+                <b>
+                  <a href={titleLink ? titleLink : "#"}>{title}</a>
+                </b>
+              </StyledTitle>
+              {tabs.map(({ id, title }, index) => (
+                <StyledTab
+                  as="div"
+                  key={id}
+                  className={index === currentTab ? "active" : ""}
+                  onClick={() => setCurrentTab(index)}
+                >
+                  {title}
+                </StyledTab>
+              ))}
+            </StyledSecondaryNav>
+          </Flex>
+          {onConnect && !principal && (
+            <div>
+              <Button size="small" onClick={onConnect}>
+                Connect
+              </Button>
+            </div>
+          )}
+          {principal && (
+            <StyledWalletMenu>
+              <StyledWallet
+                size="small"
+                onClick={() => setIsMenuOpened(!isMenuOpened)}
               >
-                {title}
-              </StyledTab>
-            ))}
-          </StyledSecondaryNav>
-        </Flex>
-        {onConnect && !principal && (
-          <div>
-            <Button size="small" onClick={onConnect}>
-              Connect
-            </Button>
-          </div>
-        )}
-        {principal && (
-          <StyledWalletMenu>
-            <StyledWallet
-              size="small"
-              onClick={() => setIsMenuOpened(!isMenuOpened)}
-            >
-              {principal.slice(0, 2)}...{principal.slice(-4)}
-            </StyledWallet>
-            {onLogOut && isMenuOpened && (
-              <StyledLogOut ref={ref} type="filled" padding="16px">
-                <Flex>
-                  <Button textButton size="small" onClick={onLogOut}>
-                    Log out
-                  </Button>
-                </Flex>
-              </StyledLogOut>
-            )}
-          </StyledWalletMenu>
-        )}
-      </Banner>
+                {principal.slice(0, 2)}...{principal.slice(-4)}
+              </StyledWallet>
+              {onLogOut && isMenuOpened && (
+                <StyledLogOut ref={ref} type="filled" padding="16px">
+                  <Flex>
+                    <Button textButton size="small" onClick={onLogOut}>
+                      Log out
+                    </Button>
+                  </Flex>
+                </StyledLogOut>
+              )}
+            </StyledWalletMenu>
+          )}
+        </Banner>
+      </StyledContainer>
       <StyledContent>{content[currentTab]}</StyledContent>
     </Banner>
   );

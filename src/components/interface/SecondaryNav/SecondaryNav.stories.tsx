@@ -13,6 +13,7 @@ const Template: Story<SecondaryNavProps> = (args) => <SecondaryNav {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   title: "Vault",
+  titleLink: "https://origyn.ch",
   principal: "jvdm5-xkwgc-4t2x7-ojmjd-ail2p-6agif-7m6a6-z6eok-oxueq-inzfb-zae",
   tabs: [
     { title: "NFT Detail" },

@@ -22,34 +22,32 @@ const NavigationBarTooltip = ({ children, content }) => {
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {children}
       </div>
-      {isVisible && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "100%",
-            transform: "translateY(-50%) translateX(8px)",
-            backgroundColor: theme.colors.ACCENT_PURPLE_800,
-            color: theme.colors.NAVIGATIONBAR_ICON_TEXT,
-            fontSize: "10px",
-            fontWeight: "normal",
-            whiteSpace: "nowrap",
-            height: "24px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: "4px",
-            padding: "4px",
-            borderRadius: "8px",
-          }}
-        >
-          {content}
-        </div>
-      )}
+      {isVisible && <StyledTooltip>{content}</StyledTooltip>}
     </div>
   );
 };
+
+const StyledTooltip = styled("div")`
+  ${({ theme }) => `
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform:translateY(-50%) translateX(8px);
+    background-color: ${theme.colors.ACCENT_PURPLE_800};
+    color: ${theme.colors.NAVIGATIONBAR_ICON_TEXT};
+    font-size: 10px;
+    font-weight: normal;
+    white-space: nowrap;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 8px;
+`}
+`;
 
 const StyledNav = styled("div")`
   ${({ theme }) => `
@@ -116,21 +114,29 @@ const MobileMenu = styled("div")`
   color: ${({ theme }) => theme.colors.TEXT};
 `;
 
+const NavButton = styled(Button)`
+  ${({ theme }) => `
+  &.nav-button {
+    color: ${theme.colors.SECONDARY_TEXT};
+  }
+
+  &.nav-button:hover {
+    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    color: ${theme.colors.ACCENT_PURPLE_200};
+  }
+  &.nav-button.active {
+    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    color: ${theme.colors.ACCENT_PURPLE_200};
+  }`}
+`;
+
 const Navbar: React.FC<{
   navItems: any;
   onChangeTheme?: any;
   dAppsVersion: string;
 }> = ({ navItems, onChangeTheme = () => {}, dAppsVersion }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [hoverStates, setHoverStates] = useState({});
-
-  const handleMouseEnter = (id) => {
-    setHoverStates((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const handleMouseLeave = (id) => {
-    setHoverStates((prev) => ({ ...prev, [id]: false }));
-  };
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <>
@@ -225,21 +231,14 @@ const Navbar: React.FC<{
           <MobileMenu>
             {navItems.map((item, index) => (
               <a href={item.href}>
-                <Button
+                <NavButton
                   textButton
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                  style={{
-                    backgroundColor: hoverStates[index]
-                      ? theme.colors.ACCENT_PURPLE_900
-                      : theme.colors.ACCENT_PURPLE_800,
-                    color: hoverStates[index]
-                      ? theme.colors.SECONDARY_TEXT
-                      : theme.colors.ACCENT_PURPLE_200,
-                  }}
+                  className={`nav-button${
+                    index === currentTab ? " active" : ""
+                  }`}
                 >
                   {item.icon()} {item.title}
-                </Button>
+                </NavButton>
               </a>
             ))}
             <br />
@@ -255,22 +254,13 @@ const Navbar: React.FC<{
               >
                 v{dAppsVersion}
               </p>
-              <Button
+              <NavButton
                 textButton
                 onClick={onChangeTheme}
-                onMouseEnter={() => handleMouseEnter("themeButton")}
-                onMouseLeave={() => handleMouseLeave("themeButton")}
-                style={{
-                  backgroundColor: hoverStates["themeButton"]
-                    ? theme.colors.ACCENT_PURPLE_900
-                    : theme.colors.ACCENT_PURPLE_800,
-                  color: hoverStates["themeButton"]
-                    ? theme.colors.SECONDARY_TEXT
-                    : theme.colors.ACCENT_PURPLE_200,
-                }}
+                className="nav-button"
               >
                 <ThemeIcon />
-              </Button>
+              </NavButton>
             </Flex>
           </MobileMenu>
         )}
@@ -291,24 +281,18 @@ const Navbar: React.FC<{
                 key={`navItem-${index}`}
                 content={item.title.toUpperCase()}
               >
-                <a key={`navItem-${index}`} href={index}>
-                  <Button
+                <a key={`navItem-${index}`} href={item.href}>
+                  <NavButton
                     textButton
                     iconButton
                     size="large"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                    style={{
-                      backgroundColor: hoverStates[index]
-                        ? theme.colors.ACCENT_PURPLE_900
-                        : theme.colors.ACCENT_PURPLE_800,
-                      color: hoverStates[index]
-                        ? theme.colors.SECONDARY_TEXT
-                        : theme.colors.ACCENT_PURPLE_200,
-                    }}
+                    className={`nav-button${
+                      index === currentTab ? " active" : ""
+                    }`}
+                    onClick={() => setCurrentTab(index)}
                   >
                     {item.icon()}
-                  </Button>
+                  </NavButton>
                 </a>
               </NavigationBarTooltip>
             ))}
@@ -320,23 +304,14 @@ const Navbar: React.FC<{
                 v{dAppsVersion}
               </p>
             </Flex>
-            <Button
+            <NavButton
               textButton
               iconButton
               onClick={onChangeTheme}
-              onMouseEnter={() => handleMouseEnter("themeButton")}
-              onMouseLeave={() => handleMouseLeave("themeButton")}
-              style={{
-                backgroundColor: hoverStates["themeButton"]
-                  ? theme.colors.ACCENT_PURPLE_900
-                  : theme.colors.ACCENT_PURPLE_800,
-                color: hoverStates["themeButton"]
-                  ? theme.colors.SECONDARY_TEXT
-                  : theme.colors.ACCENT_PURPLE_200,
-              }}
+              className="nav-button"
             >
               <ThemeIcon />
-            </Button>
+            </NavButton>
           </Flex>
         </Flex>
       </StyledNav>
