@@ -1,6 +1,6 @@
 {
   "name": "@origyn/origyn-art-ui",
-  "version": "1.2.22",
+  "version": "1.2.23",
   "main": "build/index.js",
   "module": "build/index.esm.js",
   "files": [
@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prity": "npx prettier --write src/components"
+    "pretty": "npx prettier --write src/components"
   },
   "repository": {
     "type": "git",

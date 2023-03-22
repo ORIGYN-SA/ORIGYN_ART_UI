@@ -15,5 +15,6 @@ Default.args = {
   data: [
     { title: "My portfolio", link: "#" },
     { title: "Digital twins", link: "#" },
+    { title: "Certificate Name", link: "#" },
   ],
 };

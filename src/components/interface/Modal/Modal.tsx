@@ -1,34 +1,37 @@
-import React, {PropsWithChildren} from "react";
+import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 import Container from "../../layout/Container";
 
 import CloseIcon from "../../icons/Close";
-import {Icons} from "../../index";
+import { Icons } from "../../index";
 
 export type ModalProps = {
   isOpened: boolean;
   closeModal: () => void;
   title?: string | React.ReactNode;
-  size?: 'lg' | 'md' | 'sm' | 'full';
+  size?: "lg" | "md" | "sm" | "full";
   mode?: string;
 };
 
 const modalSizes = {
-  lg: '860px',
-  md: '640px',
-  sm: '420px',
-  full: '100%',
-}
+  lg: "860px",
+  md: "640px",
+  sm: "420px",
+  full: "100%",
+};
 
 const StyledModal = styled(ReactModal)<{ size: string }>`
   &.ReactModalPortal {
+  }
+  .ReactModal__Overlay {
+    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND}
   }
   &.ReactModal__Content {
     ::-webkit-scrollbar {
       display: none;
     }
-    
+
     position: absolute;
     inset: 50% auto auto 50%;
 
@@ -74,11 +77,11 @@ const StyledCloseBtn = styled(CloseIcon)`
   right: 34.75px;
   top: 42.75px;
   cursor: pointer;
-  color: #FEFEFE;
+  color: #fefefe;
   width: 18px;
   height: 18px;
-  
-  ${({theme}) => theme?.media?.sm} {
+
+  ${({ theme }) => theme?.media?.sm} {
     top: 15px;
     right: 15px;
   }
@@ -91,15 +94,16 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   closeModal,
   size,
 }) => {
-  
+  ReactModal.setAppElement("#root");
+
   return (
-     <StyledModal
+    <StyledModal
       isOpen={isOpened}
       onRequestClose={closeModal}
       style={{
         overlay: {
           zIndex: 10000,
-        }
+        },
       }}
       size={size}
     >
@@ -108,8 +112,7 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
         {title && <h2>{title}</h2>}
         {children}
       </Container>
-    </StyledModal> 
-    
+    </StyledModal>
   );
 };
 

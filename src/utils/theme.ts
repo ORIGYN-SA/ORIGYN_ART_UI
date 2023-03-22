@@ -8,8 +8,10 @@ export const theme = {
     //BORDER: '#E3E3E3', LIGHT
     TEXT: "#FEFEFE",
     // TEXT: '#151515', LIGHT
-    SECONDARY_TEXT: "#5F5F5F",
+    SECONDARY_TEXT: "#9A9A9A",
     INACTIVE: "#9A9A9A",
+
+    MODAL_BACKGROUND: 'rgba(58, 58, 58, 0.9)',
 
     NAVIGATION_BACKGROUND: "#000000",
     // NAVIGATION_BACKGROUND: '#fafafa', LIGHT
@@ -20,8 +22,20 @@ export const theme = {
     PROGRESS: "#F2BD00",
     SUCCESS: "#50AA3E",
 
+    ACC_BUTTON_TEXT: "#FEFEFE",
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
+    ACCENT_PURPLE_800: "#331038",
+    // ACCENT_PURPLE_800:""#EDC7F2"", LIGHT
+    ACCENT_PURPLE_900: " #250A2B",
+    // ACCENT_PURPLE_900:" #f4e5f1", LIGHT
+    ACCENT_PURPLE_200: "#EDC7F2",
+    // ACCENT_PURPLE_200 : "#70237D", LIGHT
+    NAVIGATIONBAR_ICON_TEXT: "#edc7f2",
+    // NAVIGATION_ICON_TEXT: "#70237D", LIGHT
+    BREADCRUMB_TEXT: "#edc7f2",
+    // BREADCRUMB_TEXT: "#561b60", LIGHT
+    BREADCRUMB_TEXT_ACTIVE: "#aa36bf",
 
     PRIMARY_1000: "#0f0f0f",
     PRIMARY_900: "#151515",
@@ -56,7 +70,7 @@ export const theme = {
 
 export const themeLight = {
   colors: {
-    BACKGROUND: "#f3f3f3",
+    BACKGROUND: "#FAFAFA",
     BORDER: "#E3E3E3",
     TEXT: "#151515",
     SECONDARY_TEXT: "#5F5F5F",
@@ -65,12 +79,22 @@ export const themeLight = {
     NAVIGATION_BACKGROUND: "#fafafa",
     NAVIGATION_BACKGROUND_LIGHT: "#FCFCFC",
 
+    // background 3A3A3A with opacity 90%
+    MODAL_BACKGROUND: 'rgba(227, 227, 227, 0.85)',
+
     ERROR: "#B5010A",
     PROGRESS: "#F2BD00",
     SUCCESS: "#50AA3E",
-
+    
+    ACC_BUTTON_TEXT: "#FEFEFE",
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
+    ACCENT_PURPLE_800: "#EDC7F2",
+    ACCENT_PURPLE_900: " #F4E5F1",
+    ACCENT_PURPLE_200: "#70237D",
+    NAVIGATIONBAR_ICON_TEXT: "#5f5f5f",
+    BREADCRUMB_TEXT: "#561b60",
+
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",

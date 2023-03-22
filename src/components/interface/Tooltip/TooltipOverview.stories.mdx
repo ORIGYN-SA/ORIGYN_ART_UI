@@ -1,6 +1,5 @@
 import { Meta, Story, Canvas } from "@storybook/addon-docs";
 
-
 <Meta title="Components/Interface/Tooltip/Overview" />
 
 <style>{`
@@ -11,10 +10,10 @@ import { Meta, Story, Canvas } from "@storybook/addon-docs";
 
 Basic Tooltip component, with 4 directions:
 
- - Right 
- - Left 
- - Top 
- - Down
+- Right
+- Left
+- Top
+- Down
 
 Customizable Tooltip box color (background) and also the Text color (TextColor).
 It's hover activated and also on Click, the Tooltip remains active.
@@ -24,9 +23,10 @@ It's hover activated and also on Click, the Tooltip remains active.
 ```typescript
 type TooltipProps = {
   position?: "left" | "right" | "bottom" | "top";
-  background?: string
-  textColor?: string
-}
+  background?: string;
+  textColor?: string;
+  navbarTooltip?: boolean;
+};
 ```
 
 ** IMPORTANT: You can set the position and background color and hover. As default they're position: "top" (default), background-color: "000000" (black) and textColor: "ffffff" **
@@ -34,25 +34,23 @@ type TooltipProps = {
 ## Top
 
 <Canvas>
-    <Story id="components-interface-tooltip-all-stories--top" />
+  <Story id="components-interface-tooltip-all-stories--top" />
 </Canvas>
 
 ## Right
 
 <Canvas>
-    <Story id="components-interface-tooltip-all-stories--right" />
+  <Story id="components-interface-tooltip-all-stories--right" />
 </Canvas>
 
 ## Left
 
 <Canvas>
-    <Story id="components-interface-tooltip-all-stories--left" />
+  <Story id="components-interface-tooltip-all-stories--left" />
 </Canvas>
 
 ## Bottom
 
 <Canvas>
-    <Story id="components-interface-tooltip-all-stories--bottom" />
+  <Story id="components-interface-tooltip-all-stories--bottom" />
 </Canvas>
-
-
