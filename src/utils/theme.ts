@@ -22,6 +22,7 @@ export const theme = {
     PROGRESS: "#F2BD00",
     SUCCESS: "#50AA3E",
 
+    ACC_BUTTON_TEXT: "#FEFEFE",
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
     ACCENT_PURPLE_800: "#331038",
@@ -32,8 +33,9 @@ export const theme = {
     // ACCENT_PURPLE_200 : "#70237D", LIGHT
     NAVIGATIONBAR_ICON_TEXT: "#edc7f2",
     // NAVIGATION_ICON_TEXT: "#70237D", LIGHT
-    ACC_BUTTON_TEXT: "#FEFEFE",
-
+    BREADCRUMB_TEXT: "#edc7f2",
+    // BREADCRUMB_TEXT: "#561b60", LIGHT
+    BREADCRUMB_TEXT_ACTIVE: "#aa36bf",
 
     PRIMARY_1000: "#0f0f0f",
     PRIMARY_900: "#151515",
@@ -83,14 +85,16 @@ export const themeLight = {
     ERROR: "#B5010A",
     PROGRESS: "#F2BD00",
     SUCCESS: "#50AA3E",
-
+    
+    ACC_BUTTON_TEXT: "#FEFEFE",
     ACCENT_COLOR: "#70237D",
     ACCENT_COLOR_2: "#FFE7BD",
     ACCENT_PURPLE_800: "#EDC7F2",
     ACCENT_PURPLE_900: " #F4E5F1",
     ACCENT_PURPLE_200: "#70237D",
     NAVIGATIONBAR_ICON_TEXT: "#5f5f5f",
-    ACC_BUTTON_TEXT: "#FEFEFE",
+    BREADCRUMB_TEXT: "#561b60",
+
   },
   shadows: {
     sm: "0px 5px 5px -5px rgba(0, 0, 0, 0.1)",
