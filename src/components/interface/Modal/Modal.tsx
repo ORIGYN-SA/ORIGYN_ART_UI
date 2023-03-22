@@ -25,7 +25,7 @@ const StyledModal = styled(ReactModal)<{ size: string }>`
   &.ReactModalPortal {
   }
   .ReactModal__Overlay {
-    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND}
+    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND};
   }
   &.ReactModal__Content {
     ::-webkit-scrollbar {
@@ -103,6 +103,7 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
       style={{
         overlay: {
           zIndex: 10000,
+          backgroundColor: "rgb(169 112 112 / 50%)",
         },
       }}
       size={size}

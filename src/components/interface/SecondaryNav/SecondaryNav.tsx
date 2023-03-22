@@ -10,6 +10,7 @@ export type SecondaryNavProps = {
   tabs: Array<{ title: string; id: string }>;
   content: Array<any>;
   title?: string;
+  titleLink?: string;
   onConnect?: () => void;
   onLogOut?: () => void;
   principal?: string;
@@ -115,6 +116,7 @@ const SecondaryNav = ({
   tabs,
   content,
   title,
+  titleLink,
   onConnect,
   principal,
   onLogOut,
@@ -151,7 +153,9 @@ const SecondaryNav = ({
       >
         <Flex align="center" gap={32}>
           <StyledTitle>
-            <b>{title}</b>
+            <b>
+              <a href={titleLink ? titleLink : "#"}>{title}</a>
+            </b>
           </StyledTitle>
           <StyledSecondaryNav>
             {tabs.map(({ id, title }, index) => (
