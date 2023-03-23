@@ -7,6 +7,7 @@ export interface TextInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  optional?: string;
   inputSize?: "small" | "medium" | "large";
 }
 
@@ -63,7 +64,7 @@ const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
   
     &:focus{
       outline: none;
-      background-color: ${theme.colors.TEXT}06;
+      color: ${theme.colors.TEXT};
     }
 `}
 `;
@@ -88,10 +89,22 @@ const Label = styled.label`
   margin-bottom: 8px;
 `;
 
-const TextInput = ({ label, error, inputSize, ...props }: TextInputProps) => {
+const Optional = styled.label`
+${({ theme }) => `
+font-size: 14px;
+line-height: 22px;
+margin-bottom: 8px;
+margin-left: 5px;
+color: ${theme.colors.SECONDARY_TEXT};
+  `}
+`
+
+const TextInput = ({ label, error, optional, inputSize, ...props }: TextInputProps) => {
   return (
     <Flex flexFlow="column" fullWidth>
-      {label ? <Label htmlFor={props.id}>{label}</Label> : null}
+      <Flex flexFlow="row" fullWidth>
+      {label ? <Label htmlFor={props.id}>{label}</Label> : null}  {optional ? <Optional>{optional}</Optional> : null}
+      </Flex>
       <StyledTextInput error={!!error} inputSize={inputSize} {...props} />
       <ErrorMessage>
         {error && (
