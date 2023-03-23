@@ -91,7 +91,7 @@ const StyledWallet = styled(Button)`
 `;
 
 const StyledContent = styled("div")`
-  background: ${({ theme }) => theme.colors.NAVIGATION_BACKGROUND};
+  background: ${({ theme }) => theme.colors.BACKGROUND};
   box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 4%);
   border-radius: 16px 0px 0px 0px;
   width: 100%;
