@@ -118,12 +118,12 @@ const StyledButton = styled.button<ButtonProps>
   ${disabled ? `
     background: ${theme.colors.INACTIVE};
     border-color: ${theme.colors.BORDER};
-    color: ${theme.colors.SECONDARY_TEXT};
+    color: ${theme.colors.TEXT};
     cursor: not-allowed;
     :hover {
       background-color: ${theme.colors.INACTIVE};
       border-color: ${theme.colors.BORDER};
-      color: ${theme.colors.SECONDARY_TEXT};
+      color: ${theme.colors.TEXT};
     }
   ` : ""}
   ${iconButton ? `

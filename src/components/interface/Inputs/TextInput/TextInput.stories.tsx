@@ -28,7 +28,7 @@ export const small = Template.bind({});
 small.args = { name: "input", inputSize: "small", label: "Label text", placeholder: "Placeholder text" };
 
 export const filled = Template.bind({});
-filled.args = { name: "input", label: "Label text", value: "Filled", placeholder: "Placeholder text" };
+filled.args = { name: "input", label: "Label text",optional: "  (Optional)", value: "Filled", placeholder: "Placeholder text" };
 
 export const error = Template.bind({});
 error.args = { name: "input", error: "This is not a valid email address", value: "error", label: "Label text", placeholder: "placeholder text" };
