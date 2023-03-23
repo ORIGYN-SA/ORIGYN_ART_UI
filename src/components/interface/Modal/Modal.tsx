@@ -24,8 +24,9 @@ const modalSizes = {
 const StyledModal = styled(ReactModal)<{ size: string }>`
   &.ReactModalPortal {
   }
-  .ReactModal__Overlay {
-    background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND}
+  &.ReactModal__Overlay {
+    background-color: red;
+    zIndex: 10000,
   }
   &.ReactModal__Content {
     ::-webkit-scrollbar {
@@ -100,11 +101,6 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
     <StyledModal
       isOpen={isOpened}
       onRequestClose={closeModal}
-      style={{
-        overlay: {
-          zIndex: 10000,
-        },
-      }}
       size={size}
     >
       <Container relative size="md">
