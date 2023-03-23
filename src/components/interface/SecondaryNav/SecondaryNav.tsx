@@ -18,7 +18,7 @@ export type SecondaryNavProps = {
 
 const StyledSecondaryNav = styled(Flex)`
   ${({ theme }) => `
-  background: linear-gradient(90deg, ${theme.colors.NAVIGATION_BACKGROUND_LIGHT} 0%, ${theme.colors.NAVIGATION_BACKGROUND} 100%);
+  background: ${theme.colors.NAVIGATION_BACKGROUND};
   color: ${theme.colors.WHITE};
   font-weight: 600;
   font-size: 14px;
@@ -91,7 +91,7 @@ const StyledWallet = styled(Button)`
 `;
 
 const StyledContent = styled("div")`
-  background: ${({ theme }) => theme.colors.BACKGROUND};
+  background: ${({ theme }) => theme.colors.NAVIGATION_BACKGROUND};
   box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 4%);
   border-radius: 16px 0px 0px 0px;
   width: 100%;
@@ -119,7 +119,7 @@ const StyledContainer = styled("div")`
   background: ${theme.colors.NAVIGATION_BACKGROUND};
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 9999;
   `}
 `;
 
