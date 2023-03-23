@@ -119,6 +119,7 @@ const StyledContainer = styled("div")`
   background: ${theme.colors.NAVIGATION_BACKGROUND};
   position: sticky;
   top: 0;
+  z-index: 999;
   `}
 `;
 
