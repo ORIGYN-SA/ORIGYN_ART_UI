@@ -63,7 +63,7 @@ const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
   
     &:focus{
       outline: none;
-      background-color: ${theme.colors.TEXT}06;
+      color: ${theme.colors.TEXT};
     }
 `}
 `;
