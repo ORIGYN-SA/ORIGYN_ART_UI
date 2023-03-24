@@ -261,7 +261,7 @@ const Navbar: React.FC<{
                 onClick={onChangeTheme}
                 className="nav-button"
               >
-                <DarkThemeIcon />
+                {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
               </NavButton>
             </Flex>
           </MobileMenu>
