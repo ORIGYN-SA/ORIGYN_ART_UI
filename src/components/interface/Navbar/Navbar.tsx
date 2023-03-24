@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
-import ThemeIcon from "../../icons/Theme";
+import DarkThemeIcon from "../../icons/DarkTheme";
+import LightThemeIcon from "../../icons/LightTheme";
 import { HR, Icons } from "../../index";
 import { theme } from "../../../utils";
 
@@ -134,7 +135,8 @@ const Navbar: React.FC<{
   navItems: any;
   onChangeTheme?: any;
   dAppsVersion: string;
-}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion }) => {
+  darkMode: boolean;
+}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -259,7 +261,7 @@ const Navbar: React.FC<{
                 onClick={onChangeTheme}
                 className="nav-button"
               >
-                <ThemeIcon />
+                {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
               </NavButton>
             </Flex>
           </MobileMenu>
@@ -310,7 +312,7 @@ const Navbar: React.FC<{
               onClick={onChangeTheme}
               className="nav-button"
             >
-              <ThemeIcon />
+              {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
             </NavButton>
           </Flex>
         </Flex>
