@@ -9,11 +9,12 @@ export type TabContentProps = {
   fullWidth?: boolean;
   justify?: "center" | "flex-start" | "flex-end";
   borderBottom?: boolean;
+  lightBottom?: boolean;
   bgColor?: string;
 };
 
-const StyledTabContent = styled(Flex)<{borderBottom: boolean, bgColor}>`
-  ${({theme, borderBottom, bgColor}) => `
+const StyledTabContent = styled(Flex)<{borderBottom: boolean, bgColor, lightBottom: boolean}>`
+  ${({theme, borderBottom, bgColor, lightBottom}) => `
   background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.BACKGROUND};
   color: ${theme.colors.TEXT};
   box-sizing: border-box;
@@ -25,6 +26,8 @@ const StyledTabContent = styled(Flex)<{borderBottom: boolean, bgColor}>`
   gap: 32px;
   
   ${borderBottom ? "border-bottom: 1px solid #E3E3E3;" : "" }
+
+  ${lightBottom ? "border-bottom: 1px solid #242424;" : "" }
   
   ${theme.media.sm} {
     padding: 0 5px;
@@ -58,12 +61,12 @@ const StyledTab = styled(MenuLink)`
 `}
 `;
 
-const TabContent = ({tabs, content, fullWidth=false, justify="center", borderBottom, bgColor}: TabContentProps) => {
+const TabContent = ({tabs, content, fullWidth=false, justify="center", borderBottom, bgColor, lightBottom}: TabContentProps) => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <Flex flexFlow="column" align="flex-start">
-      <StyledTabContent fullWidth={fullWidth} justify={justify} borderBottom={borderBottom} bgColor={bgColor}>
+      <StyledTabContent fullWidth={fullWidth} justify={justify} lightBottom={lightBottom} borderBottom={borderBottom} bgColor={bgColor}>
         {tabs.map(({id, title}, index) => (
           <StyledTab
             as="p"
