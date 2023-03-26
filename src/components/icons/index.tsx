@@ -15,17 +15,17 @@ import SafeIcon from "./Safe";
 import SearchIcon from "./Search";
 import TransactionIcon from "./Transaction";
 import TwitterIcon from "./Twitter";
-import LogoMainIcon from "./LogoMain"
-import LogoMainHorizontal from "./LogoMainHorizontal"
-import MenuIcon from "./Menu"
-import Governance from "./Governance"
-import Home from "./Home"
-import OrigynIcon from "./Origyn"
-import ThemeIcon from "./Theme"
-import Wallet from "./Wallet"
-import Libraries from "./Libraries"
-import Marketplace from "./Marketplace"
-import DataBrowse from "./DataBrowse"
+import LogoMainIcon from "./LogoMain";
+import LogoMainHorizontal from "./LogoMainHorizontal";
+import MenuIcon from "./Menu";
+import Governance from "./Governance";
+import Home from "./Home";
+import OrigynIcon from "./Origyn";
+import ThemeIcon from "./DarkTheme";
+import Wallet from "./Wallet";
+import Libraries from "./Libraries";
+import Marketplace from "./Marketplace";
+import DataBrowse from "./DataBrowse";
 
 export {
   ArrowDownIcon,
