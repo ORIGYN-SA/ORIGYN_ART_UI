@@ -1,7 +1,12 @@
-import React, { createContext, useState, useEffect, PropsWithChildren } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  PropsWithChildren,
+} from "react";
 import type { layoutType } from "./Layouts";
 import type { positionType } from "./Positions";
-import Snack from "./Snack";
+import { Snack } from "./Snack";
 
 // Type for Snack
 export type SnackBarProps = {
@@ -17,7 +22,7 @@ export type ContextType = {
   isOpen: boolean;
   snackBarArray?: SnackBarProps[];
   addSnackBar: (snackbar: SnackBarProps) => void;
-  providerPosition : positionType;
+  providerPosition: positionType;
 };
 // Type for SnackProvider
 export type SnackProviderProps = {
@@ -27,11 +32,14 @@ export type SnackProviderProps = {
 };
 
 // Create context
-export const SnackContext = createContext<ContextType>(
-  undefined
-);
+export const SnackContext = createContext<ContextType>(undefined);
 
-const SnackProvider: React.FC<PropsWithChildren<SnackProviderProps>> = ({ children, durationms, maxSnack, position }) => {
+export const SnackProvider: React.FC<PropsWithChildren<SnackProviderProps>> = ({
+  children,
+  durationms,
+  maxSnack,
+  position,
+}) => {
   // Set default values
   durationms = durationms || 4000;
   maxSnack = maxSnack || 3;
@@ -59,8 +67,8 @@ const SnackProvider: React.FC<PropsWithChildren<SnackProviderProps>> = ({ childr
   useEffect(() => {
     if (snackBarArray.length > 0) {
       const timer = setTimeout(() => {
-        if ((queue.length > 0) && (snackBarArray.length <= maxSnack)) {
-          setSnackBarArray((prev) => [ ...prev,queue[0]]);
+        if (queue.length > 0 && snackBarArray.length <= maxSnack) {
+          setSnackBarArray((prev) => [...prev, queue[0]]);
           queue.shift();
         } else {
           // remove first element from snackBarArray
@@ -69,20 +77,19 @@ const SnackProvider: React.FC<PropsWithChildren<SnackProviderProps>> = ({ childr
       }, durationms);
       return () => clearTimeout(timer);
     }
-  }, [snackBarArray])
+  }, [snackBarArray]);
 
   return (
-    <SnackContext.Provider value={{
-      isOpen,
-      snackBarArray,
-      addSnackBar,
-      providerPosition
-    }}
+    <SnackContext.Provider
+      value={{
+        isOpen,
+        snackBarArray,
+        addSnackBar,
+        providerPosition,
+      }}
     >
       {children}
       <Snack />
     </SnackContext.Provider>
   );
 };
-
-export default SnackProvider;
