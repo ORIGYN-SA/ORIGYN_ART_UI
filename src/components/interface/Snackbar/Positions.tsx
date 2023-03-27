@@ -39,7 +39,7 @@ export const SnackContainerTopLeft = styled("div")`
   bottom: ${Positions["top-left"].bottom};
   left: ${Positions["top-left"].left};
   right: ${Positions["top-left"].right};
-  z-index: 1000;
+  z-index: 99999;
   text-align: ${Positions["top-left"].align};
 `;
 export const SnackContainerTopRight = styled("div")`
@@ -48,7 +48,7 @@ export const SnackContainerTopRight = styled("div")`
   bottom: ${Positions["top-right"].bottom};
   left: ${Positions["top-right"].left};
   right: ${Positions["top-right"].right};
-  z-index: 1000;
+  z-index: 99999;
   text-align: ${Positions["top-right"].align};
 `;
 export const SnackContainerBottomLeft = styled("div")`
@@ -57,7 +57,7 @@ export const SnackContainerBottomLeft = styled("div")`
   bottom: ${Positions["bottom-left"].bottom};
   left: ${Positions["bottom-left"].left};
   right: ${Positions["bottom-left"].right};
-  z-index: 1000;
+  z-index: 99999;
   text-align: ${Positions["bottom-left"].align};
 `;
 export const SnackContainerBottomRight = styled("div")`
@@ -66,6 +66,6 @@ export const SnackContainerBottomRight = styled("div")`
   bottom: ${Positions["bottom-right"].bottom};
   left: ${Positions["bottom-right"].left};
   right: ${Positions["bottom-right"].right};
-  z-index: 1000;
+  z-index: 99999;
   text-align: ${Positions["bottom-right"].align};
 `;

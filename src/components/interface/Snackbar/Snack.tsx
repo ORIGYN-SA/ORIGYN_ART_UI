@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { useSnackBarContext } from "./useSnackContext";
 import { Styles } from "./SnackStyles";
 import { Layouts } from "./Layouts";
-import { SnackContainerTopRight, SnackContainerTopLeft, SnackContainerBottomLeft, SnackContainerBottomRight } from "./Positions";
+import {
+  SnackContainerTopRight,
+  SnackContainerTopLeft,
+  SnackContainerBottomLeft,
+  SnackContainerBottomRight,
+} from "./Positions";
 
-
-const Snack = () => {
+export const Snack = () => {
   const { snackBarArray, isOpen, providerPosition } = useSnackBarContext();
 
   if (!isOpen && snackBarArray.length === 0) return null;
@@ -16,7 +20,7 @@ const Snack = () => {
         {snackBarArray.map((snack, index) =>
           (providerPosition === "top-right" &&
             snack.snackPosition === undefined) ||
-            snack.snackPosition == "top-right" ? (
+          snack.snackPosition == "top-right" ? (
             <Styles key={index}>{Layouts[snack.layout](snack)}</Styles>
           ) : null
         )}
@@ -25,7 +29,7 @@ const Snack = () => {
         {snackBarArray.map((snack, index) =>
           (providerPosition === "top-left" &&
             snack.snackPosition === undefined) ||
-            snack.snackPosition == "top-left" ? (
+          snack.snackPosition == "top-left" ? (
             <Styles key={index}>{Layouts[snack.layout](snack)}</Styles>
           ) : null
         )}
@@ -34,7 +38,7 @@ const Snack = () => {
         {snackBarArray.map((snack, index) =>
           (providerPosition === "bottom-left" &&
             snack.snackPosition === undefined) ||
-            snack.snackPosition == "bottom-left" ? (
+          snack.snackPosition == "bottom-left" ? (
             <Styles key={index}>{Layouts[snack.layout](snack)}</Styles>
           ) : null
         )}
@@ -43,7 +47,7 @@ const Snack = () => {
         {snackBarArray.map((snack, index) =>
           (providerPosition === "bottom-right" &&
             snack.snackPosition === undefined) ||
-            snack.snackPosition == "bottom-right" ? (
+          snack.snackPosition == "bottom-right" ? (
             <Styles key={index}>{Layouts[snack.layout](snack)}</Styles>
           ) : null
         )}
@@ -52,5 +56,3 @@ const Snack = () => {
     document.body
   );
 };
-
-export default Snack;
