@@ -1,12 +1,14 @@
 {
   "name": "@origyn/origyn-art-ui",
-  "version": "1.2.33",
+  "version": "1.2.34",
+  "author": "ORIGYN Foundation",
+  "license": "Apache-2.0",
   "main": "build/index.js",
   "module": "build/index.esm.js",
+  "type": "module",
   "files": [
     "build"
   ],
-  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
