@@ -4,6 +4,39 @@ React UI library created for and used by [Origyn Decentralized Applications](htt
 
 ## 🏁 Quickstart
 
+Install origyn-art-ui and styled-components:
+
+```
+npm i @origyn/origyn-art-ui styled-components
+```
+
+In the component that renders your `App` component (for example: index.tsx), import `GlobalStyle`, `theme` and `themeLight` from `@origyn/origyn-art-ui`. Also import `ThemeProvider` from `styled-components`.
+
+Insert `<GlobalStyle />` above `<App />` and wrap `<App />` with `<ThemeProvider theme={theme}>`. You can add logic or a custom provider to toggle `theme` (dark theme) with `themeLight` (light theme).
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { GlobalStyle, theme, themeLight } from '@origyn/origyn-art-ui';
+import { ThemeProvider } from 'styled-components';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
+);
+```
+
+## Contributors
+
 All components in this library can be rendered in Storybook.
 
 ```sh
