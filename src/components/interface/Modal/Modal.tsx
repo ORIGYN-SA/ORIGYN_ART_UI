@@ -80,7 +80,8 @@ const StyledCloseBtn = styled(CloseIcon)`
   color: #fefefe;
   width: 18px;
   height: 18px;
-
+  fill: ${({ theme }) => theme.colors.TEXT};
+  stroke ${({ theme }) => theme.colors.TEXT};
   ${({ theme }) => theme?.media?.sm} {
     top: 15px;
     right: 15px;
