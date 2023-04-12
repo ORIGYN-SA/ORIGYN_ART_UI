@@ -22,8 +22,6 @@ const modalSizes = {
 };
 
 const StyledModal = styled(ReactModal)<{ size: string }>`
-  &.ReactModalPortal {
-  }
   .ReactModal__Overlay {
     background-color: ${({ theme }) => theme.colors.MODAL_BACKGROUND};
   }
@@ -34,7 +32,7 @@ const StyledModal = styled(ReactModal)<{ size: string }>`
 
     position: absolute;
     inset: 50% auto auto 50%;
-
+    outline: none !important;
     padding: 0;
     top: 50px;
     left: 50%;
