@@ -16,6 +16,7 @@ import Modal from './interface/Modal';
 import ShowMoreBlock from './interface/ShowMoreBlock';
 import Navbar from './interface/Navbar';
 import SecondaryNav from './interface/SecondaryNav';
+import SecondaryNavIGI from './interface/SecondaryNavIGI';
 import ProductCard from './interface/ProductCard';
 import Pagination from './interface/Pagination';
 import SearchInput from './interface/Inputs/SearchInput';
@@ -64,6 +65,7 @@ export {
   ShowMoreBlock,
   Navbar,
   SecondaryNav,
+  SecondaryNavIGI,
   ProductCard,
   Pagination,
   SearchInput,
