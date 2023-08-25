@@ -18,9 +18,12 @@ const PaginationContainer = styled('div')`
   gap: 4px;
   padding: 0px;
   justify-content: center;
-  width: 260px;
   height: 40px;
   align-items: center;
+  button {
+    min-width: 40px;
+    min-height: 40px;
+  }
 `;
 
 const Ellipses = styled('div')`
