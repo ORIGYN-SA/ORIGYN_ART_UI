@@ -1,221 +1,169 @@
-import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import Button from "../Button";
-import Flex from "../../layout/Flex";
-import Container from "../../layout/Container";
+import React from 'react';
+import styled from 'styled-components';
+import Button from '../Button';
+import Flex from '../../layout/Flex';
+import { theme } from '../../../utils';
 
-const flexContainer: any = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  padding: "0px",
-  gap: "24px",
-  position: "absolute",
-  width: "348px",
-  height: "40px",
-  left: "20px",
-  top: "20px",
-};
-
-const PaginationContainer = styled("div")`
+const PagerWrapper = styled('div')`
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 8px;
+  gap: 8px;
+  justify-content: center;
+`;
+
+const PaginationContainer = styled('div')`
+  display: flex;
   flex-direction: row;
   gap: 4px;
   padding: 0px;
   justify-content: center;
   width: 260px;
   height: 40px;
-  .pageCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    padding: 11px;
-    gap: 10px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
-    background: transparent;
-    border: 1px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    margin: 0 6px;
-    cursor: pointer;
-    &:not([disabled]):hover {
-      border: 1px;
-    }
-  }
+  align-items: center;
+`;
+
+const Ellipses = styled('div')`
+  padding-top: 6px;
+  font-size: 18px;
+  margin-left: 4px;
+  margin-right: 4px;
 `;
 
 const textStyle: any = {
-  fontFamily: "Montserrat",
-  fontStyle: "normal",
-  fontWeight: "600",
-  fontSize: "10px",
-  lineHeight: "16px",
-  letterSpacing: "-0,1px",
-  width: "64px",
-  height: "16px",
+  fontFamily: 'Montserrat',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  color: `${theme.colors.SECONDARY_TEXT}`,
+  fontSize: '11px',
+  lineHeight: '16px',
+  letterSpacing: '-0,1px',
+  width: '64px',
+  height: '16px',
+  whiteSpace: 'nowrap',
 };
-
-const MoreIconDiv: any = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "0px",
-  gap: "10px",
-  width: "40px",
-  height: "40px",
-  borderRadius: "999px",
-};
-
-const MoreIconText: any = {
-  width: "9px",
-  height: "20px",
-  fontFamily: "Montserrat",
-  fontStyle: "normal",
-  fontWeight: "500",
-  fontSize: "12px",
-  lineHeight: "20px",
-  textAlign: "center",
-};
-
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
-  padding: 0 0.5rem;
-`;
 
 interface PaginationProps {
   currentPage: number;
   pageCount: number;
-  setCurrentPage: (prevPage: number) => void;
+  onPageChange: (pageNumber: number) => void;
 }
 
-const Pagination = ({ pageCount, onPageChange }: any) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const getPagerButton = (pageNumber, isActive, onPageChange) => {
+  return (
+    <Button
+      size='small'
+      textButton
+      iconButton
+      key={`page-${pageNumber}`}
+      className={isActive ? `active` : ``}
+      onClick={() => onPageChange(pageNumber)}
+    >
+      {pageNumber}
+    </Button>
+  );
+};
 
-  const getPageRange = (currentPage: number, pageCount: number) => {
-    if (pageCount < 4) {
-      return [];
-    }
-    let pageRange = [1, 2, 3];
-    if (currentPage > 1 && currentPage !== pageCount) {
-      pageRange.length = 0;
-      pageRange.push(currentPage - 1);
-      pageRange.push(currentPage);
-      pageRange.push(currentPage + 1);
-    } else if (currentPage === pageCount) {
-      pageRange.length = 0;
-      pageRange.push(currentPage - 2);
-      pageRange.push(currentPage - 1);
-      pageRange.push(currentPage);
-    }
-    return pageRange;
-  };
-
+const Pagination = ({
+  currentPage,
+  pageCount,
+  onPageChange,
+}: PaginationProps) => {
   const renderPageButtons = () => {
     let result = [];
-    for (let i = 1; i < pageCount + 1; i++) {
+    const showFirstEllipses = pageCount > 5 && currentPage >= 4;
+    const showLastEllipses = pageCount > 5 && currentPage <= pageCount - 3;
+
+    // first page
+    result.push(getPagerButton(1, currentPage === 1, onPageChange));
+
+    if (showFirstEllipses) {
+      result.push(<Ellipses key='ellipses-1'>...</Ellipses>);
+    }
+
+    // pages between first and last
+    if (pageCount > 1) {
+      let startPage = currentPage > 3 ? currentPage - 1 : 2;
+      if (startPage < 2) {
+        startPage = 2;
+      } else if (startPage > pageCount - 3 && pageCount - 3 > 1) {
+        startPage = pageCount - 3;
+      }
+
+      for (
+        let i = startPage;
+        i <= Math.min(startPage + 2, pageCount - 1);
+        i++
+      ) {
+        result.push(getPagerButton(i, currentPage === i, onPageChange));
+      }
+
+      if (showLastEllipses) {
+        result.push(<Ellipses key='ellipses-2'>...</Ellipses>);
+      }
+
+      // last page
       result.push(
-        <Button
-          size="small"
-          textButton
-          iconButton
-          key={i}
-          className={currentPage === i ? `pageCard active` : `pageCard`}
-          onClick={() => setCurrentPage(i)}
-        >
-          {i}
-        </Button>
+        getPagerButton(pageCount, currentPage === pageCount, onPageChange)
       );
     }
+
     return result;
   };
 
-  useEffect(() => {
-    onPageChange(currentPage);
-  }, [currentPage]);
+  if (pageCount === 0) {
+    return null;
+  }
 
   return (
-    <Container padding="8px">
-      <Flex align="center" gap={16}>
+    <PagerWrapper>
+      <Flex align='center'>
         <p style={textStyle}>
           Page {currentPage} of {pageCount}
         </p>
+      </Flex>
+
+      <Flex align='center'>
         <PaginationContainer>
-          {currentPage !== 1 && (
+          {/* < Previous Page */}
+          {currentPage > 1 && (
             <Button
-              size="small"
+              key='prev-page'
+              size='small'
               textButton
               iconButton
               onClick={() => {
-                if (currentPage > 1) setCurrentPage(currentPage - 1);
+                if (currentPage > 1) {
+                  onPageChange(currentPage - 1);
+                }
               }}
-              disabled={currentPage <= 1}
-            >{`<`}</Button>
-          )}
-          {pageCount < 4 && renderPageButtons()}
-          {currentPage >= pageCount - 2 && pageCount > 3 && (
-            <>
-              <Button
-                size="small"
-                textButton
-                iconButton
-                onClick={() => setCurrentPage(1)}
-              >
-                1
-              </Button>
-              <div>
-                <p>...</p>
-              </div>
-            </>
-          )}
-          {getPageRange(currentPage, pageCount).map((page: number) => (
-            <Button
-              size="small"
-              textButton
-              iconButton
-              key={page}
-              onClick={() => setCurrentPage(page)}
             >
-              {page}
+              &lt;
             </Button>
-          ))}
-          {currentPage < pageCount - 2 && pageCount > 3 && (
-            <>
-              <div style={MoreIconDiv}>
-                <p style={MoreIconText}>...</p>
-              </div>
-              <Button
-                size="small"
-                textButton
-                iconButton
-                onClick={() => setCurrentPage(pageCount)}
-              >
-                {pageCount}
-              </Button>
-            </>
           )}
 
-          <Button
-            size="small"
-            textButton
-            iconButton
-            onClick={() => {
-              if (currentPage < pageCount) setCurrentPage(currentPage + 1);
-            }}
-            disabled={currentPage === pageCount}
-          >{`>`}</Button>
+          {/* Between Pages */}
+          {renderPageButtons()}
+
+          {/* Next Page > */}
+          {currentPage < pageCount && (
+            <Button
+              key='next-page'
+              size='small'
+              textButton
+              iconButton
+              onClick={() => {
+                if (currentPage < pageCount) {
+                  onPageChange(currentPage + 1);
+                }
+              }}
+            >
+              &gt;
+            </Button>
+          )}
         </PaginationContainer>
       </Flex>
-    </Container>
+    </PagerWrapper>
   );
 };
 
