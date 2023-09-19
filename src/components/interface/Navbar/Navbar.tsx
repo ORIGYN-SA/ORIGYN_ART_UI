@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Button from "../Button";
 import Flex from "../../layout/Flex";
 import DarkThemeIcon from "../../icons/DarkTheme";
@@ -174,7 +175,7 @@ const Navbar: React.FC<{
         {mobileMenu && (
           <MobileMenu>
             {navItems.map((item, index) => (
-              <a href={item.href}>
+              <Link to={item.href} key={`navItem-${index}`}>
                 <NavButton
                   textButton
                   className={`nav-button${
@@ -183,7 +184,7 @@ const Navbar: React.FC<{
                 >
                   {item.icon()} {item.title}
                 </NavButton>
-              </a>
+              </Link>
             ))}
             <br />
             <HR />
@@ -225,7 +226,7 @@ const Navbar: React.FC<{
                 key={`navItem-${index}`}
                 content={item.title.toUpperCase()}
               >
-                <a key={`navItem-${index}`} href={item.href}>
+                <Link to={item.href} key={`navItem-${index}`}>
                   <NavButton
                     textButton
                     iconButton
@@ -237,7 +238,7 @@ const Navbar: React.FC<{
                   >
                     {item.icon()}
                   </NavButton>
-                </a>
+                </Link>
               </NavigationBarTooltip>
             ))}
           </Flex>
