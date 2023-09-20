@@ -27,6 +27,8 @@ import Libraries from "./Libraries";
 import Marketplace from "./Marketplace";
 import DataBrowse from "./DataBrowse";
 import OrigynLogomark from "./OrigynLogoMark";
+import UploadIcon from "./UploadIcon";
+import CollectionBlock from "./CollectionBlock";
 
 export {
   ArrowDownIcon,
@@ -58,4 +60,6 @@ export {
   OrigynIcon,
   OrigynLogomark,
   Wallet,
+  UploadIcon,
+  CollectionBlock,
 };
