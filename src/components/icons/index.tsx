@@ -29,6 +29,7 @@ import DataBrowse from "./DataBrowse";
 import OrigynLogomark from "./OrigynLogoMark";
 import UploadIcon from "./UploadIcon";
 import CollectionBlock from "./CollectionBlock";
+import FileUploadIcon from "./FileUploadIcon";
 
 export {
   ArrowDownIcon,
@@ -62,4 +63,5 @@ export {
   Wallet,
   UploadIcon,
   CollectionBlock,
+  FileUploadIcon,
 };

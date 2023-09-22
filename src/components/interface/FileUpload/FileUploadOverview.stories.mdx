@@ -13,9 +13,19 @@ Basic file upload component, with support for different variations.
 ## Properties
 
 ```typescript
-type FileUploadProps = {
-  handleAdd: (data: any) => void;
+interface UploadedFile {
+  fileName?: string;
+  pointer?: string;
+  type?: string;
+  preview?: string;
+  file?: File;
+  id?: string;
+}
+
+interface FileUploadProps {
+  handleAdd: (data: UploadedFile) => void;
   disabled?: boolean;
-  fileType: string[];
-};
+  pointer?: string;
+  fileTypes: string[];
+}
 ```
