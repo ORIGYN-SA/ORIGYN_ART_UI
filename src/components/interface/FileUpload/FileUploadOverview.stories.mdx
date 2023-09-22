@@ -1,0 +1,21 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="Components/Interface/FileUpload/Overview" />
+
+<style>{`
+  /* Add any custom styles you need for documentation here */
+`}</style>
+
+# File Upload Component
+
+Basic file upload component, with support for different variations.
+
+## Properties
+
+```typescript
+type FileUploadProps = {
+  handleAdd: (data: any) => void; // Adjust the type as needed
+  disabled?: boolean;
+  fileType?: string[];
+};
+```
