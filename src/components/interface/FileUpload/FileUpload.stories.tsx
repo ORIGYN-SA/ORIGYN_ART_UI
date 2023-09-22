@@ -13,6 +13,7 @@ const handleAdd = (data) => {
 };
 
 const Template: Story = (args) => (
+  //@ts-ignore
   <FileUpload handleAdd={handleAdd} {...args} />
 );
 

@@ -9,7 +9,7 @@ interface FileUploadProps {
   handleAdd: (data: any) => void;
   disabled?: boolean;
   pointer?: string;
-  fileType?: string[];
+  fileType: string[];
 }
 
 const CustomFileUpload = styled.label<CustomFileUploadProps>`
