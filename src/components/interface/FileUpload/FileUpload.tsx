@@ -8,7 +8,6 @@ interface CustomFileUploadProps {
 
 interface UploadedFile {
   fileName?: string;
-  pointer?: string;
   type?: string;
   preview?: string;
   file?: File;
@@ -17,7 +16,6 @@ interface UploadedFile {
 interface FileUploadProps {
   handleAdd: (data: UploadedFile) => void;
   disabled?: boolean;
-  pointer?: string;
   fileTypes: string[];
 }
 
@@ -48,7 +46,6 @@ const CustomButton = styled.div`
 export const FileUpload: React.FC<FileUploadProps> = ({
   handleAdd,
   disabled,
-  pointer,
   fileTypes,
 }) => {
   const [file, setFile] = useState<any>();
@@ -71,7 +68,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     const newFile = new File([fileData], id);
     const data = {
       fileName: name,
-      pointer,
+      pointer: name,
       type: fileData.type,
       preview: URL.createObjectURL(fileData),
       file: newFile,
