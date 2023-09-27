@@ -7,11 +7,11 @@ interface CustomFileUploadProps {
 }
 
 interface UploadedFile {
-  fileName?: string;
-  type?: string;
+  fileName: string;
+  type: string;
   previewURL?: string;
   file?: File;
-  id?: string;
+  id: string;
 }
 interface FileUploadProps {
   handleAdd: (data: UploadedFile) => void;
