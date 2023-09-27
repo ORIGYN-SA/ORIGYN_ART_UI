@@ -45,12 +45,7 @@ const CustomButton = styled.div`
   justify-content: center;
 `;
 
-export const FileUpload: React.FC<FileUploadProps> = ({
-  handleAdd,
-  disabled,
-  fileTypes,
-  pointer,
-}) => {
+export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fileTypes }) => {
   const fileInputRef = useRef(null);
 
   const genRanHex = (size) =>
@@ -67,7 +62,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     const newFile = new File([fileData], id);
     const data = {
       fileName: name,
-      pointer: pointer,
+      pointer: name,
       type: fileData.type,
       previewUrl: URL.createObjectURL(fileData),
       file: newFile,
