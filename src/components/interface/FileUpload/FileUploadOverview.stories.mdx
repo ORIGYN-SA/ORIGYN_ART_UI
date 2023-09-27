@@ -19,11 +19,13 @@ interface UploadedFile {
   previewUrl: string;
   file: File;
   id: string;
+  pointer: string;
 }
 
 interface FileUploadProps {
   handleAdd: (data: UploadedFile) => void;
   disabled: boolean;
   fileTypes: string[];
+  pointer: string;
 }
 ```

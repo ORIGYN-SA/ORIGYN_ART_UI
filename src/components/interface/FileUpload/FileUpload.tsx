@@ -12,11 +12,13 @@ interface UploadedFile {
   previewUrl: string;
   file: File;
   id: string;
+  pointer: string;
 }
 interface FileUploadProps {
   handleAdd: (data: UploadedFile) => void;
   disabled: boolean;
   fileTypes: string[];
+  pointer: string;
 }
 
 const CustomFileUpload = styled.label<CustomFileUploadProps>`
@@ -43,7 +45,12 @@ const CustomButton = styled.div`
   justify-content: center;
 `;
 
-export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fileTypes }) => {
+export const FileUpload: React.FC<FileUploadProps> = ({
+  handleAdd,
+  disabled,
+  fileTypes,
+  pointer,
+}) => {
   const fileInputRef = useRef(null);
 
   const genRanHex = (size) =>
@@ -60,7 +67,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fil
     const newFile = new File([fileData], id);
     const data = {
       fileName: name,
-      pointer: name,
+      pointer: pointer,
       type: fileData.type,
       previewUrl: URL.createObjectURL(fileData),
       file: newFile,
