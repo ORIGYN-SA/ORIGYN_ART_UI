@@ -44,7 +44,6 @@ const CustomButton = styled.div`
 `;
 
 export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fileTypes }) => {
-  const [file, setFile] = useState<any>();
   const fileInputRef = useRef(null);
 
   const genRanHex = (size) =>
@@ -52,7 +51,6 @@ export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fil
 
   const handleFileChange = (e) => {
     const [fileData] = e.target.files;
-    setFile(fileData);
     addFile(fileData);
   };
 
@@ -69,7 +67,6 @@ export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fil
       id,
     };
     handleAdd(data);
-    setFile(undefined);
     fileInputRef.current.value = '';
   };
 
