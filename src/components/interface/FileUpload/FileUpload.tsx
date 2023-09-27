@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { FileUploadIcon } from "../../icons";
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import { FileUploadIcon } from '../../icons';
 
 interface CustomFileUploadProps {
   disabled: boolean;
@@ -43,18 +43,12 @@ const CustomButton = styled.div`
   justify-content: center;
 `;
 
-export const FileUpload: React.FC<FileUploadProps> = ({
-  handleAdd,
-  disabled,
-  fileTypes,
-}) => {
+export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fileTypes }) => {
   const [file, setFile] = useState<any>();
   const fileInputRef = useRef(null);
 
   const genRanHex = (size) =>
-    [...Array(size)]
-      .map(() => Math.floor(Math.random() * 16).toString(16))
-      .join("");
+    [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
   const handleFileChange = (e) => {
     const [fileData] = e.target.files;
@@ -76,7 +70,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     };
     handleAdd(data);
     setFile(undefined);
-    fileInputRef.current.value = "";
+    fileInputRef.current.value = '';
   };
 
   return (
@@ -86,8 +80,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}
-        style={{ display: "none" }}
-        accept={fileTypes.join(",")}
+        style={{ display: 'none' }}
+        accept={fileTypes.join(',')}
       />
 
       <CustomButton>
