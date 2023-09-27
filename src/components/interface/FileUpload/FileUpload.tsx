@@ -9,7 +9,7 @@ interface CustomFileUploadProps {
 interface UploadedFile {
   fileName: string;
   type: string;
-  previewURL: string;
+  previewUrl: string;
   file: File;
   id: string;
 }
@@ -64,7 +64,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ handleAdd, disabled, fil
       fileName: name,
       pointer: name,
       type: fileData.type,
-      previewURL: URL.createObjectURL(fileData),
+      previewUrl: URL.createObjectURL(fileData),
       file: newFile,
       id,
     };
