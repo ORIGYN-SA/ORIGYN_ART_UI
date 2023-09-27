@@ -42,4 +42,5 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
   fileTypes: ['video/mp4', 'image/jpg'],
+  pointer: 'file',
 };
