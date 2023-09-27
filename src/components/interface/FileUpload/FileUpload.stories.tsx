@@ -20,26 +20,26 @@ const Template: Story = (args) => (
 export const Video = Template.bind({});
 Video.args = {
   disabled: false,
-  fileType: ['video/mp4'],
+  fileTypes: ['video/mp4'],
   pointer: 'files-video',
 };
 
 export const Image = Template.bind({});
 Image.args = {
   disabled: false,
-  fileType: ['image/jpg'],
+  fileTypes: ['image/jpg'],
   pointer: 'files-image',
 };
 
 export const Document = Template.bind({});
 Document.args = {
   disabled: false,
-  fileType: ['application/pdf'],
+  fileTypes: ['application/pdf'],
   pointer: 'files-document',
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
-  fileType: ['video/mp4', 'image/jpg'],
+  fileTypes: ['video/mp4', 'image/jpg'],
 };
