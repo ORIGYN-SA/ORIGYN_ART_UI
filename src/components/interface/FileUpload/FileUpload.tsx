@@ -9,8 +9,8 @@ interface CustomFileUploadProps {
 interface UploadedFile {
   fileName: string;
   type: string;
-  previewURL?: string;
-  file?: File;
+  previewURL: string;
+  file: File;
   id: string;
 }
 interface FileUploadProps {
