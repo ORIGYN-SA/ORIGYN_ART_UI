@@ -15,7 +15,7 @@ interface UploadedFile {
 }
 interface FileUploadProps {
   handleAdd: (data: UploadedFile) => void;
-  disabled?: boolean;
+  disabled: boolean;
   fileTypes: string[];
 }
 
