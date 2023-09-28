@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import Button from "../Button";
-import Flex from "../../layout/Flex";
-import DarkThemeIcon from "../../icons/DarkTheme";
-import LightThemeIcon from "../../icons/LightTheme";
-import OrigynLogoMark from "../../icons/OrigynLogoMark";
-import { HR, Icons } from "../../index";
-import { theme } from "../../../utils";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Button from '../Button';
+import Flex from '../../layout/Flex';
+import DarkThemeIcon from '../../icons/DarkTheme';
+import LightThemeIcon from '../../icons/LightTheme';
+import OrigynLogoMark from '../../icons/OrigynLogoMark';
+import { HR, Icons } from '../../index';
+import { theme } from '../../../utils';
 
 const NavigationBarTooltip = ({ children, content }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +21,7 @@ const NavigationBarTooltip = ({ children, content }) => {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: 'relative' }}>
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {children}
       </div>
@@ -30,7 +30,7 @@ const NavigationBarTooltip = ({ children, content }) => {
   );
 };
 
-const StyledTooltip = styled("div")`
+const StyledTooltip = styled('div')`
   ${({ theme }) => `
     position: absolute;
     top: 50%;
@@ -52,7 +52,7 @@ const StyledTooltip = styled("div")`
 `}
 `;
 
-const StyledNav = styled("div")`
+const StyledNav = styled('div')`
   ${({ theme }) => `
   display: block;
   ${theme.media.md}{
@@ -81,9 +81,9 @@ const StyledNav = styled("div")`
 `}
 `;
 
-const MobileNav = styled("div")`
+const MobileNav = styled('div')`
   display: none;
-  z-index: 10000;
+  z-index: 1000;
   position: sticky;
   top: 0;
   height: auto;
@@ -95,7 +95,7 @@ const MobileNav = styled("div")`
   }
 `;
 
-const MobileNavHead = styled("div")`
+const MobileNavHead = styled('div')`
   top: 0;
   width: 100%;
   display: flex;
@@ -106,7 +106,7 @@ const MobileNavHead = styled("div")`
   box-sizing: border-box;
 `;
 
-const MobileMenu = styled("div")`
+const MobileMenu = styled('div')`
   position: absolute;
   top: 64px;
   left: 0;
@@ -145,7 +145,7 @@ const Navbar: React.FC<{
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   useEffect(() => {
-    const navbarCurrentTab = sessionStorage.getItem("navbarCurrentTab");
+    const navbarCurrentTab = sessionStorage.getItem('navbarCurrentTab');
     if (navbarCurrentTab) {
       setCurrentTab(parseInt(navbarCurrentTab));
     } else {
@@ -155,7 +155,7 @@ const Navbar: React.FC<{
 
   const handleTabChange = (index: number) => {
     setCurrentTab(index);
-    sessionStorage.setItem("navbarCurrentTab", index.toString());
+    sessionStorage.setItem('navbarCurrentTab', index.toString());
   };
 
   return (
@@ -164,11 +164,7 @@ const Navbar: React.FC<{
       <MobileNav>
         <MobileNavHead>
           <Icons.OrigynIcon />
-          <Button
-            iconButton
-            size="medium"
-            onClick={() => setMobileMenu(!mobileMenu)}
-          >
+          <Button iconButton size="medium" onClick={() => setMobileMenu(!mobileMenu)}>
             {mobileMenu ? <Icons.CloseIcon width={24} /> : <Icons.MenuIcon />}
           </Button>
         </MobileNavHead>
@@ -178,9 +174,7 @@ const Navbar: React.FC<{
               <Link to={item.href} key={`navItem-${index}`}>
                 <NavButton
                   textButton
-                  className={`nav-button${
-                    index === currentTab ? " active" : ""
-                  }`}
+                  className={`nav-button${index === currentTab ? ' active' : ''}`}
                 >
                   {item.icon()} {item.title}
                 </NavButton>
@@ -193,17 +187,13 @@ const Navbar: React.FC<{
               <p
                 style={{
                   color: theme.colors.INACTIVE,
-                  fontSize: "14px",
-                  marginLeft: "24px",
+                  fontSize: '14px',
+                  marginLeft: '24px',
                 }}
               >
                 v{dAppsVersion}
               </p>
-              <NavButton
-                textButton
-                onClick={onChangeTheme}
-                className="nav-button"
-              >
+              <NavButton textButton onClick={onChangeTheme} className="nav-button">
                 {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
               </NavButton>
             </Flex>
@@ -211,29 +201,19 @@ const Navbar: React.FC<{
         )}
       </MobileNav>
       <StyledNav>
-        <Flex
-          flexFlow="column"
-          align="center"
-          justify="space-between"
-          fullHeight
-        >
+        <Flex flexFlow="column" align="center" justify="space-between" fullHeight>
           <Flex flexFlow="column" align="center" gap={8}>
-            <div style={{ marginBottom: "24px" }}>
+            <div style={{ marginBottom: '24px' }}>
               <Icons.OrigynIcon />
             </div>
             {navItems.map((item, index) => (
-              <NavigationBarTooltip
-                key={`navItem-${index}`}
-                content={item.title.toUpperCase()}
-              >
+              <NavigationBarTooltip key={`navItem-${index}`} content={item.title.toUpperCase()}>
                 <Link to={item.href} key={`navItem-${index}`}>
                   <NavButton
                     textButton
                     iconButton
                     size="large"
-                    className={`nav-button${
-                      parseInt(index) === currentTab ? " active" : ""
-                    }`}
+                    className={`nav-button${parseInt(index) === currentTab ? ' active' : ''}`}
                     onClick={() => handleTabChange(parseInt(index))}
                   >
                     {item.icon()}
@@ -245,16 +225,9 @@ const Navbar: React.FC<{
 
           <Flex flexFlow="column" align="center" gap={16}>
             <Flex>
-              <p style={{ color: theme.colors.INACTIVE, fontSize: "14px" }}>
-                v{dAppsVersion}
-              </p>
+              <p style={{ color: theme.colors.INACTIVE, fontSize: '14px' }}>v{dAppsVersion}</p>
             </Flex>
-            <NavButton
-              textButton
-              iconButton
-              onClick={onChangeTheme}
-              className="nav-button"
-            >
+            <NavButton textButton iconButton onClick={onChangeTheme} className="nav-button">
               {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
             </NavButton>
           </Flex>
