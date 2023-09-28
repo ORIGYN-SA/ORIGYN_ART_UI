@@ -67,7 +67,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     const newFile = new File([fileData], id);
     const data = {
       fileName: name,
-      pointer: pointer,
+      pointer,
       type: fileData.type,
       previewUrl: URL.createObjectURL(fileData),
       file: newFile,
