@@ -130,7 +130,7 @@ const NavButton = styled(Button)`
     color: ${theme.colors.ACCENT_PURPLE_200};
   }
   &.nav-button.active {
-    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    background-color: ${theme.colors.ACCENT_PURPLE_800};
     color: ${theme.colors.ACCENT_PURPLE_200};
   }`}
 `;
