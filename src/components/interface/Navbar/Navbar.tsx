@@ -140,8 +140,8 @@ const Navbar: React.FC<{
   onChangeTheme?: any;
   dAppsVersion: string;
   darkMode: boolean;
-  themeButton: boolean;
-}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode, themeButton }) => {
+  showThemeButton: boolean;
+}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode, showThemeButton }) => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<number>(0);
 
@@ -228,7 +228,7 @@ const Navbar: React.FC<{
             <Flex>
               <p style={{ color: theme.colors.INACTIVE, fontSize: '14px' }}>v{dAppsVersion}</p>
             </Flex>
-            {themeButton && (
+            {showThemeButton && (
               <NavButton textButton iconButton onClick={onChangeTheme} className="nav-button">
                 {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
               </NavButton>
