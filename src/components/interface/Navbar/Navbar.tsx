@@ -130,7 +130,7 @@ const NavButton = styled(Button)`
     color: ${theme.colors.ACCENT_PURPLE_200};
   }
   &.nav-button.active {
-    background-color: ${theme.colors.ACCENT_PURPLE_900};
+    background-color: ${theme.colors.ACCENT_PURPLE_800};
     color: ${theme.colors.ACCENT_PURPLE_200};
   }`}
 `;
@@ -140,7 +140,8 @@ const Navbar: React.FC<{
   onChangeTheme?: any;
   dAppsVersion: string;
   darkMode: boolean;
-}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode }) => {
+  themeButton: boolean;
+}> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode, themeButton }) => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<number>(0);
 
@@ -227,9 +228,11 @@ const Navbar: React.FC<{
             <Flex>
               <p style={{ color: theme.colors.INACTIVE, fontSize: '14px' }}>v{dAppsVersion}</p>
             </Flex>
-            <NavButton textButton iconButton onClick={onChangeTheme} className="nav-button">
-              {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
-            </NavButton>
+            {themeButton && (
+              <NavButton textButton iconButton onClick={onChangeTheme} className="nav-button">
+                {darkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
+              </NavButton>
+            )}
           </Flex>
         </Flex>
       </StyledNav>
