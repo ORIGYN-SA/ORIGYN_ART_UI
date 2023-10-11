@@ -1,7 +1,7 @@
 {
   "trailingComma": "all",
   "tabWidth": 2,
-  "singleQuote": true,
+  "singleQuote": false,
   "bracketSpacing": true,
   "semicolon": true,
   "printWidth": 100
