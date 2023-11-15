@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import { Graph } from "./Graph";
@@ -11,16 +11,50 @@ export default {
 } as Meta;
 
 const Template: Story<any> = (args) => {
+  const [data, setData] = useState({1635724800: "10000000000.00"});
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  const getData = async () => {
+    const resp = await fetch('https://api.origyn.com/ogy/supply/timeseries');
+    const parsed = await resp.json();
+  
+    const graphData = parsed.reduce((r, v) => {
+      const date = Math.floor(new Date(v.date).getTime() / 1000);
+      r[date] = (v.totalSupply).toFixed(2);
+      return r;
+    }, {});
+  
+    console.log(graphData);
+    setData(graphData);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const framesDefault = [
+    { label: "1W", days: 7 },
+    { label: "2W", days: 14 },
+    { label: "1M", days: 30 },
+    { label: "2M", days: 60 },
+    { label: "1Y", days: 360 },
+  ];
   return (
     <div style={{ padding: 20, backgroundColor: "white" }}>
-      <Graph {...args} width="700px" />
+      {
+        !isLoading && (
+          <Graph {...args} data={data} frames={framesDefault} curv={0} />
+        )
+      }
     </div>
   );
 };
 
 export const OGYGraph = Template.bind({});
 OGYGraph.args = {
-  width: 700,
+  width: 900,
   height: 300,
   token: "OGY",
   data: mockData,
@@ -28,7 +62,7 @@ OGYGraph.args = {
 };
 export const ICPGraph = Template.bind({});
 ICPGraph.args = {
-  width: 700,
+  width: 900,
   height: 300,
   token: "ICP",
   data: icpData,

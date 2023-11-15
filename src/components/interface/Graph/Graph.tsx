@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { LineChart } from "./LineChart";
 
-const SGraph = styled.div<{ width: string }>`
+const SGraph = styled.div<{ width: number }>`
   ${({ width }) => `
-    width: ${width};
+    width: ${width ? `${width}px` : '100%'};
   `}
 `;
 const SFrames = styled.div`
@@ -17,18 +17,19 @@ const SFrame = styled.div<{ isSelected?: boolean }>`
   margin: 10px;
   padding: 0.5rem 1rem;
   text-align: center;
+  color: ${({theme}) => theme.colors.TEXT};
 
-  ${({ isSelected }) => `${
+  ${({ isSelected, theme }) => `${
     isSelected
       ? `
-    background: #f2f2f2;
+    background: ${theme.colors.BORDER};
     border-radius: 999px;
     cursor: pointer;
   `
       : ""
   }
   &:hover {
-    background: #f2f2f2;
+    background: ${theme.colors.BORDER};
     border-radius: 999px;
     cursor: pointer;
   }
@@ -71,7 +72,7 @@ const SPriceChange = styled.div<{ trend: "up" | "down" }>`
   line-height: 24px;
 `;
 
-const frames = [
+const framesDefault = [
   { label: "1W", days: 7 },
   { label: "2W", days: 14 },
   { label: "1M", days: 30 },
@@ -80,7 +81,7 @@ const frames = [
   { label: "ALL", days: 900 },
 ];
 
-const findFrameByDays = (days: number) =>
+const findFrameByDays = (days: number, frames = framesDefault) =>
   frames.findIndex((frame) => frame.days >= days);
 
 export const GraphHeader = ({
@@ -90,6 +91,7 @@ export const GraphHeader = ({
   token,
   overline,
   hidePriceChange,
+  frames
 }: GraphHeaderProps) => {
   return (
     <SGraphHeader>
@@ -97,7 +99,7 @@ export const GraphHeader = ({
         {overline && <SOverline>{overline}</SOverline>}
         <SToken>{token}</SToken>
         {!hidePriceChange && (
-          <SPriceChange trend={priceChange > 0 ? "up" : "down"}>
+          <SPriceChange trend={priceChange > 0 ? "up" : "down"} className={priceChange > 0 ? "priceUp" : "priceDown"}>
             {parseFloat(priceChange.toString()).toFixed(3)}%
           </SPriceChange>
         )}
@@ -126,7 +128,10 @@ export const Graph = ({
   tooltipLabel,
   onFrameChange,
   frameAsDays,
+  curvature,
+  frames = framesDefault,
 }: GraphProps) => {
+  const wrapRef = useRef<HTMLDivElement>();
   const [selectedFrame, setSelectedFrame] = useState(
     frame ?? findFrameByDays(frameAsDays) ?? 0
   );
@@ -172,7 +177,7 @@ export const Graph = ({
   };
 
   return (
-    <SGraph width={width}>
+    <SGraph ref={wrapRef} width={width}>
       <GraphHeader
         token={token}
         priceChange={priceChange}
@@ -180,8 +185,9 @@ export const Graph = ({
         onFrameChange={_onFrameChange}
         overline={overline}
         hidePriceChange={hidePriceChange}
+        frames={frames}
       />
-      <LineChart data={filteredData} tooltipLabel={tooltipLabel} />
+      <LineChart data={filteredData}  width={width} tooltipLabel={tooltipLabel} curv={curvature} />
     </SGraph>
   );
 };
@@ -192,7 +198,7 @@ type GraphProps = {
   onFrameChange: (days: number, frameIndex?: number) => void;
   data: Record<string | number, number>;
   token: string;
-  width: string;
+  width: number;
   frame?: number;
   frameAsDays?: number;
   hidePriceChange?: boolean;
@@ -201,6 +207,8 @@ type GraphProps = {
     text?: string;
     unit?: string;
   };
+  curvature?: number;
+  frames?: Array<{label: string, days: number}>
 };
 type GraphHeaderProps = {
   onFrameChange: (days: number, frameIndex?: number) => void;
@@ -209,4 +217,5 @@ type GraphHeaderProps = {
   token: string;
   hidePriceChange?: boolean;
   overline?: string;
+  frames?: Array<{label: string, days: number}>
 };

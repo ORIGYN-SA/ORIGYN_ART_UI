@@ -48,6 +48,7 @@ export const LineChart = ({
   height = 350,
   width = 700,
   tooltipLabel,
+  curv = 0,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [tooltip, setTooltip] = useState<TooltipProps>({
@@ -66,10 +67,10 @@ export const LineChart = ({
   const MIN_DISTANCE_BETWEEN_LABELS = width * 0.15;
   const vData = 4;
   const speed = 3;
-  const curvature = 1 / 5; // 0 = no curve
   const offset = 50.5;
   const chartHeight = height - 2 * offset;
   const chartWidth = width;
+  const curvature = curv; // 0 = no curve
 
   let gradient,
     Min,
@@ -77,20 +78,6 @@ export const LineChart = ({
     verticalUnit,
     lastLabelPosition = { x: 0, y: 0 };
 
-  useEffect(() => {
-    const _data = [];
-    for (const label in propsData) {
-      _data.push({
-        label,
-        value: propsData[label],
-      });
-    }
-    setData(_data);
-  }, [propsData]);
-
-  useEffect(() => {
-    setupChart();
-  }, [data]);
 
   const setupChart = useCallback(() => {
     const A = {
@@ -125,7 +112,7 @@ export const LineChart = ({
     console.log("Max", Max);
     console.log("Min", Min);
     const aStep = (chartHeight - offset / 2) / vData;
-    const aStepValue = (Max * 2.5 - Min) / vData;
+    const aStepValue = (Max - Min) / vData;
     verticalUnit = aStep / aStepValue;
 
     let a = [];
@@ -182,18 +169,12 @@ export const LineChart = ({
         drawCoords(b[i], b[i].textOffset, 3);
       }
     }
-    if (b.length) setDots(generateDotsPosition(b, verticalUnit));
+    if (b.length) setDots(generateDotsPosition(b, verticalUnit, Min, Max));
 
     getCanvasContext().lineWidth = 3;
     getCanvasContext().strokeStyle = "#43B8CA";
     getCanvasContext().fillStyle = "#5F5F5F";
   }, [data]);
-
-  useEffect(() => {
-    if (data.length > 0 && dots.length > 0) {
-      animateChart(0, dots);
-    }
-  }, [dots]);
 
   const animateChart = useCallback(
     (frames, volatileDots) => {
@@ -234,9 +215,10 @@ export const LineChart = ({
         window.cancelAnimationFrame(animationFrameId);
       }
     },
-    [dots, data]
+    []
   );
 
+  // Draws the bottom coordinates
   const drawCoords = (o, offX, offY) => {
     // Clear the previous label, using this when changing the frame
     getCanvasContext().clearRect(o.x, o.y + 2 * offY, width, 20);
@@ -245,9 +227,11 @@ export const LineChart = ({
     //getCanvasContext().lineTo(o.x + offX, o.y + offY);
     getCanvasContext().stroke();
     getCanvasContext().fillStyle = "#5F5F5F";
+    getCanvasContext().font = "semibold 14px Montserrat";
     getCanvasContext().fillText(o.val, o.x - 2 * offX, o.y + 2 * offY);
   };
 
+  // Draws the line between all dots
   const drawCurve = (p) => {
     var pc = generateControlPoints(curvature, p);
 
@@ -303,18 +287,18 @@ export const LineChart = ({
   };
 
   const generateDotsPosition = useCallback(
-    (b, verticalUnit) => {
+    (b, verticalUnit, Min, Max) => {
       let _dots = [];
       for (const datum of data) {
         const i = _dots.length;
         _dots.push({
           position: {
             x: b[i].x,
-            y: b[i].y - datum.value * verticalUnit - offset / 2,
+            y: b[i].y - (datum.value - Min) * verticalUnit - offset / 2,
           },
           flat: {
             x: b[i].x,
-            y: b[i].y - 25,
+            y: b[i].y - offset / 2,
           },
         });
       }
@@ -367,6 +351,35 @@ export const LineChart = ({
     [getCanvasContext(), dots, data, tooltip]
   );
 
+  useEffect(() => {
+    const _data = [];
+    for (const label in propsData) {
+      _data.push({
+        label,
+        value: propsData[label],
+      });
+    }
+    setData(_data);
+  }, [propsData]);
+
+  useEffect(() => {
+    setupChart();
+  }, [data]);
+
+  useEffect(() => {
+    canvasRef.current.style.width ='100%';
+    canvasRef.current.style.height='100%';
+    // ...then set the internal size to match
+    canvasRef.current.width  = canvasRef.current.offsetWidth;
+    canvasRef.current.height = canvasRef.current.offsetHeight;
+  }, [])
+
+  useEffect(() => {
+    if (data.length > 0 && dots.length > 0) {
+      animateChart(0, dots);
+    }
+  }, [dots]);
+
   return (
     <div
       onMouseMove={(e) => onChartMouseMove(e)}
@@ -375,7 +388,7 @@ export const LineChart = ({
         cursor: tooltip.display === "block" ? "pointer" : "auto",
       }}
     >
-      <canvas ref={canvasRef} height={height} width={width} />
+      <canvas ref={canvasRef} height={height} />
       {tooltip.content && (
         <STooltip
           top={tooltip.top}
@@ -384,8 +397,8 @@ export const LineChart = ({
         >
           <span>{data[tooltip.selectedIndex]?.label}</span>
           <div style={{ color: "white" }}>
-            {tooltipLabel.text ?? "Avg.Price"}:{" "}
-            {data[tooltip.selectedIndex]?.value} {tooltipLabel.unit ?? "$"}
+            {tooltipLabel?.text ?? "Avg.Price"}:{" "}
+            {data[tooltip.selectedIndex]?.value} {tooltipLabel?.unit ?? "$"}
           </div>
         </STooltip>
       )}
