@@ -131,9 +131,8 @@ export const Graph = ({
   curvature,
   frames = framesDefault,
 }: GraphProps) => {
-  const wrapRef = useRef<HTMLDivElement>();
   const [selectedFrame, setSelectedFrame] = useState(
-    frame ?? findFrameByDays(frameAsDays) ?? 0
+    frame ?? findFrameByDays(frameAsDays, frames) ?? 0
   );
   const [filteredData, setFilteredData] = useState({});
   const [priceChange, setPriceChange] = useState(0);
@@ -177,7 +176,7 @@ export const Graph = ({
   };
 
   return (
-    <SGraph ref={wrapRef} width={width}>
+    <SGraph width={width}>
       <GraphHeader
         token={token}
         priceChange={priceChange}
