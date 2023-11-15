@@ -7,7 +7,7 @@
   "module": "build/index.esm.js",
   "type": "module",
   "files": [
-    "build"
+    "build/*"
   ],
   "scripts": {
     "build": "rollup -c",
