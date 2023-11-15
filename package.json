@@ -6,9 +6,6 @@
   "main": "build/index.js",
   "module": "build/index.esm.js",
   "type": "module",
-  "files": [
-    "build/*"
-  ],
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
