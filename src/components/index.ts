@@ -7,6 +7,7 @@ import BreadCrumbs from './interface/BreadCrumbs';
 import Button from './interface/Button';
 import Card from './interface/Card';
 import Graph from './interface/Graph/Graph';
+import FileUpload from './interface/FileUpload/FileUpload';
 import CheckboxInput from './interface/Inputs/CheckboxInput';
 import DatePicker from './interface/Inputs/DatePicker';
 import HR from './interface/HR';
@@ -55,6 +56,7 @@ export {
   BreadCrumbs,
   Button,
   Card,
+  FileUpload,
   CheckboxInput,
   DatePicker,
   HR,

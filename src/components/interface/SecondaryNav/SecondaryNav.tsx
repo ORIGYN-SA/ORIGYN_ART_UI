@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import Flex from "../../layout/Flex";
-import MenuLink from "../MenuLink";
-import Banner from "../Banner";
-import Button from "../Button/Button";
-import Card from "../Card";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import Flex from '../../layout/Flex';
+import MenuLink from '../MenuLink';
+import Banner from '../Banner';
+import Button from '../Button/Button';
+import Card from '../Card';
 
 export type SecondaryNavProps = {
   tabs: Array<{ title: string; id: string }>;
@@ -59,7 +59,7 @@ const StyledTab = styled(MenuLink)`
 `}
 `;
 
-const StyledWalletMenu = styled("div")`
+const StyledWalletMenu = styled('div')`
   position: relative;
 `;
 const StyledLogOut = styled(Card)`
@@ -75,7 +75,7 @@ const StyledWallet = styled(Button)`
   opacity: 1;
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 8px;
@@ -90,7 +90,7 @@ const StyledWallet = styled(Button)`
   }
 `;
 
-const StyledContent = styled("div")`
+const StyledContent = styled('div')`
   background: ${({ theme }) => theme.colors.BACKGROUND};
   box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 4%);
   border-radius: 16px 0px 0px 0px;
@@ -112,14 +112,14 @@ const StyledTitle = styled(MenuLink)`
   
 `}
 `;
-const StyledContainer = styled("div")`
+const StyledContainer = styled('div')`
   ${({ theme }) => `
   width: 100%;
   height: auto;
   background: ${theme.colors.NAVIGATION_BACKGROUND};
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 1000;
   `}
 `;
 
@@ -142,19 +142,14 @@ const SecondaryNav = ({
         setIsMenuOpened(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
 
   return (
-    <Banner
-      bgColor="transparent"
-      flexFlow="column"
-      align="flex-start"
-      padding="0"
-    >
+    <Banner bgColor="transparent" flexFlow="column" align="flex-start" padding="0">
       <StyledContainer>
         <Banner
           bgColor="transparent"
@@ -165,16 +160,16 @@ const SecondaryNav = ({
         >
           <Flex align="center" gap={32}>
             <StyledSecondaryNav>
-              <StyledTitle as="div" className={""}>
+              <StyledTitle as="div" className={''}>
                 <b>
-                  <a href={titleLink ? titleLink : "#"}>{title}</a>
+                  <a href={titleLink ? titleLink : '#'}>{title}</a>
                 </b>
               </StyledTitle>
               {tabs.map(({ id, title }, index) => (
                 <StyledTab
                   as="div"
                   key={id}
-                  className={index === currentTab ? "active" : ""}
+                  className={index === currentTab ? 'active' : ''}
                   onClick={() => setCurrentTab(index)}
                 >
                   {title}
@@ -191,10 +186,7 @@ const SecondaryNav = ({
           )}
           {principal && (
             <StyledWalletMenu>
-              <StyledWallet
-                size="small"
-                onClick={() => setIsMenuOpened(!isMenuOpened)}
-              >
+              <StyledWallet size="small" onClick={() => setIsMenuOpened(!isMenuOpened)}>
                 {principal.slice(0, 2)}...{principal.slice(-4)}
               </StyledWallet>
               {onLogOut && isMenuOpened && (

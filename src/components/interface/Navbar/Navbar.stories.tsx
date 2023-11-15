@@ -49,7 +49,8 @@ const Template: Story = (args: any) => {
           },
         ]}
         dAppsVersion="1.0.0"
-        darkMode={false}
+        darkMode
+        showThemeButton={false}
       />
     </div>
   );
