@@ -197,7 +197,7 @@ type GraphProps = {
   onFrameChange: (days: number, frameIndex?: number) => void;
   data: Record<string | number, number>;
   token: string;
-  width: number;
+  width?: number;
   frame?: number;
   frameAsDays?: number;
   hidePriceChange?: boolean;
