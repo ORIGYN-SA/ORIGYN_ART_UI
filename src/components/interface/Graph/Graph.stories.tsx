@@ -45,7 +45,7 @@ const Template: Story<any> = (args) => {
     <div style={{ padding: 20, backgroundColor: "white" }}>
       {
         !isLoading && (
-          <Graph {...args} data={data} frames={framesDefault} curv={0} />
+          <Graph {...args} data={data} showDots={false} frames={framesDefault} curvature={0.2} />
         )
       }
     </div>

@@ -49,6 +49,7 @@ export const LineChart = ({
   width = 700,
   tooltipLabel,
   curv = 0,
+  showDots = true,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [tooltip, setTooltip] = useState<TooltipProps>({
@@ -207,9 +208,11 @@ export const LineChart = ({
           2 * Math.PI
         );
         // Setting dots color
-        getCanvasContext().fillStyle = "#43B8CA";
+        if (showDots) {
+          getCanvasContext().fillStyle = "#43B8CA";
 
-        getCanvasContext().fill();
+          getCanvasContext().fill();
+        }
       }
       if (frames >= Max * verticalUnit) {
         window.cancelAnimationFrame(animationFrameId);
@@ -367,10 +370,10 @@ export const LineChart = ({
   }, [data]);
 
   useEffect(() => {
-    canvasRef.current.style.width ='100%';
-    canvasRef.current.style.height='100%';
+    canvasRef.current.style.width = '100%';
+    canvasRef.current.style.height = '100%';
     // ...then set the internal size to match
-    canvasRef.current.width  = canvasRef.current.offsetWidth;
+    canvasRef.current.width = canvasRef.current.offsetWidth;
     canvasRef.current.height = canvasRef.current.offsetHeight;
   }, [])
 
