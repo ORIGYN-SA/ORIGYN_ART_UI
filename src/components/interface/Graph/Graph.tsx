@@ -131,6 +131,7 @@ export const Graph = ({
   curvature,
   frames = framesDefault,
   showDots = true,
+  parabolize = false,
 }: GraphProps) => {
   const [selectedFrame, setSelectedFrame] = useState(
     frame ?? findFrameByDays(frameAsDays, frames) ?? 0
@@ -187,7 +188,7 @@ export const Graph = ({
         hidePriceChange={hidePriceChange}
         frames={frames}
       />
-      <LineChart data={filteredData} showDots={showDots} width={width} tooltipLabel={tooltipLabel} curv={curvature} />
+      <LineChart data={filteredData} showDots={showDots} width={width} tooltipLabel={tooltipLabel} parabolize={parabolize} curv={curvature} />
     </SGraph>
   );
 };
@@ -209,6 +210,7 @@ type GraphProps = {
   };
   curvature?: number;
   showDots?: boolean;
+  parabolize?: boolean;
   frames?: Array<{label: string, days: number}>
 };
 type GraphHeaderProps = {

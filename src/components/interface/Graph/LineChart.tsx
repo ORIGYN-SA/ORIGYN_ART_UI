@@ -50,6 +50,7 @@ export const LineChart = ({
   tooltipLabel,
   curv = 0,
   showDots = true,
+  parabolize = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [tooltip, setTooltip] = useState<TooltipProps>({
@@ -294,14 +295,18 @@ export const LineChart = ({
       let _dots = [];
       for (const datum of data) {
         const i = _dots.length;
+        const m = parabolize ? Math.pow(i / ((b.length) - 1), 1.25) : 1;
+        //? 1 - (Math.sin((Math.PI / (b.length / 2)) * i - Math.PI / 2) + 1) / 20
+        //: 1 + (Math.sin((Math.PI / (b.length / 2)) * i - Math.PI / 2) + 1) / 20;
+        console.log(Math.pow(i / ((b.length) - 1), 2), i);
         _dots.push({
           position: {
-            x: b[i].x,
-            y: b[i].y - (datum.value - Min) * verticalUnit - offset / 2,
+            x: b[i].x * m,
+            y: (b[i].y  - (datum.value - Min) * verticalUnit - offset / 2),
           },
           flat: {
-            x: b[i].x,
-            y: b[i].y - offset / 2,
+            x: b[i].x * m,
+            y: (b[i].y - offset / 2),
           },
         });
       }
