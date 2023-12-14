@@ -1,6 +1,6 @@
 {
   "name": "@origyn/origyn-art-ui",
-  "version": "1.3.14",
+  "version": "1.3.15",
   "author": "ORIGYN Foundation",
   "license": "Apache-2.0",
   "main": "build/index.js",
