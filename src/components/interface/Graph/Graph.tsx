@@ -165,9 +165,11 @@ export const Graph = ({
     slicedKeys.forEach((key) => {
       const date = new Date(parseInt(key) * 1000);
       const keyAsDate = `${date.toLocaleString("default", {
+        day: "numeric",
         month: "short",
-      })} ${date.getDate()}`;
-      newFilteredData[keyAsDate] = data[key];
+        year: "numeric",
+      })}`;
+      newFilteredData[date.getTime()] = data[key];
     });
     setFilteredData({ ...newFilteredData });
   }, [selectedFrame]);

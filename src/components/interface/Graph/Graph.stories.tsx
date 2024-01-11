@@ -40,6 +40,7 @@ const Template: Story<any> = (args) => {
     { label: "1M", days: 30 },
     { label: "2M", days: 60 },
     { label: "1Y", days: 360 },
+    { label: "ALL", days: 900 },
   ];
   return (
     <div style={{ padding: 20, backgroundColor: "white" }}>

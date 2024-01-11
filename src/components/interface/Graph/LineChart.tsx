@@ -40,6 +40,8 @@ type Dot = {
 
 type Data = {
   label: string;
+  date: string;
+  shortDate: string;
   value: number;
 };
 
@@ -147,7 +149,7 @@ export const LineChart = ({
         b[i] = {
           x: B.x,
           y: B.y,
-          val: data[0].label,
+          val: data[0].shortDate,
         };
         b[i].textOffset = -15;
         lastLabelPosition = B;
@@ -155,7 +157,7 @@ export const LineChart = ({
         b[i] = {};
         b[i].x = b[i - 1].x + bStep;
         b[i].y = b[i - 1].y;
-        b[i].val = data[i].label;
+        b[i].val = data[i].shortDate;
         if (i == data.length - 1) {
           b[i].textOffset = 15;
         } else {
@@ -364,6 +366,15 @@ export const LineChart = ({
     for (const label in propsData) {
       _data.push({
         label,
+        date: new Date(parseInt(label)).toLocaleString("default", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        shortDate: new Date(parseInt(label)).toLocaleString("default", {
+          day: "numeric",
+          month: "short",
+        }),
         value: propsData[label],
       });
     }
@@ -403,7 +414,7 @@ export const LineChart = ({
           left={tooltip.left}
           display={tooltip.display}
         >
-          <span>{data[tooltip.selectedIndex]?.label}</span>
+          <span>{data[tooltip.selectedIndex]?.date}</span>
           <div style={{ color: "white" }}>
             {tooltipLabel?.text ?? "Avg.Price"}:{" "}
             {data[tooltip.selectedIndex]?.value} {tooltipLabel?.unit ?? "$"}
