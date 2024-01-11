@@ -202,7 +202,7 @@ export const LineChart = ({
         // We need the dot offset for the first and the last one, as they overflow out of the Chart
         let dotOffset = 0;
         if (i === 0) dotOffset = 3.5;
-        else if (i === volatileDots.length - 1) dotOffset = -3;
+        else if (i === volatileDots.length - 1) dotOffset = -3.5;
         getCanvasContext().arc(
           volatileDots[i].flat.x + dotOffset,
           volatileDots[i].flat.y,

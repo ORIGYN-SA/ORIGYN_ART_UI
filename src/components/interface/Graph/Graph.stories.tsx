@@ -55,7 +55,7 @@ const Template: Story<any> = (args) => {
 
 export const OGYGraph = Template.bind({});
 OGYGraph.args = {
-  width: 900,
+  width: 600,
   height: 300,
   token: "OGY",
   data: mockData,
