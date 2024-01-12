@@ -187,7 +187,7 @@ export const LineChart = ({
         animateChart(frames, volatileDots)
       );
       frames += speed;
-      getCanvasContext().clearRect(0, 0, width, height - 60);
+      getCanvasContext().clearRect(0, 0, width + 60, height - 60);
 
       for (var i = 0; i < volatileDots.length; i++) {
         if (volatileDots[i].flat.y > volatileDots[i].position.y) {
@@ -202,7 +202,7 @@ export const LineChart = ({
         // We need the dot offset for the first and the last one, as they overflow out of the Chart
         let dotOffset = 0;
         if (i === 0) dotOffset = 3.5;
-        else if (i === volatileDots.length - 1) dotOffset = -3.5;
+        else if (i === volatileDots.length - 1) dotOffset = -3;
         getCanvasContext().arc(
           volatileDots[i].flat.x + dotOffset,
           volatileDots[i].flat.y,

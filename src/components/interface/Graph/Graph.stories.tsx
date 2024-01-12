@@ -55,7 +55,6 @@ const Template: Story<any> = (args) => {
 
 export const OGYGraph = Template.bind({});
 OGYGraph.args = {
-  width: 600,
   height: 300,
   token: "OGY",
   data: mockData,
@@ -63,7 +62,6 @@ OGYGraph.args = {
 };
 export const ICPGraph = Template.bind({});
 ICPGraph.args = {
-  width: 900,
   height: 300,
   token: "ICP",
   data: icpData,
