@@ -1,14 +1,13 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import Flex from "../../../layout/Flex";
-import ErrorIcon from "../../../icons/Error";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import Flex from '../../../layout/Flex';
+import ErrorIcon from '../../../icons/Error';
 
-export interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   optional?: string;
-  inputSize?: "small" | "medium" | "large";
+  inputSize?: 'small' | 'medium' | 'large';
   borderRadius?: number;
 }
 
@@ -45,8 +44,14 @@ export const inputSizes = {
   small: smallSize,
 };
 
-const StyledTextInput = styled.input<{ error: boolean; inputSize?: string, borderRadius?: number }>`
-  ${({ inputSize = "large" }) => inputSizes[inputSize]};
+export const inputBorderRadius = {
+  large: 12,
+  medium: 12,
+  small: 10,
+};
+
+const StyledTextInput = styled.input<{ error: boolean; inputSize?: string; borderRadius?: number }>`
+  ${({ inputSize = 'large' }) => inputSizes[inputSize]};
 
   ${({ theme, borderRadius, error }) => `
     padding: 0 16px;
@@ -54,7 +59,7 @@ const StyledTextInput = styled.input<{ error: boolean; inputSize?: string, borde
     background: ${theme.colors.BACKGROUND};
     
     border: 1px solid ${error ? theme.colors.ERROR : theme.colors.BORDER};
-    border-radius: ${borderRadius}px;
+    border-radius: ${`${borderRadius}px`};
     color: ${error ? theme.colors.ERROR : theme.colors.TEXT}};
   
     ::placeholder {
@@ -68,7 +73,7 @@ const StyledTextInput = styled.input<{ error: boolean; inputSize?: string, borde
 `}
 `;
 
-const ErrorMessage = styled("div")`
+const ErrorMessage = styled('div')`
   ${({ theme }) => `
   font-weight: 400;
   font-size: 11px;
@@ -89,22 +94,36 @@ const Label = styled.label`
 `;
 
 const Optional = styled.label`
-${({ theme }) => `
+  ${({ theme }) => `
 font-size: 14px;
 line-height: 22px;
 margin-bottom: 8px;
 margin-left: 5px;
 color: ${theme.colors.SECONDARY_TEXT};
   `}
-`
+`;
 
-const TextInput = ({ label, error, optional, inputSize, borderRadius=1, ...props }: TextInputProps) => {
+const TextInput = ({
+  label,
+  error,
+  optional,
+  inputSize,
+  borderRadius,
+  ...props
+}: TextInputProps) => {
+  const _borderRadius = borderRadius >= 0 ? borderRadius : inputBorderRadius[inputSize || 'large'];
   return (
     <Flex flexFlow="column" fullWidth>
       <Flex flexFlow="row" fullWidth>
-      {label ? <Label htmlFor={props.id}>{label}</Label> : null}  {optional ? <Optional>{optional}</Optional> : null}
+        {label ? <Label htmlFor={props.id}>{label}</Label> : null}{' '}
+        {optional ? <Optional>{optional}</Optional> : null}
       </Flex>
-      <StyledTextInput error={!!error} inputSize={inputSize} borderRadius={borderRadius} {...props} />
+      <StyledTextInput
+        error={!!error}
+        inputSize={inputSize}
+        borderRadius={_borderRadius}
+        {...props}
+      />
       <ErrorMessage>
         {error && (
           <>
