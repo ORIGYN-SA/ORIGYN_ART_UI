@@ -9,6 +9,7 @@ export interface TextInputProps
   error?: string;
   optional?: string;
   inputSize?: "small" | "medium" | "large";
+  borderRadius?: number;
 }
 
 const largeSize = css`
@@ -18,7 +19,6 @@ const largeSize = css`
   font-size: 14px;
   line-height: 22px;
   letter-spacing: -0.15px;
-  border-radius: 12px;
 `;
 
 const mediumSize = css`
@@ -28,7 +28,6 @@ const mediumSize = css`
   font-size: 14px;
   line-height: 22px;
   letter-spacing: -0.15px;
-  border-radius: 12px;
 `;
 
 const smallSize = css`
@@ -38,7 +37,6 @@ const smallSize = css`
   font-size: 12px;
   line-height: 20px;
   letter-spacing: -0.1px;
-  border-radius: 10px;
 `;
 
 export const inputSizes = {
@@ -47,15 +45,16 @@ export const inputSizes = {
   small: smallSize,
 };
 
-const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
+const StyledTextInput = styled.input<{ error: boolean; inputSize?: string, borderRadius?: number }>`
   ${({ inputSize = "large" }) => inputSizes[inputSize]};
 
-  ${({ theme, error }) => `
+  ${({ theme, borderRadius, error }) => `
     padding: 0 16px;
     gap: 10px;
     background: ${theme.colors.BACKGROUND};
     
     border: 1px solid ${error ? theme.colors.ERROR : theme.colors.BORDER};
+    border-radius: ${borderRadius}px;
     color: ${error ? theme.colors.ERROR : theme.colors.TEXT}};
   
     ::placeholder {
@@ -99,13 +98,13 @@ color: ${theme.colors.SECONDARY_TEXT};
   `}
 `
 
-const TextInput = ({ label, error, optional, inputSize, ...props }: TextInputProps) => {
+const TextInput = ({ label, error, optional, inputSize, borderRadius=1, ...props }: TextInputProps) => {
   return (
     <Flex flexFlow="column" fullWidth>
       <Flex flexFlow="row" fullWidth>
       {label ? <Label htmlFor={props.id}>{label}</Label> : null}  {optional ? <Optional>{optional}</Optional> : null}
       </Flex>
-      <StyledTextInput error={!!error} inputSize={inputSize} {...props} />
+      <StyledTextInput error={!!error} inputSize={inputSize} borderRadius={borderRadius} {...props} />
       <ErrorMessage>
         {error && (
           <>
