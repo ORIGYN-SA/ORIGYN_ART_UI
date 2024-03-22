@@ -3,11 +3,24 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Flex from '../../layout/Flex';
+import Grid from '../../layout/Grid';
 import DarkThemeIcon from '../../icons/DarkTheme';
 import LightThemeIcon from '../../icons/LightTheme';
 import OrigynLogoMark from '../../icons/OrigynLogoMark';
 import { HR, Icons } from '../../index';
 import { theme } from '../../../utils';
+
+type NavItem = {
+  href: string;
+  title: string;
+  icon: any;
+};
+
+type NavItems = {
+  start?: NavItem[];
+  center?: NavItem[];
+  end?: NavItem[];
+};
 
 const NavigationBarTooltip = ({ children, content }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -125,38 +138,47 @@ const NavButton = styled(Button)`
     color: ${theme.colors.SECONDARY_TEXT};
   }
 
-  &.nav-button:hover {
+  &.nav-button:hover, nav-button-mobile:hover {
     background-color: ${theme.colors.ACCENT_PURPLE_900};
     color: ${theme.colors.ACCENT_PURPLE_200};
   }
-  &.nav-button.active {
+  &.nav-button.active, nav-button-mobile:hover {
     background-color: ${theme.colors.ACCENT_PURPLE_800};
     color: ${theme.colors.ACCENT_PURPLE_200};
-  }`}
+  }
+  &.nav-button-mobile {
+    border-radius: 0 50px 50px 0;
+  }
+  `}
 `;
 
 const Navbar: React.FC<{
-  navItems: any;
+  navItems: NavItems;
   onChangeTheme?: any;
   dAppsVersion: string;
   darkMode: boolean;
   showThemeButton: boolean;
 }> = ({ navItems, onChangeTheme = () => {}, dAppsVersion, darkMode, showThemeButton }) => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
-  const [currentTab, setCurrentTab] = useState<number>(0);
+  const defaultTab = ['start', 'center', 'end'].find((key) => key in navItems);
+  const [currentTab, setCurrentTab] = useState<string>(`${defaultTab}-0` || null);
+  const countNavItems = Object.values(navItems).reduce(
+    (acc, currentValue) => acc + currentValue.length,
+    0,
+  );
 
   useEffect(() => {
     const navbarCurrentTab = sessionStorage.getItem('navbarCurrentTab');
     if (navbarCurrentTab) {
-      setCurrentTab(parseInt(navbarCurrentTab));
+      setCurrentTab(navbarCurrentTab);
     } else {
-      setCurrentTab(0);
+      setCurrentTab('start-0' || 'center-0' || 'end-0');
     }
   }, []);
 
-  const handleTabChange = (index: number) => {
+  const handleTabChange = (index: string) => {
     setCurrentTab(index);
-    sessionStorage.setItem('navbarCurrentTab', index.toString());
+    sessionStorage.setItem('navbarCurrentTab', index);
   };
 
   return (
@@ -171,16 +193,30 @@ const Navbar: React.FC<{
         </MobileNavHead>
         {mobileMenu && (
           <MobileMenu>
-            {navItems.map((item, index) => (
-              <Link to={item.href} key={`navItem-${index}`}>
-                <NavButton
-                  textButton
-                  className={`nav-button${index === currentTab ? ' active' : ''}`}
-                >
-                  {item.icon()} {item.title}
-                </NavButton>
-              </Link>
-            ))}
+            {Object.entries(navItems).map(
+              ([key, value]) =>
+                value &&
+                value.map((item, index) => (
+                  <Flex
+                    flexFlow="column"
+                    align="flex-start"
+                    gap={8}
+                    key={`navItem-${key}-${index}`}
+                  >
+                    <Link to={item.href}>
+                      <NavButton
+                        textButton
+                        className={`nav-button nav-button-mobile${
+                          `${key}-${index}` === currentTab ? ' active' : ''
+                        }`}
+                        onClick={() => handleTabChange(`${key}-${index}`)}
+                      >
+                        {item.icon()} {item.title}
+                      </NavButton>
+                    </Link>
+                  </Flex>
+                )),
+            )}
             <br />
             <HR />
             <br />
@@ -202,28 +238,40 @@ const Navbar: React.FC<{
         )}
       </MobileNav>
       <StyledNav>
-        <Flex flexFlow="column" align="center" justify="space-between" fullHeight>
-          <Flex flexFlow="column" align="center" gap={8}>
-            <div style={{ marginBottom: '24px' }}>
-              <Icons.OrigynIcon />
-            </div>
-            {navItems.map((item, index) => (
-              <NavigationBarTooltip key={`navItem-${index}`} content={item.title.toUpperCase()}>
-                <Link to={item.href} key={`navItem-${index}`}>
-                  <NavButton
-                    textButton
-                    iconButton
-                    size="large"
-                    className={`nav-button${parseInt(index) === currentTab ? ' active' : ''}`}
-                    onClick={() => handleTabChange(parseInt(index))}
-                  >
-                    {item.icon()}
-                  </NavButton>
-                </Link>
-              </NavigationBarTooltip>
-            ))}
+        <Flex flexFlow="column" align="center" fullHeight>
+          <Flex flexFlow="column" align="center" style={{ marginBottom: '24px' }}>
+            <Icons.OrigynIcon />
           </Flex>
-
+          {['start', 'center', 'end'].map((key) => (
+            <Flex
+              flexFlow="column"
+              align="center"
+              justify={`flex-${key}`}
+              gap={8}
+              fullHeight
+              key={`navItem-${key}`}
+            >
+              {navItems[key] &&
+                navItems[key].map((item: NavItem, index: number) => (
+                  <NavigationBarTooltip
+                    key={`navItem-${key}-${index}`}
+                    content={item.title.toUpperCase()}
+                  >
+                    <Link to={item.href}>
+                      <NavButton
+                        textButton
+                        iconButton
+                        size="large"
+                        className={`nav-button${`${key}-${index}` === currentTab ? ' active' : ''}`}
+                        onClick={() => handleTabChange(`${key}-${index}`)}
+                      >
+                        {item.icon()}
+                      </NavButton>
+                    </Link>
+                  </NavigationBarTooltip>
+                ))}
+            </Flex>
+          ))}
           <Flex flexFlow="column" align="center" gap={16}>
             <Flex>
               <p style={{ color: theme.colors.INACTIVE, fontSize: '14px' }}>v{dAppsVersion}</p>
