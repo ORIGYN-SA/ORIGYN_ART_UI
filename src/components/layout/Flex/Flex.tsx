@@ -8,7 +8,8 @@ export type FlexProps = {
     | "flex-end"
     | "center"
     | "space-between"
-    | "space-around";
+    | "space-around"
+    | string;
   align?: "flex-start" | "flex-end" | "center";
   flexFlow?: TFlexFlow;
   flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
