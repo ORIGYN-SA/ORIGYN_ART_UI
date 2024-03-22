@@ -8,7 +8,6 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   error?: string;
   optional?: string;
   inputSize?: 'small' | 'medium' | 'large';
-  borderRadius?: number;
 }
 
 const largeSize = css`
@@ -44,22 +43,16 @@ export const inputSizes = {
   small: smallSize,
 };
 
-export const inputBorderRadius = {
-  large: 12,
-  medium: 12,
-  small: 10,
-};
-
-const StyledTextInput = styled.input<{ error: boolean; inputSize?: string; borderRadius?: number }>`
+const StyledTextInput = styled.input<{ error: boolean; inputSize?: string }>`
   ${({ inputSize = 'large' }) => inputSizes[inputSize]};
 
-  ${({ theme, borderRadius, error }) => `
+  ${({ theme, error }) => `
     padding: 0 16px;
     gap: 10px;
     background: ${theme.colors.BACKGROUND};
     
     border: 1px solid ${error ? theme.colors.ERROR : theme.colors.BORDER};
-    border-radius: ${`${borderRadius}px`};
+    border-radius: 50px;
     color: ${error ? theme.colors.ERROR : theme.colors.TEXT}};
   
     ::placeholder {
@@ -103,27 +96,14 @@ color: ${theme.colors.SECONDARY_TEXT};
   `}
 `;
 
-const TextInput = ({
-  label,
-  error,
-  optional,
-  inputSize,
-  borderRadius,
-  ...props
-}: TextInputProps) => {
-  const _borderRadius = borderRadius >= 0 ? borderRadius : inputBorderRadius[inputSize || 'large'];
+const TextInput = ({ label, error, optional, inputSize, ...props }: TextInputProps) => {
   return (
     <Flex flexFlow="column" fullWidth>
       <Flex flexFlow="row" fullWidth>
         {label ? <Label htmlFor={props.id}>{label}</Label> : null}{' '}
         {optional ? <Optional>{optional}</Optional> : null}
       </Flex>
-      <StyledTextInput
-        error={!!error}
-        inputSize={inputSize}
-        borderRadius={_borderRadius}
-        {...props}
-      />
+      <StyledTextInput error={!!error} inputSize={inputSize} {...props} />
       <ErrorMessage>
         {error && (
           <>
