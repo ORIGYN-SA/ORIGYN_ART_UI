@@ -19,16 +19,22 @@ export type CustomSelectProps = {
   }[];
 };
 
+const menuBorderRadius = {
+  large: 25,
+  medium: 20,
+  small: 15,
+};
+
 const StyledSelect = styled(Select)<{ inputSize?: string }>`
   .react-select__control {
     min-height: auto;
+    border-radius: 50px !important;
     border-color: ${({ theme }) => theme?.colors?.BORDER};
-    ${({ inputSize = 'large' }) => inputSizes[inputSize]};
+    ${({ inputSize }) => inputSizes[inputSize]};
     background: ${({ theme }) => theme?.colors?.BACKGROUND};
     outline: none !important;
   }
   .react-select__control--is-focused {
-    border-radius: 12px 12px 0 0;
     border-color: ${({ theme }) => theme?.colors?.BORDER};
     outline: none;
     box-shadow: none;
@@ -55,17 +61,26 @@ const StyledSelect = styled(Select)<{ inputSize?: string }>`
   .react-select__menu {
     z-index: 1000;
     margin: 0;
+    margin-top: 2px;
     padding: 8px;
     background: ${({ theme }) => theme?.colors?.BACKGROUND};
     color: ${({ theme }) => theme?.colors?.TEXT};
     outline: none !important;
+    border-radius: ${({ inputSize }) => `${menuBorderRadius[inputSize]}px`};
   }
 
   .react-select__option {
-    border-radius: 8px;
     :hover {
       background: ${({ theme }) => theme?.colors?.BORDER};
     }
+  }
+  .react-select__option:first-child {
+    border-radius: ${({ inputSize }) =>
+      `${menuBorderRadius[inputSize]}px ${menuBorderRadius[inputSize]}px 0 0`};
+  }
+  .react-select__option:last-child {
+    border-radius: ${({ inputSize }) =>
+      `0 0 ${menuBorderRadius[inputSize]}px ${menuBorderRadius[inputSize]}px`};
   }
   .react-select__option--is-selected,
   .react-select__option--is-focused {
@@ -106,6 +121,10 @@ const CustomSelect = ({
       />
     </Flex>
   );
+};
+
+StyledSelect.defaultProps = {
+  inputSize: 'large', // Setting default size to large
 };
 
 export default CustomSelect;
