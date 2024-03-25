@@ -30,6 +30,7 @@ const CheckboxInput = ({ label, radio, id, ...props }: CheckboxInputProps) => {
             color: theme.colors.SECONDARY_TEXT,
           },
         }}
+        disableRipple
         {...props}
       />
       <span>{label}</span>
