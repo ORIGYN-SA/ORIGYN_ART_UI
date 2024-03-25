@@ -1,26 +1,37 @@
 import React from 'react';
-import { ThemeProvider } from "styled-components";
-import { theme, GlobalStyle, themeLight } from "../src";
-import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider as ThemeProviderMui, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from 'styled-components';
+import { theme, GlobalStyle, themeLight } from '../src';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
 
 export const parameters = {
   layout: 'fullscreen',
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={themeLight}>
-      <GlobalStyle />
-      <Router>
+    <ThemeProviderMui theme={darkTheme}>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Router>
           <Story />
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </ThemeProviderMui>
   ),
 ];
