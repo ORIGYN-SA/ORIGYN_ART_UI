@@ -1,11 +1,11 @@
-import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
-import { Story } from "@storybook/react";
-import Grid from "../../../layout/Grid";
-import CheckboxInput, { CheckboxInputProps } from "./CheckboxInput";
+import React from 'react';
+import { Meta } from '@storybook/react/types-6-0';
+import { Story } from '@storybook/react';
+import Grid from '../../../layout/Grid';
+import CheckboxInput, { CheckboxInputProps } from './CheckboxInput';
 
 export default {
-  title: "Components/Interface/Inputs/CheckboxInput/All stories",
+  title: 'Components/Interface/Inputs/CheckboxInput/All stories',
   component: CheckboxInput,
 } as Meta;
 
@@ -16,22 +16,22 @@ const Template: Story<CheckboxInputProps> = (args) => (
 );
 
 export const noLabel = Template.bind({});
-noLabel.args = { name: "input", id: "noLabelInput" };
+noLabel.args = { name: 'input', id: 'noLabelInput' };
 
 export const withLabel = Template.bind({});
-withLabel.args = { name: "input", label: "Checkbox Label" };
+withLabel.args = { name: 'input', label: 'Checkbox Label' };
 
 export const disabled = Template.bind({});
-disabled.args = { name: "input", label: "Checkbox Label", disabled: true };
+disabled.args = { name: 'input', label: 'Checkbox Label', disabled: true };
 
 export const disabledChecked = Template.bind({});
-disabledChecked.args = { name: "input", label: "Checkbox Label", disabled: true };
+disabledChecked.args = { name: 'input', label: 'Checkbox Label', disabled: true, checked: true };
 
 export const radio = Template.bind({});
-radio.args = { name: "input", radio: true };
+radio.args = { name: 'input', radio: true };
 
 export const radioWithLabel = Template.bind({});
-radioWithLabel.args = { name: "input", radio: true, label: "Checkbox Label" };
+radioWithLabel.args = { name: 'input', radio: true, label: 'Checkbox Label' };
 
 export const radioDisabled = Template.bind({});
-radioDisabled.args = { name: "input", radio: true, label: "Checkbox Label", disabled: true};
+radioDisabled.args = { name: 'input', radio: true, label: 'Checkbox Label', disabled: true };

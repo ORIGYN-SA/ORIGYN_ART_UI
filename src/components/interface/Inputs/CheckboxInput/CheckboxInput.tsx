@@ -1,12 +1,11 @@
-import React, { useState, useMemo } from "react";
-import styled from "styled-components";
-import CheckboxUncheckedIcon from "../../../icons/CheckboxUnchecked";
-import CheckboxCheckedIcon from "../../../icons/CheckboxChecked";
-import CheckboxUncheckedDisabledIcon from "../../../icons/CheckboxUncheckedDisabled";
-import CheckboxCheckedDisabledIcon from "../../../icons/CheckboxCheckedDisabled";
+import React, { useState, useMemo } from 'react';
+import styled from 'styled-components';
+import CheckboxUncheckedIcon from '../../../icons/CheckboxUnchecked';
+import CheckboxCheckedIcon from '../../../icons/CheckboxChecked';
+import CheckboxUncheckedDisabledIcon from '../../../icons/CheckboxUncheckedDisabled';
+import CheckboxCheckedDisabledIcon from '../../../icons/CheckboxCheckedDisabled';
 
-export interface CheckboxInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
   radio?: boolean;
@@ -43,7 +42,18 @@ const StyledCheckboxInput = styled.input`
   }
 `;
 
-const StyledCheckboxIcon = styled("div")`
+const StyledCheckboxCheckedIcon = styled(CheckboxCheckedIcon)`
+  rect {
+    fill: ${({ theme }) => theme.colors.SECONDARY_TEXT};
+  }
+`;
+const StyledCheckboxUncheckedIcon = styled(CheckboxUncheckedIcon)`
+  rect {
+    stroke: ${({ theme }) => theme.colors.SECONDARY_TEXT};
+  }
+`;
+
+const StyledCheckboxIcon = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,8 +96,8 @@ const CheckboxInput = ({ label, radio, id, ...props }: CheckboxInputProps) => {
               </>
             ) : (
               <>
-                <CheckboxCheckedIcon />
-                <CheckboxUncheckedIcon />
+                <StyledCheckboxCheckedIcon />
+                <StyledCheckboxUncheckedIcon />
               </>
             )}
           </>
