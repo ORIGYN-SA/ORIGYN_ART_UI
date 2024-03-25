@@ -49,6 +49,7 @@ const StyledCheckboxCheckedIcon = styled(CheckboxCheckedIcon)`
 `;
 const StyledCheckboxUncheckedIcon = styled(CheckboxUncheckedIcon)`
   rect {
+    fill: transparent;
     stroke: ${({ theme }) => theme.colors.SECONDARY_TEXT};
   }
 `;
