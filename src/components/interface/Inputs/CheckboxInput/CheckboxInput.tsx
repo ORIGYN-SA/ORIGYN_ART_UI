@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import Checkbox from '@mui/material/Checkbox';
 
 export interface CheckboxInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -18,13 +18,22 @@ const StyledLabel = styled.label`
 `;
 
 const CheckboxInput = ({ label, radio, id, ...props }: CheckboxInputProps) => {
+  const theme: any = useTheme();
   return (
-    <>
-      <StyledLabel htmlFor={id}>
-        <Checkbox id={id} disabled={props.disabled} />
-        <span>{label}</span>
-      </StyledLabel>
-    </>
+    <StyledLabel htmlFor={id}>
+      <Checkbox
+        id={id}
+        disabled={props.disabled}
+        sx={{
+          color: theme.colors.SECONDARY_TEXT,
+          '&.Mui-checked': {
+            color: theme.colors.SECONDARY_TEXT,
+          },
+        }}
+        {...props}
+      />
+      <span>{label}</span>
+    </StyledLabel>
   );
 };
 

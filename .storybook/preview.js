@@ -7,6 +7,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const darkTheme = createTheme({
   palette: {
+    mode: 'dark',
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
     mode: 'light',
   },
 });
@@ -24,9 +30,9 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProviderMui theme={darkTheme}>
+    <ThemeProviderMui theme={lightTheme}>
       <CssBaseline />
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <GlobalStyle />
         <Router>
           <Story />
