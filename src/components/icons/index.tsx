@@ -4,7 +4,6 @@ import CheckIcon from './Check';
 import CheckboxCheckedIcon from './CheckboxChecked';
 import CheckboxUncheckedIcon from './CheckboxUnchecked';
 import CloseIcon from './Close';
-import CopyIcon from './Copy';
 import DifinityLogoIcon from './DifinityLogo';
 import FBIcon from './FB';
 import FilterIcon from './Filter';
@@ -30,6 +29,27 @@ import OrigynLogomark from './OrigynLogoMark';
 import UploadIcon from './UploadIcon';
 import CollectionBlock from './CollectionBlock';
 import FileUploadIcon from './FileUploadIcon';
+import CopyIcon from './CopyIcon';
+import Copy from './Copy';
+import CalendarIcon from './CalendarIcon';
+import CertificateIcon from './Certificate';
+import CollectionIcon from './CollectionIcon';
+import DashboardIcon from './DashboardIcon';
+import DataStructureIcon from './DataStructureIcon';
+import DeleteIcon from './DeleteIcon';
+import GalleryIcon from './GalleryIcon';
+import HTMLIcon from './HTMLIcon';
+import InvoiceIcon from './InvoiceIcon';
+import MintIcon from './MintIcon';
+import MoreIcon from './MoreIcon';
+import MoveIcon from './MoveIcon';
+import OwnerIcon from './OwnerIcon';
+import SignOutIcon from './SignOutIcon';
+import StorageIcon from './StorageIcon';
+import UnclaimedIcon from './UnclaimedIcon';
+import UpIcon from './UpIcon';
+import UserIcon from './UserIcon';
+import ValidationIcon from './Validation';
 
 export {
   ArrowDownIcon,
@@ -64,4 +84,24 @@ export {
   UploadIcon,
   CollectionBlock,
   FileUploadIcon,
+  Copy,
+  CalendarIcon,
+  CertificateIcon,
+  CollectionIcon,
+  DashboardIcon,
+  DataStructureIcon,
+  DeleteIcon,
+  GalleryIcon,
+  HTMLIcon,
+  InvoiceIcon,
+  MintIcon,
+  MoreIcon,
+  MoveIcon,
+  OwnerIcon,
+  SignOutIcon,
+  StorageIcon,
+  UnclaimedIcon,
+  UpIcon,
+  UserIcon,
+  ValidationIcon,
 };

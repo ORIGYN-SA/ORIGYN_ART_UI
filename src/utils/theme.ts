@@ -10,6 +10,7 @@ export const theme = {
     // TEXT: '#151515', LIGHT
     SECONDARY_TEXT: "#9A9A9A",
     INACTIVE: "#9A9A9A",
+    HOVER: "#E1E1E1",
 
     MODAL_BACKGROUND: 'rgba(58, 58, 58, 0.9)',
 
@@ -77,10 +78,12 @@ export const theme = {
 export const themeLight = {
   colors: {
     BACKGROUND: "#FAFAFA",
-    BORDER: "#E3E3E3",
-    TEXT: "#151515",
+    BORDER: "#E1E1E1",
+    TEXT: "#222526",
+    TEXT_ON_BG: "#FFFFFF",
     SECONDARY_TEXT: "#5F5F5F",
-    INACTIVE: "#9A9A9A",
+    INACTIVE: "#69737C",
+    HOVER: "#E3E3E3",
 
     WIDGET_BACKGROUND: '#FFFFFF',
 

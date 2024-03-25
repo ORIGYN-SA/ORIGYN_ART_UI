@@ -11,18 +11,18 @@ export type CardProps = {
 const outlined = css`
   background: transparent;
   border: 1px solid ${({theme}) => theme.colors.BORDER};
-  border-radius: 12px;
+  border-radius: 16px;
 `;
 
 const filled = css`
   background: ${({theme}) => theme.colors.BORDER};
-  border-radius: 12px;
+  border-radius: 16px;
 `;
 
 const elevated = css`
   background: ${({theme}) => theme.colors.BORDER};
   box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.32);
-  border-radius: 12px;
+  border-radius: 16px;
 `;
 
 const cardTypes = {

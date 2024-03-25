@@ -14,7 +14,7 @@ export type TabContentProps = {
 
 const StyledTabContent = styled(Flex)<{borderBottom: boolean, bgColor}>`
   ${({theme, borderBottom, bgColor}) => `
-  background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.BACKGROUND};
+  background-color: ${bgColor ? theme.colors[bgColor] : "transparent"};
   color: ${theme.colors.TEXT};
   box-sizing: border-box;
   font-weight: 600;
@@ -53,7 +53,7 @@ const StyledTab = styled(MenuLink)`
   &.active {
     opacity: 1;
     color: ${theme.colors.TEXT};
-    border-bottom: 2px solid ${theme.colors.ACCENT_COLOR};
+    border-bottom: 2px solid ${theme.colors.TEXT};
   }
 `}
 `;

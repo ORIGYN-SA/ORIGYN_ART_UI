@@ -1,0 +1,11 @@
+import React from "react";
+
+const HTMLIcon = (props: any) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none" {...props}>
+      <path d="M0.68 20V13H1.96V15.91H5.1V13H6.38V20H5.1V16.95H1.96V20H0.68ZM11.3705 20V14.03H9.33055V13H14.7005V14.03H12.6505V20H11.3705ZM17.6488 20V13H19.1688L21.3988 17.44L23.5988 13H25.1188V20H23.8388V15.17L21.8888 19H20.8788L18.9288 15.17V20H17.6488ZM28.4769 20V13H29.7569V19H32.8569V20H28.4769Z" fill="#69737C" />
+    </svg>
+  );
+};
+
+export default HTMLIcon;

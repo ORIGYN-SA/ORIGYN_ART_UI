@@ -7,6 +7,8 @@ import TabContentVertical, {
   useTabContentVertical,
 } from "./TabContentVertical";
 import styled from "styled-components";
+import Flex from "../../layout/Flex";
+import { Icons } from "../../..";
 
 export default {
   title: "Components/Interface/TabContent",
@@ -18,7 +20,7 @@ const Template: Story<TabContentProps> = (args) => <TabContent {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   tabs: [
-    { title: "Digital Twin" },
+    { title: <Flex align="center" gap={8}><Icons.CalendarIcon width={16} height={16}/> Digital Twin</Flex> },
     { title: "Selling" },
     { title: "Buying" },
     { title: "Transaction" },

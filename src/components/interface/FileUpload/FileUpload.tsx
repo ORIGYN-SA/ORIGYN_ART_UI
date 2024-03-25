@@ -87,7 +87,6 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         style={{ display: 'none' }}
         accept={fileTypes.join(',')}
       />
-
       <CustomButton>
         <FileUploadIcon />
       </CustomButton>

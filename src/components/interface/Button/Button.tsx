@@ -9,12 +9,12 @@ export type ButtonProps = {
 };
 
 const largeSize = css`${({theme}) => `
-  padding: 17px 24px;
+  padding: 13px 24px;
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: -0.2px;
-  border-radius: 28px;
+  border-radius: 23px;
 `}`;
 
 const mediumSize = css`${({theme}) => `
@@ -61,8 +61,8 @@ const secondary = css`
 `;
 
 const filled = css`
-  background-color: ${({theme}) => theme.colors.TEXT};
-  color: ${({theme}) => theme.colors.BACKGROUND};
+  color: ${({theme}) => theme.colors.TEXT};
+  background-color: ${({theme}) => theme.colors.BACKGROUND};
   svg {
     fill: currentColor;
   }
@@ -92,8 +92,8 @@ const StyledButton = styled.button<ButtonProps>
   gap: 15px;
   align-items: center;
   box-sizing: border-box;
-  background: ${({theme}) => theme.colors.BACKGROUND};
-  color: ${({theme}) => theme.colors.TEXT};
+  color: ${({theme}) => theme.colors.BACKGROUND};
+  background: ${({theme}) => theme.colors.TEXT};
   white-space: nowrap;
   border: none;
   
@@ -106,11 +106,11 @@ const StyledButton = styled.button<ButtonProps>
   
   ${({ theme, size = "large", disabled, iconButton, textButton }) => `
   :hover, &.hover {
-    background-color: ${theme.colors.BORDER};
+    background-color: ${theme.colors.HOVER};
     color: ${theme.colors.TEXT};
   }
   :active, &.active {
-    background-color: ${theme.colors.BORDER};
+    background-color: ${theme.colors.HOVER};
     color: ${theme.colors.TEXT};
   }
   cursor: pointer;
@@ -118,18 +118,18 @@ const StyledButton = styled.button<ButtonProps>
   ${disabled ? `
     background: ${theme.colors.INACTIVE};
     border-color: ${theme.colors.BORDER};
-    color: ${theme.colors.TEXT};
+    color: ${theme.colors.TEXT_ON_BG};
     cursor: not-allowed;
     :hover {
       background-color: ${theme.colors.INACTIVE};
       border-color: ${theme.colors.BORDER};
-      color: ${theme.colors.TEXT};
+      color: ${theme.colors.TEXT_ON_BG};
     }
   ` : ""}
   ${iconButton ? `
     position: relative;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     padding: 0;
     ${size === "medium" ? `
