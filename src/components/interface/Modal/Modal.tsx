@@ -44,7 +44,7 @@ const StyledModal = styled(ReactModal)<{ size: string }>`
     box-shadow: 0px 10px 15px -3px rgba(26, 32, 44, 0.1),
       0px 4px 6px -2px rgba(26, 32, 44, 0.05);
     overflow-y: auto;
-    border-radius: 24px;
+    border-radius: 20px;
     background-color: ${({ theme }) => theme.colors.BACKGROUND};
     color: ${({ theme }) => theme.colors.TEXT};
     width: ${({ size }) => modalSizes[size]};

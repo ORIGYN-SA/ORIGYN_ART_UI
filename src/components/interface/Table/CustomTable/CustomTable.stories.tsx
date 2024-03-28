@@ -49,5 +49,5 @@ export const Table = TableStory.bind({});
 Table.args = {
   cells: cells,
   rows: rows,
-  cols: [18, 18, 28, 18, 18],
+  // cols: [18, 18, 28, 18, 18],
 };
